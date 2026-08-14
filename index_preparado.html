@@ -77,15 +77,16 @@
   .btn-ghost:hover{border-color:var(--red);color:var(--red);}
   .btn-danger{background:transparent;color:var(--red);border-color:var(--red);}
   .btn-danger:hover{background:var(--red);color:#ffffff;}
-  .btn-small{padding:5px 10px;font-size:12px;}
+  .btn-small{padding:6px 12px;font-size:12px;}
 
   nav.tabs{
     max-width:1180px;margin:16px auto 0;display:flex;gap:4px;
     padding:0 clamp(16px,4vw,40px);
+    overflow-x:auto;
   }
   .tab{
     background:#252525;color:var(--muted);border:1px solid var(--paper-line);border-bottom:none;
-    padding:10px 18px;border-radius:6px 6px 0 0;font-size:13px;
+    padding:10px 18px;border-radius:6px 6px 0 0;font-size:13px;white-space:nowrap;
   }
   .tab.active{background:var(--paper);color:var(--ink);border-color:var(--red);border-bottom:1px solid var(--paper);}
 
@@ -132,10 +133,10 @@
     flex-wrap: wrap;
     margin-bottom: 16px;
   }
-  .filter-bar .search-input { flex: 2; min-width: 220px; }
+  .filter-bar .search-input { flex: 2; min-width: 200px; }
   .filter-bar select { flex: 1; min-width: 140px; }
 
-  /* Tabla de Cobranza (Check/Equis) */
+  /* Tabla de Cobranza Desktop */
   .ledger-wrap{overflow-x:auto;border:1px solid var(--paper-line);border-radius:6px;background:#141414;}
   table.ledger{border-collapse:collapse;width:100%;font-size:13.5px;}
   table.ledger th,table.ledger td{
@@ -171,7 +172,6 @@
     color: var(--red-hover);
     border-color: var(--red);
   }
-  .status-btn:hover { transform: scale(1.1); }
 
   .badge-tag {
     background: #2a2a2a;
@@ -238,9 +238,50 @@
   }
   .toast.show{opacity:1;}
 
-  @media (max-width:640px){
-    .cover-actions{width:100%;justify-content:flex-start;}
-    #syncStatus{border-right:none;padding-right:0;width:100%;}
+  /* ---------------- OPtimización Móvil (Smartphone) ---------------- */
+  @media (max-width: 600px) {
+    header.cover { padding: 14px 14px 0; }
+    .cover-top { gap: 10px; }
+    .cover-actions { width: 100%; justify-content: space-between; }
+    #syncStatus { border-right: none; padding-right: 0; width: 100%; text-align: center; }
+
+    main.paper { padding: 14px; margin-bottom: 20px; }
+    
+    .field { width: 100%; min-width: 100%; }
+    .form-row { flex-direction: column; gap: 12px; }
+    
+    .filter-bar { flex-direction: column; }
+    .filter-bar .search-input, .filter-bar select, .filter-bar button { width: 100%; }
+
+    /* Transformación de Tabla a Tarjetas Táctiles en Celular */
+    .ledger-wrap { background: transparent; border: none; }
+    table.ledger thead { display: none; }
+    table.ledger, table.ledger tbody, table.ledger tr, table.ledger td {
+      display: block; width: 100%;
+    }
+    table.ledger tr {
+      background: var(--paper-card);
+      border: 1px solid var(--paper-line);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+    table.ledger tr td {
+      border: none !important;
+      padding: 0 !important;
+      white-space: normal !important;
+    }
+    /* El botón de check queda gigante en la izquierda */
+    table.ledger tr td:first-child {
+      grid-row: span 4;
+      display: flex; justify-content: center; align-items: center;
+    }
+    .status-btn { width: 48px; height: 48px; font-size: 20px; }
+    table.ledger td.num { font-size: 12px; }
   }
 </style>
 </head>
@@ -258,7 +299,7 @@
     <div class="cover-actions">
       <span id="syncStatus">cargando...</span>
       <button class="btn-ghost btn-small" id="btnConfigToken">🔑 Token</button>
-      <button class="btn-primary" id="btnSave">Guardar cambios</button>
+      <button class="btn-primary" id="btnSave">Guardar</button>
     </div>
   </div>
   <nav class="tabs">
@@ -282,11 +323,11 @@
           <input type="date" id="initFecha">
         </div>
         <div class="field">
-          <label>Monto fijo definitivo a cobrar (Gs.)</label>
+          <label>Monto fijo definitivo (Gs.)</label>
           <input type="number" id="initMonto" placeholder="Ej: 150000" min="0">
         </div>
-        <div class="field" style="flex:0; align-self:flex-end;">
-          <button class="btn-primary" id="btnIniciarCobranza">🚀 Iniciar Cobranza</button>
+        <div class="field" style="flex:0; align-self:flex-end; width: 100%;">
+          <button class="btn-primary" id="btnIniciarCobranza" style="width:100%;">🚀 Iniciar Cobranza</button>
         </div>
       </div>
 
@@ -317,7 +358,7 @@
 
       <!-- Filtros de búsqueda -->
       <div class="filter-bar">
-        <input type="text" id="inputSearch" class="search-input" placeholder="🔍 Buscar por nombre, apellido, cédula..." oninput="renderTablaCobranza()">
+        <input type="text" id="inputSearch" class="search-input" placeholder="🔍 Buscar nombre, cédula..." oninput="renderTablaCobranza()">
         <select id="filterCarrera" onchange="renderTablaCobranza()">
           <option value="">Todas las carreras</option>
         </select>
@@ -327,7 +368,7 @@
         <button class="btn-ghost btn-small" id="btnExportCsv">Exportar CSV</button>
       </div>
 
-      <!-- Tabla con check / equis -->
+      <!-- Tabla / Lista Adaptativa -->
       <div class="ledger-wrap">
         <table class="ledger">
           <thead>
@@ -337,7 +378,7 @@
               <th>Cédula</th>
               <th>Carrera</th>
               <th>Etiqueta</th>
-              <th style="text-align:right;">Estado de Pago</th>
+              <th style="text-align:right;">Estado</th>
             </tr>
           </thead>
           <tbody id="tbodyCobranza">
@@ -348,7 +389,7 @@
     </div>
 
     <div id="cobranzaEmptyState" class="empty">
-      No hay ninguna práctica seleccionada. Crea una nueva o selecciona una existente arriba para empezar a cobrar.
+      No hay ninguna práctica seleccionada. Crea una nueva o selecciona una existente arriba para empezar.
     </div>
   </section>
 
@@ -371,14 +412,14 @@
       <div class="field"><label>Cédula</label><input id="eCedula" placeholder="1234567"></div>
       <div class="field"><label>Carrera</label><input id="eCarrera" placeholder="Ej: Civil"></div>
       <div class="field"><label>Etiqueta</label><input id="eEtiqueta" placeholder="Ej: Alego / Enfermo"></div>
-      <div class="field" style="flex:0;align-self:flex-end;"><button class="btn-primary" id="btnAddEstudiante">+ Agregar</button></div>
+      <div class="field" style="flex:0;align-self:flex-end; width:100%;"><button class="btn-primary" id="btnAddEstudiante" style="width:100%;">+ Agregar Estudiante</button></div>
     </div>
     <div id="listaEstudiantes"></div>
   </section>
 
   <!-- RESUMEN -->
   <section id="tab-resumen" class="tab-panel">
-    <div class="panel-head"><div><h2>Resumen General</h2><p>Totales recaudados y faltantes por cada práctica.</p></div></div>
+    <div class="panel-head"><div><h2>Resumen General</h2><p>Totales recaudados y faltantes por práctica.</p></div></div>
     <div id="resumenTotales" class="summary-grid"></div>
     <div id="resumenTabla"></div>
   </section>
@@ -404,7 +445,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-/* ---------------- Configuración ---------------- */
+/* ---------------- Configuración y Persistencia ---------------- */
 const LS_DATA = 'cobranzas_data_v1';
 const LS_TOKEN = 'cobranzas_github_token';
 
@@ -425,10 +466,8 @@ let savingShared = false;
 let currentFileSha = null;
 let practicaActivaId = null;
 
-// Cargar fecha actual por defecto en el input
 document.getElementById('initFecha').valueAsDate = new Date();
 
-/* ---------------- Utilidades ---------------- */
 const uid = () => Math.random().toString(36).slice(2,10);
 const fmtGs = n => (Number(n)||0).toLocaleString('es-PY') + ' Gs.';
 const todayISO = () => new Date().toISOString().slice(0,10);
@@ -459,14 +498,13 @@ function escapeHtml(s){
   return String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
-/* ---------------- Gestión de Token ---------------- */
 function getSavedToken(){ return localStorage.getItem(LS_TOKEN) || ''; }
 function promptForToken(){
   const current = getSavedToken();
   const token = prompt('Ingresa tu Personal Access Token de GitHub (ghp_...):', current);
   if(token !== null){
     localStorage.setItem(LS_TOKEN, token.trim());
-    if(token.trim()){ toast('Token guardado en el navegador'); loadFromShared(); }
+    if(token.trim()){ toast('Token guardado'); loadFromShared(); }
   }
 }
 document.getElementById('btnConfigToken').addEventListener('click', promptForToken);
@@ -482,7 +520,7 @@ document.querySelectorAll('.tab').forEach(btn=>{
   });
 });
 
-/* ---------------- Lógica: Iniciar / Administrar Cobranza ---------------- */
+/* ---------------- Iniciar Práctica ---------------- */
 document.getElementById('btnIniciarCobranza').addEventListener('click', ()=>{
   const fechaVal = document.getElementById('initFecha').value;
   const montoVal = document.getElementById('initMonto').value;
@@ -493,19 +531,16 @@ document.getElementById('btnIniciarCobranza').addEventListener('click', ()=>{
   const nombreFormateado = `Práctica ${d}/${m}/${a}`;
   const nuevoId = uid();
 
-  const nuevaPractica = {
+  state.practicas.push({
     id: nuevoId,
     nombre: nombreFormateado,
     monto: Number(montoVal) || 0,
     fecha: fechaVal
-  };
-
-  state.practicas.push(nuevaPractica);
+  });
   practicaActivaId = nuevoId;
 
   document.getElementById('initMonto').value = '';
   setDirty(true);
-  
   actualizarSelectPracticas();
   renderAll();
   toast('¡Nueva práctica iniciada!');
@@ -547,7 +582,7 @@ function poblarFiltros(){
   selEtiqueta.value = currE;
 }
 
-/* ---------------- Render Tabla de Cobranza (Check / Equis) ---------------- */
+/* ---------------- Render Cobranza ---------------- */
 function renderTablaCobranza(){
   const container = document.getElementById('cobranzaActivaContainer');
   const emptyState = document.getElementById('cobranzaEmptyState');
@@ -559,17 +594,13 @@ function renderTablaCobranza(){
   }
 
   const practica = state.practicas.find(p => p.id === practicaActivaId);
-  if(!practica){
-    practicaActivaId = null;
-    renderTablaCobranza();
-    return;
-  }
+  if(!practica){ practicaActivaId = null; renderTablaCobranza(); return; }
 
   container.style.display = 'block';
   emptyState.style.display = 'none';
 
   document.getElementById('cobranzaTitulo').textContent = practica.nombre;
-  document.getElementById('cobranzaSubmonto').textContent = `Monto fijo a cobrar: ${fmtGs(practica.monto)}`;
+  document.getElementById('cobranzaSubmonto').textContent = `Monto fijo: ${fmtGs(practica.monto)}`;
 
   const searchTxt = document.getElementById('inputSearch').value.toLowerCase().trim();
   const selCarrera = document.getElementById('filterCarrera').value;
@@ -589,9 +620,7 @@ function renderTablaCobranza(){
   let pagadosCount = 0;
   state.estudiantes.forEach(e => {
     const pago = state.pagos[e.id + '__' + practicaActivaId];
-    if(pago && pago.pagado){
-      pagadosCount++;
-    }
+    if(pago && pago.pagado) pagadosCount++;
   });
 
   const totalEst = state.estudiantes.length;
@@ -600,7 +629,7 @@ function renderTablaCobranza(){
   document.getElementById('cobranzaProgressBar').style.width = `${pct}%`;
 
   if(estudiantesFiltrados.length === 0){
-    tbody.innerHTML = `<tr><td colspan="6" class="empty">No se encontraron estudiantes con los filtros aplicados.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="6" class="empty">No se encontraron estudiantes.</td></tr>`;
     return;
   }
 
@@ -612,23 +641,22 @@ function renderTablaCobranza(){
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td style="text-align:center;">
-        <button class="status-btn ${estaPagado ? 'paid' : 'unpaid'}" onclick="toggleQuickPago('${est.id}', '${practica.id}')" title="Haz clic para cambiar estado">
+        <button class="status-btn ${estaPagado ? 'paid' : 'unpaid'}" onclick="toggleQuickPago('${est.id}', '${practica.id}')">
           ${estaPagado ? '✓' : '✕'}
         </button>
       </td>
       <td><strong>${escapeHtml(est.apellido||'')}, ${escapeHtml(est.nombre||'')}</strong></td>
-      <td class="num">${escapeHtml(est.cedula||'—')}</td>
+      <td class="num">C.I.: ${escapeHtml(est.cedula||'—')}</td>
       <td>${escapeHtml(est.carrera||'—')}</td>
-      <td>${est.etiqueta ? `<span class="badge-tag">${escapeHtml(est.etiqueta)}</span>` : '—'}</td>
+      <td>${est.etiqueta ? `<span class="badge-tag">${escapeHtml(est.etiqueta)}</span>` : ''}</td>
       <td class="num" style="text-align:right; font-weight:600; color: ${estaPagado ? 'var(--green)' : 'var(--muted)'}">
-        ${estaPagado ? `Pagado (${fmtGs(practica.monto)})` : 'Pendiente (0 Gs.)'}
+        ${estaPagado ? `Pagado (${fmtGs(practica.monto)})` : 'Pendiente'}
       </td>
     `;
     tbody.appendChild(tr);
   });
 }
 
-// Alternar directamente entre pagado (✓) o pendiente (✕) usando el monto fijo
 function toggleQuickPago(estId, pracId){
   const key = estId + '__' + pracId;
   const prac = state.practicas.find(p => p.id === pracId);
@@ -637,30 +665,26 @@ function toggleQuickPago(estId, pracId){
   if(pago && pago.pagado){
     delete state.pagos[key];
   } else {
-    state.pagos[key] = {
-      pagado: true,
-      monto: Number(prac.monto) || 0,
-      fecha: todayISO()
-    };
+    state.pagos[key] = { pagado: true, monto: Number(prac.monto) || 0, fecha: todayISO() };
   }
 
   setDirty(true);
   renderTablaCobranza();
 }
 
-/* ---------------- Prácticas (Pestaña Lista) ---------------- */
+/* ---------------- Pestaña Prácticas ---------------- */
 function renderPracticas(){
   const el = document.getElementById('listaPracticas');
-  if(state.practicas.length===0){ el.innerHTML = '<div class="empty">Todavía no agregaste prácticas.</div>'; return; }
-  let html = '<table class="list-table"><thead><tr><th>Nombre</th><th>Cuota Fija</th><th>Fecha límite</th><th>Acción</th></tr></thead><tbody>';
+  if(state.practicas.length===0){ el.innerHTML = '<div class="empty">No hay prácticas agregadas.</div>'; return; }
+  let html = '<table class="list-table"><thead><tr><th>Nombre</th><th>Cuota</th><th>Acción</th></tr></thead><tbody>';
   state.practicas.forEach(p=>{
-    html += `<tr><td>${escapeHtml(p.nombre)}</td><td class="num">${fmtGs(p.monto)}</td><td>${p.fecha||'—'}</td>
-      <td><div class="row-actions"><button class="btn-danger btn-small" data-del="${p.id}">Eliminar</button></div></td></tr>`;
+    html += `<tr><td>${escapeHtml(p.nombre)}</td><td class="num">${fmtGs(p.monto)}</td>
+      <td><button class="btn-danger btn-small" data-del="${p.id}">Eliminar</button></td></tr>`;
   });
   html += '</tbody></table>';
   el.innerHTML = html;
   el.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click', ()=>{
-    if(!confirm('¿Eliminar esta práctica? También se borrarán los pagos registrados en ella.')) return;
+    if(!confirm('¿Eliminar práctica?')) return;
     const id = b.dataset.del;
     state.practicas = state.practicas.filter(p=>p.id!==id);
     Object.keys(state.pagos).forEach(k=>{ if(k.endsWith('__'+id)) delete state.pagos[k]; });
@@ -671,7 +695,7 @@ function renderPracticas(){
   }));
 }
 
-/* ---------------- Estudiantes (Agregar, Listar y Editar) ---------------- */
+/* ---------------- Estudiantes ---------------- */
 document.getElementById('btnAddEstudiante').addEventListener('click', ()=>{
   const nombre = document.getElementById('eNombre').value.trim();
   const apellido = document.getElementById('eApellido').value.trim();
@@ -679,7 +703,7 @@ document.getElementById('btnAddEstudiante').addEventListener('click', ()=>{
   const carrera = document.getElementById('eCarrera').value.trim();
   const etiqueta = document.getElementById('eEtiqueta').value.trim();
 
-  if(!nombre || !apellido){ toast('Poné nombre y apellido', true); return; }
+  if(!nombre || !apellido){ toast('Completa nombre y apellido', true); return; }
 
   state.estudiantes.push({ id: uid(), nombre, apellido, cedula, carrera, etiqueta });
 
@@ -695,28 +719,23 @@ document.getElementById('btnAddEstudiante').addEventListener('click', ()=>{
 
 function renderEstudiantes(){
   const el = document.getElementById('listaEstudiantes');
-  if(state.estudiantes.length===0){ el.innerHTML = '<div class="empty">Todavía no agregaste estudiantes.</div>'; return; }
+  if(state.estudiantes.length===0){ el.innerHTML = '<div class="empty">No hay estudiantes.</div>'; return; }
   const rows = [...state.estudiantes].sort((a,b)=> ((a.apellido||'')+(a.nombre||'')).localeCompare((b.apellido||'')+(b.nombre||'')));
-  let html = '<table class="list-table"><thead><tr><th>Apellido</th><th>Nombre</th><th>Cédula</th><th>Carrera</th><th>Etiqueta</th><th>Acciones</th></tr></thead><tbody>';
+  let html = '<table class="list-table"><thead><tr><th>Estudiante</th><th>Etiqueta</th><th>Acción</th></tr></thead><tbody>';
   rows.forEach(e=>{
     html += `<tr>
-      <td>${escapeHtml(e.apellido||'')}</td>
-      <td>${escapeHtml(e.nombre||'')}</td>
-      <td>${escapeHtml(e.cedula||'')}</td>
-      <td>${escapeHtml(e.carrera||'—')}</td>
+      <td><strong>${escapeHtml(e.apellido||'')}, ${escapeHtml(e.nombre||'')}</strong><br><small style="color:var(--muted)">C.I.: ${escapeHtml(e.cedula||'—')} | ${escapeHtml(e.carrera||'—')}</small></td>
       <td>${e.etiqueta ? `<span class="badge-tag">${escapeHtml(e.etiqueta)}</span>` : '—'}</td>
       <td>
-        <div class="row-actions">
-          <button class="btn-ghost btn-small" onclick="abrirModalEditarEstudiante('${e.id}')">✏️ Editar</button>
-          <button class="btn-danger btn-small" data-del="${e.id}">Eliminar</button>
-        </div>
+        <button class="btn-ghost btn-small" onclick="abrirModalEditarEstudiante('${e.id}')">✏️</button>
+        <button class="btn-danger btn-small" data-del="${e.id}">✕</button>
       </td>
     </tr>`;
   });
   html += '</tbody></table>';
   el.innerHTML = html;
   el.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click', ()=>{
-    if(!confirm('¿Eliminar este estudiante? También se borrarán sus pagos.')) return;
+    if(!confirm('¿Eliminar estudiante?')) return;
     const id = b.dataset.del;
     state.estudiantes = state.estudiantes.filter(e=>e.id!==id);
     Object.keys(state.pagos).forEach(k=>{ if(k.startsWith(id+'__')) delete state.pagos[k]; });
@@ -725,18 +744,15 @@ function renderEstudiantes(){
   }));
 }
 
-/* Modal de Edición de Estudiantes */
 function abrirModalEditarEstudiante(id){
   const est = state.estudiantes.find(e => e.id === id);
   if(!est) return;
-
   document.getElementById('editEstId').value = est.id;
   document.getElementById('editEstNombre').value = est.nombre || '';
   document.getElementById('editEstApellido').value = est.apellido || '';
   document.getElementById('editEstCedula').value = est.cedula || '';
   document.getElementById('editEstCarrera').value = est.carrera || '';
   document.getElementById('editEstEtiqueta').value = est.etiqueta || '';
-
   document.getElementById('editEstudianteModal').classList.remove('hidden');
 }
 
@@ -754,16 +770,14 @@ document.getElementById('btnSaveEditEst').addEventListener('click', ()=>{
     est.cedula = document.getElementById('editEstCedula').value.trim();
     est.carrera = document.getElementById('editEstCarrera').value.trim();
     est.etiqueta = document.getElementById('editEstEtiqueta').value.trim();
-
     setDirty(true);
     renderAll();
-    toast('Estudiante actualizado correctamente');
+    toast('Estudiante actualizado');
   }
-
   document.getElementById('editEstudianteModal').classList.add('hidden');
 });
 
-/* ---------------- Resumen ---------------- */
+/* ---------------- Resumen y Export ---------------- */
 function renderResumen(){
   const totalesEl = document.getElementById('resumenTotales');
   const tablaEl = document.getElementById('resumenTabla');
@@ -779,23 +793,21 @@ function renderResumen(){
     return {p, esperado, recaudado, pendiente: esperado-recaudado, pagaron};
   });
   totalesEl.innerHTML = `
-    <div class="stamp-card"><div class="label">Esperado total</div><div class="value">${fmtGs(granEsperado)}</div></div>
+    <div class="stamp-card"><div class="label">Esperado</div><div class="value">${fmtGs(granEsperado)}</div></div>
     <div class="stamp-card total-green"><div class="label">Recaudado</div><div class="value">${fmtGs(granRecaudado)}</div></div>
     <div class="stamp-card total-red"><div class="label">Pendiente</div><div class="value">${fmtGs(granEsperado-granRecaudado)}</div></div>
   `;
-  if(filas.length===0){ tablaEl.innerHTML = '<div class="empty">Agregá prácticas para ver el detalle.</div>'; return; }
-  let html = '<table class="list-table"><thead><tr><th>Práctica</th><th>Cuota</th><th>Esperado</th><th>Recaudado</th><th>Pendiente</th><th>Pagaron completo</th></tr></thead><tbody>';
+  if(filas.length===0){ tablaEl.innerHTML = '<div class="empty">Sin resumen disponible.</div>'; return; }
+  let html = '<table class="list-table"><thead><tr><th>Práctica</th><th>Recaudado</th><th>Pagaron</th></tr></thead><tbody>';
   filas.forEach(f=>{
-    html += `<tr><td>${escapeHtml(f.p.nombre)}</td><td class="num">${fmtGs(f.p.monto)}</td><td class="num">${fmtGs(f.esperado)}</td>
-      <td class="num">${fmtGs(f.recaudado)}</td><td class="num">${fmtGs(f.pendiente)}</td><td class="num">${f.pagaron}/${state.estudiantes.length}</td></tr>`;
+    html += `<tr><td>${escapeHtml(f.p.nombre)}</td><td class="num">${fmtGs(f.recaudado)}</td><td class="num">${f.pagaron}/${state.estudiantes.length}</td></tr>`;
   });
   html += '</tbody></table>';
   tablaEl.innerHTML = html;
 }
 
-/* ---------------- Export CSV ---------------- */
 document.getElementById('btnExportCsv').addEventListener('click', ()=>{
-  if(state.estudiantes.length===0){ toast('No hay datos para exportar', true); return; }
+  if(state.estudiantes.length===0){ toast('Sin datos para exportar', true); return; }
   const estudiantes = [...state.estudiantes].sort((a,b)=> ((a.apellido||'')+(a.nombre||'')).localeCompare((b.apellido||'')+(b.nombre||'')));
   let rows = [['Apellido','Nombre','Cédula','Carrera','Etiqueta', ...state.practicas.map(p=>p.nombre), 'Total pagado']];
   estudiantes.forEach(e=>{
@@ -816,25 +828,19 @@ document.getElementById('btnExportCsv').addEventListener('click', ()=>{
   a.click();
 });
 
-/* ---------------- API GitHub ---------------- */
+/* ---------------- Sync GitHub ---------------- */
 async function loadFromShared(){
   if(loadingShared) return;
   loadingShared = true;
   const statusEl = document.getElementById('syncStatus');
   statusEl.textContent = 'sincronizando...';
-  statusEl.className = '';
-
   const token = getSavedToken();
 
   try {
     const headers = {};
     if(token) headers['Authorization'] = `token ${token}`;
 
-    const metaRes = await fetch(`${API_GITHUB_URL}?_t=${Date.now()}`, {
-      headers,
-      cache: 'no-store'
-    });
-
+    const metaRes = await fetch(`${API_GITHUB_URL}?_t=${Date.now()}`, { headers, cache: 'no-store' });
     if(!metaRes.ok) throw new Error('HTTP ' + metaRes.status);
     
     const meta = await metaRes.json();
@@ -842,121 +848,73 @@ async function loadFromShared(){
 
     const binary = atob(meta.content.replace(/\s/g, ''));
     const bytes = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) {
-      bytes[i] = binary.charCodeAt(i);
-    }
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
     const jsonStr = new TextDecoder().decode(bytes);
-    const json = JSON.parse(jsonStr);
 
-    state = Object.assign({practicas:[], estudiantes:[], pagos:{}}, json);
-
+    state = Object.assign({practicas:[], estudiantes:[], pagos:{}}, JSON.parse(jsonStr));
     saveLocal();
     dirty = false;
     
-    // Seleccionar última práctica por defecto si existe
     if(state.practicas.length > 0 && !practicaActivaId){
       practicaActivaId = state.practicas[state.practicas.length - 1].id;
     }
 
     actualizarSelectPracticas();
     renderAll();
-
-    statusEl.textContent = 'sincronizado con GitHub ✓';
+    statusEl.textContent = 'sincronizado ✓';
     statusEl.className = '';
   } catch(err) {
-    console.error(err);
-    statusEl.textContent = token ? 'error al sincronizar' : 'ingresa tu token (🔑)';
+    statusEl.textContent = token ? 'error sincronización' : 'falta token (🔑)';
     statusEl.className = 'error';
-  } finally {
-    loadingShared = false;
-  }
+  } finally { loadingShared = false; }
 }
 
 async function saveToShared(){
   let token = getSavedToken();
-  if(!token){
-    promptForToken();
-    token = getSavedToken();
-    if(!token) return;
-  }
+  if(!token){ promptForToken(); token = getSavedToken(); if(!token) return; }
 
   if(savingShared) return;
   savingShared = true;
-
   const statusEl = document.getElementById('syncStatus');
-  statusEl.textContent = 'guardando en GitHub...';
-  statusEl.className = '';
+  statusEl.textContent = 'guardando...';
 
   try {
     if(!currentFileSha){
-      const metaRes = await fetch(API_GITHUB_URL, {
-        headers: { 'Authorization': `token ${token}` },
-        cache: 'no-store'
-      });
-      if(metaRes.ok){
-        const meta = await metaRes.json();
-        currentFileSha = meta.sha;
-      }
+      const metaRes = await fetch(API_GITHUB_URL, { headers: { 'Authorization': `token ${token}` }, cache: 'no-store' });
+      if(metaRes.ok){ const meta = await metaRes.json(); currentFileSha = meta.sha; }
     }
 
     const jsonStr = JSON.stringify(state, null, 2);
     const bytes = new TextEncoder().encode(jsonStr);
     let binary = '';
-    for (let i = 0; i < bytes.byteLength; i++) {
-      binary += String.fromCharCode(bytes[i]);
-    }
-    const contentBase64 = btoa(binary);
-
-    const bodyData = {
-      message: 'Actualización de cobranzas',
-      content: contentBase64,
-      sha: currentFileSha
-    };
+    for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
 
     const res = await fetch(API_GITHUB_URL, {
       method: 'PUT',
-      headers: {
-        'Authorization': `token ${token}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/vnd.github.v3+json'
-      },
-      body: JSON.stringify(bodyData)
+      headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'Update', content: btoa(binary), sha: currentFileSha })
     });
 
-    if(!res.ok){
-      const errJson = await res.json().catch(()=> ({}));
-      throw new Error(errJson.message || ('HTTP ' + res.status));
-    }
+    if(!res.ok) throw new Error('HTTP ' + res.status);
 
     const resData = await res.json();
     currentFileSha = resData.content.sha;
-
     dirty = false;
     saveLocal();
 
-    statusEl.textContent = 'guardado en GitHub ✓';
-    statusEl.className = '';
+    statusEl.textContent = 'guardado ✓';
     toast('¡Cambios guardados en GitHub!');
   } catch(err) {
-    console.error(err);
     statusEl.textContent = 'error al guardar';
     statusEl.className = 'error';
-    toast('Error: ' + err.message, true);
-  } finally {
-    savingShared = false;
-  }
+    toast('Error guardando', true);
+  } finally { savingShared = false; }
 }
 
 document.getElementById('btnSave').addEventListener('click', saveToShared);
 
-/* Recarga automática cada 15s */
-setInterval(()=>{
-  if(!dirty && !loadingShared && !savingShared){
-    loadFromShared();
-  }
-}, 15000);
+setInterval(()=>{ if(!dirty && !loadingShared && !savingShared) loadFromShared(); }, 15000);
 
-/* Init */
 function renderAll(){
   poblarFiltros();
   renderPracticas();
