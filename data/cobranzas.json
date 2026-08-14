@@ -1,5 +1,12 @@
 {
-  "practicas": [],
+  "practicas": [
+    {
+      "id": "mwmc2vca",
+      "nombre": "Práctica 14/08/2026",
+      "monto": 3000,
+      "fecha": "2026-08-14"
+    }
+  ],
   "estudiantes": [
     {
       "id": "est-001",
@@ -858,5 +865,26 @@
       "etiqueta": "Enfermo"
     }
   ],
-  "pagos": {}
+  "pagos": {
+    "est-061__mwmc2vca": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-14"
+    },
+    "est-088__mwmc2vca": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-14"
+    },
+    "est-038__mwmc2vca": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-14"
+    },
+    "est-043__mwmc2vca": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-14"
+    }
+  }
 }
