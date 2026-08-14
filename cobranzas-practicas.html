@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Libro de Cobranzas — Prácticas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cover:#152029;
+    --cover-2:#1c2c3a;
+    --paper:#efe9db;
+    --paper-line:#d9d0ba;
+    --ink:#20291f;
+    --muted:#6b6252;
+    --brass:#b8934a;
+    --brass-light:#d8b876;
+    --green:#3f6b4b;
+    --green-bg:#e2ecdf;
+    --red:#a13c32;
+    --red-bg:#f2e2df;
+    --amber:#a8792a;
+    --amber-bg:#f4e8d2;
+    --radius:3px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cover);
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+  }
+  ::selection{background:var(--brass-light);}
+
+  /* ---------- Cover / header ---------- */
+  header.cover{
+    background:linear-gradient(180deg,var(--cover),var(--cover-2));
+    padding:22px clamp(16px,4vw,40px) 0;
+    border-bottom:3px solid var(--brass);
+  }
+  .cover-top{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    flex-wrap:wrap;gap:14px;
+    max-width:1180px;margin:0 auto;
+  }
+  .cover-title{display:flex;align-items:center;gap:14px;}
+  .stamp-mark{
+    width:46px;height:46px;border:2px solid var(--brass);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--brass-light);font-family:'Spectral',serif;font-size:22px;font-weight:600;
+    flex:none;
+  }
+  h1{
+    font-family:'Spectral',serif;color:#f2ead9;margin:0;
+    font-size:clamp(20px,3vw,26px);font-weight:600;letter-spacing:.2px;
+  }
+  .subtitle{margin:2px 0 0;color:#a9b2ad;font-size:13px;letter-spacing:.4px;text-transform:uppercase;}
+  .cover-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  #syncStatus{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:#a9b2ad;
+    border-right:1px solid #3a4753;padding-right:12px;margin-right:2px;
+  }
+  #syncStatus.dirty{color:var(--brass-light);}
+  #syncStatus.error{color:#e2897c;}
+  button{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:13px;cursor:pointer;
+    border-radius:var(--radius);border:1px solid transparent;padding:9px 14px;
+  }
+  .btn-primary{background:var(--brass);color:#1c1405;border-color:var(--brass);}
+  .btn-primary:hover{background:var(--brass-light);}
+  .btn-ghost{background:transparent;color:#e4dcc7;border-color:#48576a;}
+  .btn-ghost:hover{border-color:var(--brass-light);color:var(--brass-light);}
+  .btn-danger{background:transparent;color:var(--red);border-color:var(--red);}
+  .btn-small{padding:5px 10px;font-size:12px;}
+
+  nav.tabs{
+    max-width:1180px;margin:16px auto 0;display:flex;gap:2px;
+    padding:0 clamp(16px,4vw,40px);
+  }
+  .tab{
+    background:#0000;color:#a9b2ad;border:1px solid #3a4753;border-bottom:none;
+    padding:10px 18px;border-radius:6px 6px 0 0;font-size:13px;
+  }
+  .tab.active{background:var(--paper);color:var(--ink);border-color:var(--paper);}
+
+  main.paper{
+    background:var(--paper);
+    max-width:1180px;margin:0 auto 40px;
+    padding:clamp(16px,3vw,32px);
+    min-height:400px;
+    box-shadow:0 30px 60px -20px #00000066;
+  }
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+
+  .panel-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:18px;}
+  .panel-head h2{font-family:'Spectral',serif;font-size:19px;margin:0;font-weight:600;}
+  .panel-head p{margin:2px 0 0;color:var(--muted);font-size:13px;}
+
+  /* ---------- Ledger table ---------- */
+  .ledger-wrap{overflow-x:auto;border:1px solid var(--paper-line);border-radius:4px;background:#f7f3e8;}
+  table.ledger{border-collapse:collapse;width:100%;font-size:13px;}
+  table.ledger th,table.ledger td{
+    border-bottom:1px solid var(--paper-line);
+    padding:9px 12px;text-align:left;white-space:nowrap;
+  }
+  table.ledger thead th{
+    background:#e6dfcb;font-family:'Inter',sans-serif;font-weight:600;font-size:11.5px;
+    text-transform:uppercase;letter-spacing:.4px;color:var(--muted);
+    position:sticky;top:0;
+  }
+  table.ledger td.num,table.ledger th.num{font-family:'IBM Plex Mono',monospace;}
+  table.ledger tbody tr:hover{background:#efe6cd;}
+  .sticky-col{position:sticky;left:0;background:#f7f3e8;z-index:1;border-right:1px solid var(--paper-line);}
+  thead .sticky-col{background:#e6dfcb;z-index:2;}
+  .practica-head{cursor:default;}
+  .practica-head small{display:block;font-weight:400;text-transform:none;color:var(--brass);font-family:'IBM Plex Mono',monospace;}
+
+  .cell-btn{
+    width:100%;min-width:78px;padding:6px 8px;border-radius:var(--radius);
+    font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;
+    border:1px dashed #b8ac8c;background:#00000006;color:var(--muted);
+  }
+  .cell-btn.paid{background:var(--green-bg);color:var(--green);border:1px solid var(--green);border-style:solid;}
+  .cell-btn.partial{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber);}
+  .cell-btn.unpaid:hover{border-color:var(--red);color:var(--red);}
+
+  /* ---------- Forms ---------- */
+  .form-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+  .field{display:flex;flex-direction:column;gap:4px;flex:1;min-width:140px;}
+  .field label{font-size:11.5px;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);font-weight:600;}
+  .field input,.field select{
+    font-family:'Inter',sans-serif;font-size:13.5px;padding:8px 10px;
+    border:1px solid var(--paper-line);border-radius:var(--radius);background:#faf7ee;color:var(--ink);
+  }
+  .field input:focus,.field select:focus{outline:2px solid var(--brass);outline-offset:0;}
+
+  .row-actions{display:flex;gap:6px;}
+  .list-table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  .list-table th{text-align:left;font-size:11px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--paper-line);padding:6px 10px;}
+  .list-table td{padding:8px 10px;border-bottom:1px solid var(--paper-line);}
+  .list-table td.num{font-family:'IBM Plex Mono',monospace;}
+
+  /* ---------- Summary ---------- */
+  .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px;}
+  .stamp-card{
+    background:#f7f3e8;border:1px solid var(--paper-line);border-radius:4px;padding:16px 18px;
+    position:relative;overflow:hidden;
+  }
+  .stamp-card .label{font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);font-weight:600;}
+  .stamp-card .value{font-family:'IBM Plex Mono',monospace;font-size:22px;margin-top:6px;color:var(--ink);}
+  .stamp-card.total-green .value{color:var(--green);}
+  .stamp-card.total-red .value{color:var(--red);}
+
+  /* ---------- Modal ---------- */
+  .modal{
+    position:fixed;inset:0;background:#0c1218cc;display:flex;align-items:center;justify-content:center;
+    padding:20px;z-index:50;
+  }
+  .modal.hidden{display:none;}
+  .modal-box{
+    background:var(--paper);border-radius:6px;max-width:440px;width:100%;
+    padding:24px;box-shadow:0 30px 60px #000a;
+  }
+  .modal-box h3{font-family:'Spectral',serif;margin:0 0 4px;font-size:18px;}
+  .modal-box p.hint{color:var(--muted);font-size:12.5px;margin:0 0 16px;}
+  .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;}
+
+  .empty{color:var(--muted);font-size:13.5px;padding:24px 0;text-align:center;}
+  .toast{
+    position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+    background:#1c2c3a;color:#f2ead9;padding:10px 18px;border-radius:5px;
+    font-size:13px;border:1px solid var(--brass);opacity:0;pointer-events:none;
+    transition:opacity .25s ease;z-index:100;
+  }
+  .toast.show{opacity:1;}
+
+  @media (max-width:640px){
+    .cover-actions{width:100%;justify-content:flex-start;}
+    #syncStatus{border-right:none;padding-right:0;width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="cover-top">
+    <div class="cover-title">
+      <div class="stamp-mark">₲</div>
+      <div>
+        <h1>Libro de Cobranzas</h1>
+        <p class="subtitle">Cuotas de prácticas</p>
+      </div>
+    </div>
+    <div class="cover-actions">
+      <span id="syncStatus">sin conectar a GitHub</span>
+      <button class="btn-ghost" id="btnSettings">⚙ Config. GitHub</button>
+      <button class="btn-primary" id="btnSave">Guardar en GitHub</button>
+    </div>
+  </div>
+  <nav class="tabs">
+    <button class="tab active" data-tab="planilla">Planilla</button>
+    <button class="tab" data-tab="practicas">Prácticas</button>
+    <button class="tab" data-tab="estudiantes">Estudiantes</button>
+    <button class="tab" data-tab="resumen">Resumen</button>
+  </nav>
+</header>
+
+<main class="paper">
+
+  <!-- PLANILLA -->
+  <section id="tab-planilla" class="tab-panel active">
+    <div class="panel-head">
+      <div>
+        <h2>Planilla</h2>
+        <p>Click en una celda para registrar el pago de esa práctica.</p>
+      </div>
+      <button class="btn-ghost btn-small" id="btnExportCsv">Exportar CSV</button>
+    </div>
+    <div class="ledger-wrap"><div id="grid"></div></div>
+  </section>
+
+  <!-- PRACTICAS -->
+  <section id="tab-practicas" class="tab-panel">
+    <div class="panel-head">
+      <div><h2>Prácticas</h2><p>Cada práctica tiene un monto de cuota.</p></div>
+    </div>
+    <div class="form-row">
+      <div class="field"><label>Nombre</label><input id="pNombre" placeholder="Ej: Práctica II"></div>
+      <div class="field"><label>Cuota (Gs.)</label><input id="pMonto" type="number" min="0" placeholder="150000"></div>
+      <div class="field"><label>Fecha límite</label><input id="pFecha" type="date"></div>
+      <div class="field" style="flex:0;align-self:flex-end;"><button class="btn-primary" id="btnAddPractica">+ Agregar</button></div>
+    </div>
+    <div id="listaPracticas"></div>
+  </section>
+
+  <!-- ESTUDIANTES -->
+  <section id="tab-estudiantes" class="tab-panel">
+    <div class="panel-head">
+      <div><h2>Estudiantes</h2><p>Alumnos registrados en el libro.</p></div>
+    </div>
+    <div class="form-row">
+      <div class="field"><label>Nombre</label><input id="eNombre" placeholder="Nombre"></div>
+      <div class="field"><label>Apellido</label><input id="eApellido" placeholder="Apellido"></div>
+      <div class="field"><label>Cédula</label><input id="eCedula" placeholder="1234567"></div>
+      <div class="field" style="flex:0;align-self:flex-end;"><button class="btn-primary" id="btnAddEstudiante">+ Agregar</button></div>
+    </div>
+    <div id="listaEstudiantes"></div>
+  </section>
+
+  <!-- RESUMEN -->
+  <section id="tab-resumen" class="tab-panel">
+    <div class="panel-head"><div><h2>Resumen</h2><p>Totales por práctica y en general.</p></div></div>
+    <div id="resumenTotales" class="summary-grid"></div>
+    <div id="resumenTabla"></div>
+  </section>
+
+</main>
+
+<!-- Settings modal -->
+<div class="modal hidden" id="settingsModal">
+  <div class="modal-box">
+    <h3>Conexión con GitHub</h3>
+    <p class="hint">Se guarda como un archivo JSON dentro de un repo tuyo. El token queda solo en este navegador (localStorage), nunca se envía a Anthropic.</p>
+    <div class="field" style="margin-bottom:10px;"><label>Usuario / organización</label><input id="cfgOwner" placeholder="tu-usuario"></div>
+    <div class="field" style="margin-bottom:10px;"><label>Repositorio</label><input id="cfgRepo" placeholder="cobranzas-practicas"></div>
+    <div class="field" style="margin-bottom:10px;"><label>Ruta del archivo</label><input id="cfgPath" placeholder="data/cobranzas.json"></div>
+    <div class="field" style="margin-bottom:10px;"><label>Rama</label><input id="cfgBranch" placeholder="main"></div>
+    <div class="field" style="margin-bottom:4px;"><label>Personal Access Token (repo scope)</label><input id="cfgToken" type="password" placeholder="ghp_..."></div>
+    <p class="hint" style="margin-top:6px;">Creá el token en GitHub → Settings → Developer settings → Personal access tokens (fine-grained, con permiso de lectura/escritura de "Contents" en ese repo).</p>
+    <div class="modal-actions">
+      <button class="btn-ghost btn-small" id="btnCancelSettings">Cancelar</button>
+      <button class="btn-primary btn-small" id="btnSaveSettings">Guardar y cargar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Cell edit modal -->
+<div class="modal hidden" id="cellModal">
+  <div class="modal-box">
+    <h3 id="cellTitle">Registrar pago</h3>
+    <p class="hint" id="cellSubtitle"></p>
+    <div class="field" style="margin-bottom:10px;"><label>Monto pagado (Gs.)</label><input id="cellMonto" type="number" min="0"></div>
+    <div class="field" style="margin-bottom:10px;"><label>Fecha de pago</label><input id="cellFecha" type="date"></div>
+    <div class="field"><label>Observación</label><input id="cellObs" placeholder="Opcional"></div>
+    <div class="modal-actions">
+      <button class="btn-danger btn-small" id="btnClearCell">Quitar pago</button>
+      <button class="btn-ghost btn-small" id="btnCancelCell">Cancelar</button>
+      <button class="btn-primary btn-small" id="btnSaveCell">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------------- Estado ---------------- */
+const LS_DATA = 'cobranzas_data_v1';
+const LS_CFG  = 'cobranzas_github_cfg_v1';
+
+let state = {
+  practicas: [],   // {id, nombre, monto, fecha}
+  estudiantes: [], // {id, nombre, apellido, cedula}
+  pagos: {}        // key `${estudianteId}__${practicaId}` -> {monto, fecha, obs}
+};
+let cfg = { owner:'', repo:'', path:'data/cobranzas.json', branch:'main', token:'' };
+let fileSha = null;
+let dirty = false;
+let activeCell = null; // {estudianteId, practicaId}
+
+/* ---------------- Utilidades ---------------- */
+const uid = () => Math.random().toString(36).slice(2,10);
+const fmtGs = n => (Number(n)||0).toLocaleString('es-PY') + ' Gs.';
+const todayISO = () => new Date().toISOString().slice(0,10);
+
+function toast(msg, isError){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.borderColor = isError ? 'var(--red)' : 'var(--brass)';
+  t.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(()=>t.classList.remove('show'), 3200);
+}
+
+function setDirty(v){
+  dirty = v;
+  const el = document.getElementById('syncStatus');
+  if(v){ el.textContent = 'cambios sin guardar en GitHub'; el.className = 'dirty'; }
+  saveLocal();
+}
+
+function saveLocal(){
+  localStorage.setItem(LS_DATA, JSON.stringify(state));
+}
+function loadLocal(){
+  const raw = localStorage.getItem(LS_DATA);
+  if(raw){ try{ state = JSON.parse(raw); }catch(e){} }
+}
+function loadCfg(){
+  const raw = localStorage.getItem(LS_CFG);
+  if(raw){ try{ cfg = Object.assign(cfg, JSON.parse(raw)); }catch(e){} }
+}
+function saveCfg(){
+  localStorage.setItem(LS_CFG, JSON.stringify(cfg));
+}
+
+/* ---------------- Tabs ---------------- */
+document.querySelectorAll('.tab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    if(btn.dataset.tab==='resumen') renderResumen();
+  });
+});
+
+/* ---------------- Render: Planilla ---------------- */
+function renderGrid(){
+  const grid = document.getElementById('grid');
+  if(state.estudiantes.length===0 || state.practicas.length===0){
+    grid.innerHTML = `<div class="empty">Agregá al menos un estudiante y una práctica para ver la planilla.</div>`;
+    return;
+  }
+  const estudiantes = [...state.estudiantes].sort((a,b)=> (a.apellido+a.nombre).localeCompare(b.apellido+b.nombre));
+  let html = '<table class="ledger"><thead><tr><th class="sticky-col">Estudiante</th>';
+  state.practicas.forEach(p=>{
+    html += `<th class="num practica-head">${escapeHtml(p.nombre)}<small>${fmtGs(p.monto)}</small></th>`;
+  });
+  html += '</tr></thead><tbody>';
+  estudiantes.forEach(e=>{
+    html += `<tr><td class="sticky-col">${escapeHtml(e.apellido)}, ${escapeHtml(e.nombre)}</td>`;
+    state.practicas.forEach(p=>{
+      const key = e.id+'__'+p.id;
+      const pago = state.pagos[key];
+      let cls='unpaid', label='—';
+      if(pago){
+        if(Number(pago.monto) >= Number(p.monto) && Number(p.monto) > 0){ cls='paid'; label='✓ '+fmtGs(pago.monto); }
+        else { cls='partial'; label=fmtGs(pago.monto); }
+      }
+      html += `<td><button class="cell-btn ${cls}" data-est="${e.id}" data-prac="${p.id}">${label}</button></td>`;
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  grid.innerHTML = html;
+  grid.querySelectorAll('.cell-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=> openCellModal(btn.dataset.est, btn.dataset.prac));
+  });
+}
+
+function escapeHtml(s){
+  return String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ---------------- Cell modal ---------------- */
+function openCellModal(estId, pracId){
+  activeCell = {estId, pracId};
+  const est = state.estudiantes.find(x=>x.id===estId);
+  const prac = state.practicas.find(x=>x.id===pracId);
+  const pago = state.pagos[estId+'__'+pracId];
+  document.getElementById('cellTitle').textContent = `${est.nombre} ${est.apellido}`;
+  document.getElementById('cellSubtitle').textContent = `${prac.nombre} · cuota ${fmtGs(prac.monto)}`;
+  document.getElementById('cellMonto').value = pago ? pago.monto : prac.monto;
+  document.getElementById('cellFecha').value = pago ? pago.fecha : todayISO();
+  document.getElementById('cellObs').value = pago ? (pago.obs||'') : '';
+  document.getElementById('cellModal').classList.remove('hidden');
+}
+document.getElementById('btnCancelCell').addEventListener('click', ()=> document.getElementById('cellModal').classList.add('hidden'));
+document.getElementById('btnSaveCell').addEventListener('click', ()=>{
+  const {estId, pracId} = activeCell;
+  const monto = document.getElementById('cellMonto').value;
+  const fecha = document.getElementById('cellFecha').value || todayISO();
+  const obs = document.getElementById('cellObs').value;
+  state.pagos[estId+'__'+pracId] = { monto: Number(monto)||0, fecha, obs };
+  document.getElementById('cellModal').classList.add('hidden');
+  setDirty(true); renderGrid();
+});
+document.getElementById('btnClearCell').addEventListener('click', ()=>{
+  const {estId, pracId} = activeCell;
+  delete state.pagos[estId+'__'+pracId];
+  document.getElementById('cellModal').classList.add('hidden');
+  setDirty(true); renderGrid();
+});
+
+/* ---------------- Prácticas ---------------- */
+document.getElementById('btnAddPractica').addEventListener('click', ()=>{
+  const nombre = document.getElementById('pNombre').value.trim();
+  const monto = document.getElementById('pMonto').value;
+  const fecha = document.getElementById('pFecha').value;
+  if(!nombre){ toast('Poné un nombre para la práctica', true); return; }
+  state.practicas.push({id:uid(), nombre, monto:Number(monto)||0, fecha});
+  document.getElementById('pNombre').value='';
+  document.getElementById('pMonto').value='';
+  document.getElementById('pFecha').value='';
+  setDirty(true); renderPracticas(); renderGrid();
+});
+function renderPracticas(){
+  const el = document.getElementById('listaPracticas');
+  if(state.practicas.length===0){ el.innerHTML = '<div class="empty">Todavía no agregaste prácticas.</div>'; return; }
+  let html = '<table class="list-table"><thead><tr><th>Nombre</th><th>Cuota</th><th>Fecha límite</th><th></th></tr></thead><tbody>';
+  state.practicas.forEach(p=>{
+    html += `<tr><td>${escapeHtml(p.nombre)}</td><td class="num">${fmtGs(p.monto)}</td><td>${p.fecha||'—'}</td>
+      <td><div class="row-actions"><button class="btn-danger btn-small" data-del="${p.id}">Eliminar</button></div></td></tr>`;
+  });
+  html += '</tbody></table>';
+  el.innerHTML = html;
+  el.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click', ()=>{
+    if(!confirm('¿Eliminar esta práctica? También se borran los pagos registrados en ella.')) return;
+    const id = b.dataset.del;
+    state.practicas = state.practicas.filter(p=>p.id!==id);
+    Object.keys(state.pagos).forEach(k=>{ if(k.endsWith('__'+id)) delete state.pagos[k]; });
+    setDirty(true); renderPracticas(); renderGrid();
+  }));
+}
+
+/* ---------------- Estudiantes ---------------- */
+document.getElementById('btnAddEstudiante').addEventListener('click', ()=>{
+  const nombre = document.getElementById('eNombre').value.trim();
+  const apellido = document.getElementById('eApellido').value.trim();
+  const cedula = document.getElementById('eCedula').value.trim();
+  if(!nombre || !apellido){ toast('Poné nombre y apellido', true); return; }
+  state.estudiantes.push({id:uid(), nombre, apellido, cedula});
+  document.getElementById('eNombre').value='';
+  document.getElementById('eApellido').value='';
+  document.getElementById('eCedula').value='';
+  setDirty(true); renderEstudiantes(); renderGrid();
+});
+function renderEstudiantes(){
+  const el = document.getElementById('listaEstudiantes');
+  if(state.estudiantes.length===0){ el.innerHTML = '<div class="empty">Todavía no agregaste estudiantes.</div>'; return; }
+  const rows = [...state.estudiantes].sort((a,b)=> (a.apellido+a.nombre).localeCompare(b.apellido+b.nombre));
+  let html = '<table class="list-table"><thead><tr><th>Apellido</th><th>Nombre</th><th>Cédula</th><th></th></tr></thead><tbody>';
+  rows.forEach(e=>{
+    html += `<tr><td>${escapeHtml(e.apellido)}</td><td>${escapeHtml(e.nombre)}</td><td>${escapeHtml(e.cedula)}</td>
+      <td><div class="row-actions"><button class="btn-danger btn-small" data-del="${e.id}">Eliminar</button></div></td></tr>`;
+  });
+  html += '</tbody></table>';
+  el.innerHTML = html;
+  el.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click', ()=>{
+    if(!confirm('¿Eliminar este estudiante? También se borran sus pagos.')) return;
+    const id = b.dataset.del;
+    state.estudiantes = state.estudiantes.filter(e=>e.id!==id);
+    Object.keys(state.pagos).forEach(k=>{ if(k.startsWith(id+'__')) delete state.pagos[k]; });
+    setDirty(true); renderEstudiantes(); renderGrid();
+  }));
+}
+
+/* ---------------- Resumen ---------------- */
+function renderResumen(){
+  const totalesEl = document.getElementById('resumenTotales');
+  const tablaEl = document.getElementById('resumenTabla');
+  let granEsperado=0, granRecaudado=0;
+  let filas = state.practicas.map(p=>{
+    const esperado = p.monto * state.estudiantes.length;
+    let recaudado = 0, pagaron = 0;
+    state.estudiantes.forEach(e=>{
+      const pago = state.pagos[e.id+'__'+p.id];
+      if(pago){ recaudado += Number(pago.monto)||0; if(Number(pago.monto) >= Number(p.monto)) pagaron++; }
+    });
+    granEsperado += esperado; granRecaudado += recaudado;
+    return {p, esperado, recaudado, pendiente: esperado-recaudado, pagaron};
+  });
+  totalesEl.innerHTML = `
+    <div class="stamp-card"><div class="label">Esperado total</div><div class="value">${fmtGs(granEsperado)}</div></div>
+    <div class="stamp-card total-green"><div class="label">Recaudado</div><div class="value">${fmtGs(granRecaudado)}</div></div>
+    <div class="stamp-card total-red"><div class="label">Pendiente</div><div class="value">${fmtGs(granEsperado-granRecaudado)}</div></div>
+  `;
+  if(filas.length===0){ tablaEl.innerHTML = '<div class="empty">Agregá prácticas para ver el detalle.</div>'; return; }
+  let html = '<table class="list-table"><thead><tr><th>Práctica</th><th>Cuota</th><th>Esperado</th><th>Recaudado</th><th>Pendiente</th><th>Pagaron completo</th></tr></thead><tbody>';
+  filas.forEach(f=>{
+    html += `<tr><td>${escapeHtml(f.p.nombre)}</td><td class="num">${fmtGs(f.p.monto)}</td><td class="num">${fmtGs(f.esperado)}</td>
+      <td class="num">${fmtGs(f.recaudado)}</td><td class="num">${fmtGs(f.pendiente)}</td><td class="num">${f.pagaron}/${state.estudiantes.length}</td></tr>`;
+  });
+  html += '</tbody></table>';
+  tablaEl.innerHTML = html;
+}
+
+/* ---------------- Export CSV ---------------- */
+document.getElementById('btnExportCsv').addEventListener('click', ()=>{
+  if(state.estudiantes.length===0){ toast('No hay datos para exportar', true); return; }
+  const estudiantes = [...state.estudiantes].sort((a,b)=> (a.apellido+a.nombre).localeCompare(b.apellido+b.nombre));
+  let rows = [['Apellido','Nombre','Cédula', ...state.practicas.map(p=>p.nombre), 'Total pagado']];
+  estudiantes.forEach(e=>{
+    let total = 0;
+    const cells = state.practicas.map(p=>{
+      const pago = state.pagos[e.id+'__'+p.id];
+      const monto = pago ? Number(pago.monto)||0 : 0;
+      total += monto;
+      return monto;
+    });
+    rows.push([e.apellido, e.nombre, e.cedula, ...cells, total]);
+  });
+  const csv = rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob(['\ufeff'+csv], {type:'text/csv;charset=utf-8;'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'cobranzas_practicas.csv';
+  a.click();
+});
+
+/* ---------------- GitHub sync ---------------- */
+const API = 'https://api.github.com';
+
+function ghHeaders(){
+  const h = {'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};
+  if(cfg.token) h['Authorization'] = 'Bearer '+cfg.token;
+  return h;
+}
+
+function utf8ToB64(str){ return btoa(unescape(encodeURIComponent(str))); }
+function b64ToUtf8(str){ return decodeURIComponent(escape(atob(str))); }
+
+function cfgReady(){ return cfg.owner && cfg.repo && cfg.path; }
+
+async function loadFromGithub(){
+  if(!cfgReady()){ updateStatus(); return; }
+  const statusEl = document.getElementById('syncStatus');
+  statusEl.textContent = 'cargando desde GitHub…'; statusEl.className='';
+  try{
+    const url = `${API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(cfg.path)}?ref=${encodeURIComponent(cfg.branch||'main')}`;
+    const res = await fetch(url, {headers: ghHeaders()});
+    if(res.status===404){
+      fileSha = null;
+      toast('No existe el archivo todavía en el repo. Se creará al guardar.');
+      updateStatus();
+      return;
+    }
+    if(!res.ok){ throw new Error('HTTP '+res.status); }
+    const data = await res.json();
+    fileSha = data.sha;
+    const json = JSON.parse(b64ToUtf8(data.content.replace(/\n/g,'')));
+    state = Object.assign({practicas:[],estudiantes:[],pagos:{}}, json);
+    saveLocal();
+    renderAll();
+    dirty = false;
+    toast('Datos cargados desde GitHub');
+    updateStatus();
+  }catch(err){
+    console.error(err);
+    statusEl.textContent = 'error al cargar de GitHub'; statusEl.className='error';
+    toast('No se pudo cargar desde GitHub: '+err.message, true);
+  }
+}
+
+async function saveToGithub(){
+  if(!cfgReady()){ document.getElementById('settingsModal').classList.remove('hidden'); toast('Configurá el repo primero', true); return; }
+  if(!cfg.token){ toast('Falta el token para poder guardar', true); return; }
+  const statusEl = document.getElementById('syncStatus');
+  statusEl.textContent='guardando en GitHub…'; statusEl.className='';
+  try{
+    const content = utf8ToB64(JSON.stringify(state, null, 2));
+    const url = `${API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(cfg.path)}`;
+    const body = {
+      message: `Actualiza cobranzas — ${new Date().toLocaleString('es-PY')}`,
+      content,
+      branch: cfg.branch || 'main'
+    };
+    if(fileSha) body.sha = fileSha;
+    const res = await fetch(url, {method:'PUT', headers:{...ghHeaders(),'Content-Type':'application/json'}, body:JSON.stringify(body)});
+    if(!res.ok){
+      const errBody = await res.json().catch(()=>({}));
+      throw new Error(errBody.message || ('HTTP '+res.status));
+    }
+    const data = await res.json();
+    fileSha = data.content.sha;
+    dirty = false;
+    toast('Guardado en GitHub ✓');
+    updateStatus();
+  }catch(err){
+    console.error(err);
+    statusEl.textContent='error al guardar'; statusEl.className='error';
+    toast('No se pudo guardar en GitHub: '+err.message, true);
+  }
+}
+
+function updateStatus(){
+  const el = document.getElementById('syncStatus');
+  if(!cfgReady()){ el.textContent='sin conectar a GitHub'; el.className=''; return; }
+  if(dirty){ el.textContent='cambios sin guardar en GitHub'; el.className='dirty'; return; }
+  el.textContent = `sincronizado con ${cfg.owner}/${cfg.repo}`; el.className='';
+}
+
+document.getElementById('btnSave').addEventListener('click', saveToGithub);
+
+/* ---------------- Settings modal ---------------- */
+document.getElementById('btnSettings').addEventListener('click', ()=>{
+  document.getElementById('cfgOwner').value = cfg.owner;
+  document.getElementById('cfgRepo').value = cfg.repo;
+  document.getElementById('cfgPath').value = cfg.path;
+  document.getElementById('cfgBranch').value = cfg.branch;
+  document.getElementById('cfgToken').value = cfg.token;
+  document.getElementById('settingsModal').classList.remove('hidden');
+});
+document.getElementById('btnCancelSettings').addEventListener('click', ()=> document.getElementById('settingsModal').classList.add('hidden'));
+document.getElementById('btnSaveSettings').addEventListener('click', async ()=>{
+  cfg.owner = document.getElementById('cfgOwner').value.trim();
+  cfg.repo = document.getElementById('cfgRepo').value.trim();
+  cfg.path = document.getElementById('cfgPath').value.trim() || 'data/cobranzas.json';
+  cfg.branch = document.getElementById('cfgBranch').value.trim() || 'main';
+  cfg.token = document.getElementById('cfgToken').value.trim();
+  saveCfg();
+  document.getElementById('settingsModal').classList.add('hidden');
+  await loadFromGithub();
+});
+
+/* ---------------- Init ---------------- */
+function renderAll(){
+  renderPracticas();
+  renderEstudiantes();
+  renderGrid();
+  renderResumen();
+  updateStatus();
+}
+
+loadCfg();
+loadLocal();
+renderAll();
+if(cfgReady()) loadFromGithub();
+</script>
+</body>
+</html>
