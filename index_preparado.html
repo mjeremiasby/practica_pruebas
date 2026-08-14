@@ -104,34 +104,6 @@
   .panel-head h2{font-family:'Spectral',serif;font-size:20px;margin:0;font-weight:600;color:#fff;}
   .panel-head p{margin:2px 0 0;color:var(--muted);font-size:13px;}
 
-  /* Tabla principal */
-  .ledger-wrap{overflow-x:auto;border:1px solid var(--paper-line);border-radius:4px;background:#141414;}
-  table.ledger{border-collapse:collapse;width:100%;font-size:13px;}
-  table.ledger th,table.ledger td{
-    border-bottom:1px solid var(--paper-line);
-    padding:9px 12px;text-align:left;white-space:nowrap;
-  }
-  table.ledger thead th{
-    background:#222222;font-family:'Inter',sans-serif;font-weight:600;font-size:11.5px;
-    text-transform:uppercase;letter-spacing:.4px;color:var(--muted);
-    position:sticky;top:0;
-  }
-  table.ledger td.num,table.ledger th.num{font-family:'IBM Plex Mono',monospace;}
-  table.ledger tbody tr:hover{background:#1f1f1f;}
-  .sticky-col{position:sticky;left:0;background:#181818;z-index:1;border-right:1px solid var(--paper-line);}
-  thead .sticky-col{background:#222222;z-index:2;}
-  .practica-head{cursor:default;}
-  .practica-head small{display:block;font-weight:400;text-transform:none;color:var(--red-hover);font-family:'IBM Plex Mono',monospace;}
-
-  .cell-btn{
-    width:100%;min-width:85px;padding:6px 8px;border-radius:var(--radius);
-    font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;
-    border:1px dashed var(--paper-line);background:#1a1a1a;color:var(--muted);
-  }
-  .cell-btn.paid{background:var(--green-bg);color:var(--green);border:1px solid var(--green);}
-  .cell-btn.partial{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber);}
-  .cell-btn.unpaid:hover{border-color:var(--red);color:var(--red-hover);background:#251515;}
-
   /* Formas y Listas */
   .form-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
   .field{display:flex;flex-direction:column;gap:4px;flex:1;min-width:140px;}
@@ -145,11 +117,87 @@
     border-color:var(--red);
   }
 
-  .row-actions{display:flex;gap:6px;}
-  .list-table{width:100%;border-collapse:collapse;font-size:13.5px;}
-  .list-table th{text-align:left;font-size:11px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--paper-line);padding:8px 10px;}
-  .list-table td{padding:10px;border-bottom:1px solid var(--paper-line);}
-  .list-table td.num{font-family:'IBM Plex Mono',monospace;}
+  .card-box {
+    background: var(--paper-card);
+    border: 1px solid var(--paper-line);
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 20px;
+  }
+
+  /* Filtros y Buscador */
+  .filter-bar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .filter-bar .search-input { flex: 2; min-width: 220px; }
+  .filter-bar select { flex: 1; min-width: 140px; }
+
+  /* Tabla de Cobranza (Check/Equis) */
+  .ledger-wrap{overflow-x:auto;border:1px solid var(--paper-line);border-radius:6px;background:#141414;}
+  table.ledger{border-collapse:collapse;width:100%;font-size:13.5px;}
+  table.ledger th,table.ledger td{
+    border-bottom:1px solid var(--paper-line);
+    padding:10px 14px;text-align:left;white-space:nowrap;
+  }
+  table.ledger thead th{
+    background:#222222;font-family:'Inter',sans-serif;font-weight:600;font-size:11.5px;
+    text-transform:uppercase;letter-spacing:.4px;color:var(--muted);
+    position:sticky;top:0;
+  }
+  table.ledger td.num,table.ledger th.num{font-family:'IBM Plex Mono',monospace;}
+  table.ledger tbody tr:hover{background:#1f1f1f;}
+
+  /* Botones Check / Equis */
+  .status-btn {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: bold;
+    cursor: pointer; user-select: none;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+  .status-btn.paid {
+    background: var(--green-bg);
+    color: var(--green);
+    border-color: var(--green);
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+  }
+  .status-btn.unpaid {
+    background: var(--red-bg);
+    color: var(--red-hover);
+    border-color: var(--red);
+  }
+  .status-btn:hover { transform: scale(1.1); }
+
+  .badge-tag {
+    background: #2a2a2a;
+    border: 1px solid var(--paper-line);
+    color: var(--muted);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+  }
+
+  /* Progress Bar */
+  .progress-wrap {
+    background: #111;
+    border-radius: 10px;
+    height: 8px;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 8px;
+    border: 1px solid var(--paper-line);
+  }
+  .progress-bar {
+    background: var(--green);
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
 
   /* Resumen */
   .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px;}
@@ -162,7 +210,12 @@
   .stamp-card.total-green .value{color:var(--green);}
   .stamp-card.total-red .value{color:var(--red-hover);}
 
-  /* Modales */
+  .list-table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  .list-table th{text-align:left;font-size:11px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--paper-line);padding:8px 10px;}
+  .list-table td{padding:10px;border-bottom:1px solid var(--paper-line);}
+  .list-table td.num{font-family:'IBM Plex Mono',monospace;}
+
+  /* Modales y Toast */
   .modal{
     position:fixed;inset:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;
     padding:20px;z-index:50;backdrop-filter:blur(3px);
@@ -209,7 +262,7 @@
     </div>
   </div>
   <nav class="tabs">
-    <button class="tab active" data-tab="planilla">Planilla</button>
+    <button class="tab active" data-tab="planilla">Cobranza Principal</button>
     <button class="tab" data-tab="practicas">Prácticas</button>
     <button class="tab" data-tab="estudiantes">Estudiantes</button>
     <button class="tab" data-tab="resumen">Resumen</button>
@@ -217,28 +270,92 @@
 </header>
 
 <main class="paper">
-  <!-- PLANILLA -->
+  <!-- PLANILLA / COBRANZA PRINCIPAL -->
   <section id="tab-planilla" class="tab-panel active">
-    <div class="panel-head">
-      <div>
-        <h2>Planilla</h2>
-        <p>Click en una celda para registrar el pago de esa práctica.</p>
+    
+    <!-- Crear / Iniciar Cobranza -->
+    <div class="card-box">
+      <h3 style="margin:0 0 12px; font-family:'Spectral',serif; color:#fff;">Iniciar Nueva Cobranza</h3>
+      <div class="form-row">
+        <div class="field">
+          <label>Fecha de la práctica</label>
+          <input type="date" id="initFecha">
+        </div>
+        <div class="field">
+          <label>Monto a cobrar por estudiante (Gs.)</label>
+          <input type="number" id="initMonto" placeholder="Ej: 150000" min="0">
+        </div>
+        <div class="field" style="flex:0; align-self:flex-end;">
+          <button class="btn-primary" id="btnIniciarCobranza">🚀 Iniciar Cobranza</button>
+        </div>
       </div>
-      <button class="btn-ghost btn-small" id="btnExportCsv">Exportar CSV</button>
+
+      <div style="margin-top: 15px; border-top: 1px solid var(--paper-line); padding-top: 12px;">
+        <div class="field">
+          <label>Seleccionar práctica existente</label>
+          <select id="selectPracticaActiva" onchange="cambiarPracticaActiva()">
+            <option value="">-- Cargar una práctica --</option>
+          </select>
+        </div>
+      </div>
     </div>
-    <div class="ledger-wrap"><div id="grid"></div></div>
+
+    <!-- Panel de Cobranza Activa -->
+    <div id="cobranzaActivaContainer" style="display:none;">
+      <div class="panel-head">
+        <div>
+          <h2 id="cobranzaTitulo">Práctica</h2>
+          <p id="cobranzaSubmonto" style="font-family:'IBM Plex Mono',monospace; color:var(--amber);">Monto a cobrar: 0 Gs.</p>
+        </div>
+        <div style="text-align:right;">
+          <span id="cobranzaContador" style="font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:15px; color:var(--green);">0/0 Pagados</span>
+          <div class="progress-wrap" style="width: 140px;">
+            <div id="cobranzaProgressBar" class="progress-bar"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filtros de búsqueda -->
+      <div class="filter-bar">
+        <input type="text" id="inputSearch" class="search-input" placeholder="🔍 Buscar por estudiante, cédula..." oninput="renderTablaCobranza()">
+        <select id="filterCarrera" onchange="renderTablaCobranza()">
+          <option value="">Todas las carreras</option>
+        </select>
+        <select id="filterEtiqueta" onchange="renderTablaCobranza()">
+          <option value="">Todas las etiquetas</option>
+        </select>
+        <button class="btn-ghost btn-small" id="btnExportCsv">Exportar CSV</button>
+      </div>
+
+      <!-- Tabla con check / equis -->
+      <div class="ledger-wrap">
+        <table class="ledger">
+          <thead>
+            <tr>
+              <th style="width:60px; text-align:center;">Estado</th>
+              <th>Estudiante</th>
+              <th>Cédula</th>
+              <th>Carrera</th>
+              <th>Etiqueta</th>
+              <th style="text-align:right;">Monto Pagado</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyCobranza">
+            <!-- Rellenado dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="cobranzaEmptyState" class="empty">
+      No hay ninguna práctica seleccionada. Crea una nueva o selecciona una existente arriba para empezar a cobrar.
+    </div>
   </section>
 
   <!-- PRACTICAS -->
   <section id="tab-practicas" class="tab-panel">
     <div class="panel-head">
-      <div><h2>Prácticas</h2><p>Cada práctica tiene un monto de cuota.</p></div>
-    </div>
-    <div class="form-row">
-      <div class="field"><label>Nombre</label><input id="pNombre" placeholder="Ej: Práctica II"></div>
-      <div class="field"><label>Cuota (Gs.)</label><input id="pMonto" type="number" min="0" placeholder="150000"></div>
-      <div class="field"><label>Fecha límite</label><input id="pFecha" type="date"></div>
-      <div class="field" style="flex:0;align-self:flex-end;"><button class="btn-primary" id="btnAddPractica">+ Agregar</button></div>
+      <div><h2>Prácticas Creadas</h2><p>Administra o elimina prácticas registradas.</p></div>
     </div>
     <div id="listaPracticas"></div>
   </section>
@@ -253,7 +370,7 @@
       <div class="field"><label>Apellido</label><input id="eApellido" placeholder="Apellido"></div>
       <div class="field"><label>Cédula</label><input id="eCedula" placeholder="1234567"></div>
       <div class="field"><label>Carrera</label><input id="eCarrera" placeholder="Ej: Civil"></div>
-      <div class="field"><label>Etiqueta</label><input id="eEtiqueta" placeholder="Ej: Enfermo/Alego"></div>
+      <div class="field"><label>Etiqueta</label><input id="eEtiqueta" placeholder="Ej: Delegado"></div>
       <div class="field" style="flex:0;align-self:flex-end;"><button class="btn-primary" id="btnAddEstudiante">+ Agregar</button></div>
     </div>
     <div id="listaEstudiantes"></div>
@@ -261,24 +378,24 @@
 
   <!-- RESUMEN -->
   <section id="tab-resumen" class="tab-panel">
-    <div class="panel-head"><div><h2>Resumen</h2><p>Totales por práctica y en general.</p></div></div>
+    <div class="panel-head"><div><h2>Resumen General</h2><p>Totales recaudados y faltantes por cada práctica.</p></div></div>
     <div id="resumenTotales" class="summary-grid"></div>
     <div id="resumenTabla"></div>
   </section>
 </main>
 
-<!-- Modal Edición Celda -->
+<!-- Modal Edición Registro de Pago -->
 <div class="modal hidden" id="cellModal">
   <div class="modal-box">
     <h3 id="cellTitle">Registrar pago</h3>
     <p class="hint" id="cellSubtitle"></p>
     <div class="field" style="margin-bottom:10px;"><label>Monto pagado (Gs.)</label><input id="cellMonto" type="number" min="0"></div>
     <div class="field" style="margin-bottom:10px;"><label>Fecha de pago</label><input id="cellFecha" type="date"></div>
-    <div class="field"><label>Observación</label><input id="cellObs" placeholder="Opcional"></div>
+    <div class="field"><label>Observación</label><input id="cellObs" placeholder="Opcional (Ej: Transferencia)"></div>
     <div class="modal-actions">
-      <button class="btn-danger btn-small" id="btnClearCell">Quitar pago</button>
+      <button class="btn-danger btn-small" id="btnClearCell">Quitar pago (✕)</button>
       <button class="btn-ghost btn-small" id="btnCancelCell">Cancelar</button>
-      <button class="btn-primary btn-small" id="btnSaveCell">Guardar</button>
+      <button class="btn-primary btn-small" id="btnSaveCell">Guardar pago (✓)</button>
     </div>
   </div>
 </div>
@@ -306,6 +423,10 @@ let loadingShared = false;
 let savingShared = false;
 let activeCell = null;
 let currentFileSha = null;
+let practicaActivaId = null;
+
+// Cargar fecha actual por defecto en el input
+document.getElementById('initFecha').valueAsDate = new Date();
 
 /* ---------------- Utilidades ---------------- */
 const uid = () => Math.random().toString(36).slice(2,10);
@@ -334,23 +455,20 @@ function loadLocal(){
   if(raw){ try{ state = JSON.parse(raw); }catch(e){} }
 }
 
-/* ---------------- Gestión del Token ---------------- */
-function getSavedToken(){
-  return localStorage.getItem(LS_TOKEN) || '';
+function escapeHtml(s){
+  return String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
+/* ---------------- Gestión de Token ---------------- */
+function getSavedToken(){ return localStorage.getItem(LS_TOKEN) || ''; }
 function promptForToken(){
   const current = getSavedToken();
   const token = prompt('Ingresa tu Personal Access Token de GitHub (ghp_...):', current);
   if(token !== null){
     localStorage.setItem(LS_TOKEN, token.trim());
-    if(token.trim()){
-      toast('Token guardado en tu navegador');
-      loadFromShared();
-    }
+    if(token.trim()){ toast('Token guardado en el navegador'); loadFromShared(); }
   }
 }
-
 document.getElementById('btnConfigToken').addEventListener('click', promptForToken);
 
 /* ---------------- Tabs ---------------- */
@@ -364,91 +482,213 @@ document.querySelectorAll('.tab').forEach(btn=>{
   });
 });
 
-/* ---------------- Render: Planilla ---------------- */
-function renderGrid(){
-  const grid = document.getElementById('grid');
-  if(state.estudiantes.length===0 || state.practicas.length===0){
-    grid.innerHTML = `<div class="empty">Agregá al menos un estudiante y una práctica para ver la planilla.</div>`;
+/* ---------------- Lógica: Iniciar / Administrar Cobranza ---------------- */
+document.getElementById('btnIniciarCobranza').addEventListener('click', ()=>{
+  const fechaVal = document.getElementById('initFecha').value;
+  const montoVal = document.getElementById('initMonto').value;
+
+  if(!fechaVal){ toast('Por favor selecciona una fecha', true); return; }
+
+  const [a, m, d] = fechaVal.split('-');
+  const nombreFormateado = `Práctica ${d}/${m}/${a}`;
+  const nuevoId = uid();
+
+  const nuevaPractica = {
+    id: nuevoId,
+    nombre: nombreFormateado,
+    monto: Number(montoVal) || 0,
+    fecha: fechaVal
+  };
+
+  state.practicas.push(nuevaPractica);
+  practicaActivaId = nuevoId;
+
+  document.getElementById('initMonto').value = '';
+  setDirty(true);
+  
+  actualizarSelectPracticas();
+  renderAll();
+  toast('¡Nueva práctica creada e iniciada!');
+});
+
+function actualizarSelectPracticas(){
+  const select = document.getElementById('selectPracticaActiva');
+  select.innerHTML = '<option value="">-- Seleccionar Práctica --</option>';
+  state.practicas.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.id;
+    opt.textContent = `${p.nombre} — (${fmtGs(p.monto)})`;
+    if(p.id === practicaActivaId) opt.selected = true;
+    select.appendChild(opt);
+  });
+}
+
+function cambiarPracticaActiva(){
+  practicaActivaId = document.getElementById('selectPracticaActiva').value;
+  renderTablaCobranza();
+}
+
+function poblarFiltros(){
+  const carreras = [...new Set(state.estudiantes.map(e => e.carrera).filter(Boolean))];
+  const etiquetas = [...new Set(state.estudiantes.map(e => e.etiqueta).filter(Boolean))];
+
+  const selCarrera = document.getElementById('filterCarrera');
+  const selEtiqueta = document.getElementById('filterEtiqueta');
+
+  const currC = selCarrera.value;
+  const currE = selEtiqueta.value;
+
+  selCarrera.innerHTML = '<option value="">Todas las carreras</option>';
+  carreras.forEach(c => selCarrera.innerHTML += `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`);
+  selCarrera.value = currC;
+
+  selEtiqueta.innerHTML = '<option value="">Todas las etiquetas</option>';
+  etiquetas.forEach(e => selEtiqueta.innerHTML += `<option value="${escapeHtml(e)}">${escapeHtml(e)}</option>`);
+  selEtiqueta.value = currE;
+}
+
+/* ---------------- Render Tabla de Cobranza (Check / Equis) ---------------- */
+function renderTablaCobranza(){
+  const container = document.getElementById('cobranzaActivaContainer');
+  const emptyState = document.getElementById('cobranzaEmptyState');
+
+  if(!practicaActivaId){
+    container.style.display = 'none';
+    emptyState.style.display = 'block';
     return;
   }
-  const estudiantes = [...state.estudiantes].sort((a,b)=> ((a.apellido||'')+(a.nombre||'')).localeCompare((b.apellido||'')+(b.nombre||'')));
-  let html = '<table class="ledger"><thead><tr><th class="sticky-col">Estudiante</th>';
-  state.practicas.forEach(p=>{
-    html += `<th class="num practica-head">${escapeHtml(p.nombre)}<small>${fmtGs(p.monto)}</small></th>`;
+
+  const practica = state.practicas.find(p => p.id === practicaActivaId);
+  if(!practica){
+    practicaActivaId = null;
+    renderTablaCobranza();
+    return;
+  }
+
+  container.style.display = 'block';
+  emptyState.style.display = 'none';
+
+  document.getElementById('cobranzaTitulo').textContent = practica.nombre;
+  document.getElementById('cobranzaSubmonto').textContent = `Monto a cobrar: ${fmtGs(practica.monto)}`;
+
+  const searchTxt = document.getElementById('inputSearch').value.toLowerCase().trim();
+  const selCarrera = document.getElementById('filterCarrera').value;
+  const selEtiqueta = document.getElementById('filterEtiqueta').value;
+
+  const estudiantesFiltrados = state.estudiantes.filter(e => {
+    const completo = `${e.nombre||''} ${e.apellido||''}`.toLowerCase();
+    const matchTxt = completo.includes(searchTxt) || String(e.cedula||'').toLowerCase().includes(searchTxt);
+    const matchCarrera = !selCarrera || e.carrera === selCarrera;
+    const matchEtiqueta = !selEtiqueta || e.etiqueta === selEtiqueta;
+    return matchTxt && matchCarrera && matchEtiqueta;
+  }).sort((a,b)=> ((a.apellido||'')+(a.nombre||'')).localeCompare((b.apellido||'')+(b.nombre||'')));
+
+  const tbody = document.getElementById('tbodyCobranza');
+  tbody.innerHTML = '';
+
+  let pagadosCount = 0;
+  state.estudiantes.forEach(e => {
+    const pago = state.pagos[e.id + '__' + practicaActivaId];
+    if(pago && Number(pago.monto) >= Number(practica.monto) && Number(practica.monto) > 0){
+      pagadosCount++;
+    }
   });
-  html += '</tr></thead><tbody>';
-  estudiantes.forEach(e=>{
-    const nombreDisplay = (e.apellido || e.nombre) ? `${escapeHtml(e.apellido||'')}, ${escapeHtml(e.nombre||'')}` : 'Sin Nombre';
-    html += `<tr><td class="sticky-col">${nombreDisplay}</td>`;
-    state.practicas.forEach(p=>{
-      const key = e.id+'__'+p.id;
-      const pago = state.pagos[key];
-      let cls='unpaid', label='—';
-      if(pago){
-        if(Number(pago.monto) >= Number(p.monto) && Number(p.monto) > 0){ cls='paid'; label='✓ '+fmtGs(pago.monto); }
-        else { cls='partial'; label=fmtGs(pago.monto); }
-      }
-      html += `<td><button class="cell-btn ${cls}" data-est="${e.id}" data-prac="${p.id}">${label}</button></td>`;
-    });
-    html += '</tr>';
-  });
-  html += '</tbody></table>';
-  grid.innerHTML = html;
-  grid.querySelectorAll('.cell-btn').forEach(btn=>{
-    btn.addEventListener('click', ()=> openCellModal(btn.dataset.est, btn.dataset.prac));
+
+  const totalEst = state.estudiantes.length;
+  document.getElementById('cobranzaContador').textContent = `${pagadosCount}/${totalEst} Pagados`;
+  const pct = totalEst > 0 ? (pagadosCount / totalEst) * 100 : 0;
+  document.getElementById('cobranzaProgressBar').style.width = `${pct}%`;
+
+  if(estudiantesFiltrados.length === 0){
+    tbody.innerHTML = `<tr><td colspan="6" class="empty">No se encontraron estudiantes con los filtros aplicados.</td></tr>`;
+    return;
+  }
+
+  estudiantesFiltrados.forEach(est => {
+    const key = est.id + '__' + practicaActivaId;
+    const pago = state.pagos[key];
+    const estaPagadoCompleto = pago && Number(pago.monto) >= Number(practica.monto) && Number(practica.monto) > 0;
+    
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="text-align:center;">
+        <button class="status-btn ${estaPagadoCompleto ? 'paid' : 'unpaid'}" onclick="toggleQuickPago('${est.id}', '${practica.id}')">
+          ${estaPagadoCompleto ? '✓' : '✕'}
+        </button>
+      </td>
+      <td><strong>${escapeHtml(est.apellido||'')}, ${escapeHtml(est.nombre||'')}</strong></td>
+      <td class="num">${escapeHtml(est.cedula||'—')}</td>
+      <td>${escapeHtml(est.carrera||'—')}</td>
+      <td>${est.etiqueta ? `<span class="badge-tag">${escapeHtml(est.etiqueta)}</span>` : '—'}</td>
+      <td class="num" style="text-align:right; cursor:pointer;" onclick="openCellModal('${est.id}', '${practica.id}')">
+        ${pago ? fmtGs(pago.monto) : '0 Gs.'} ✏️
+      </td>
+    `;
+    tbody.appendChild(tr);
   });
 }
 
-function escapeHtml(s){
-  return String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toggleQuickPago(estId, pracId){
+  const key = estId + '__' + pracId;
+  const prac = state.practicas.find(p => p.id === pracId);
+  const pago = state.pagos[key];
+
+  if(pago && Number(pago.monto) >= Number(prac.monto) && Number(prac.monto) > 0){
+    delete state.pagos[key];
+  } else {
+    state.pagos[key] = {
+      monto: Number(prac.monto) || 0,
+      fecha: todayISO(),
+      obs: 'Pago completo'
+    };
+  }
+
+  setDirty(true);
+  renderTablaCobranza();
 }
 
-/* ---------------- Modal Celda ---------------- */
+/* ---------------- Modal Celda / Pago ---------------- */
 function openCellModal(estId, pracId){
   activeCell = {estId, pracId};
   const est = state.estudiantes.find(x=>x.id===estId);
   const prac = state.practicas.find(x=>x.id===pracId);
   const pago = state.pagos[estId+'__'+pracId];
+
   document.getElementById('cellTitle').textContent = `${est.nombre||''} ${est.apellido||''}`.trim() || 'Estudiante';
-  document.getElementById('cellSubtitle').textContent = `${prac.nombre} · cuota ${fmtGs(prac.monto)}`;
+  document.getElementById('cellSubtitle').textContent = `${prac.nombre} · Cuota fija: ${fmtGs(prac.monto)}`;
   document.getElementById('cellMonto').value = pago ? pago.monto : prac.monto;
   document.getElementById('cellFecha').value = pago ? pago.fecha : todayISO();
   document.getElementById('cellObs').value = pago ? (pago.obs||'') : '';
   document.getElementById('cellModal').classList.remove('hidden');
 }
+
 document.getElementById('btnCancelCell').addEventListener('click', ()=> document.getElementById('cellModal').classList.add('hidden'));
+
 document.getElementById('btnSaveCell').addEventListener('click', ()=>{
   const {estId, pracId} = activeCell;
   const monto = document.getElementById('cellMonto').value;
   const fecha = document.getElementById('cellFecha').value || todayISO();
   const obs = document.getElementById('cellObs').value;
+
   state.pagos[estId+'__'+pracId] = { monto: Number(monto)||0, fecha, obs };
   document.getElementById('cellModal').classList.add('hidden');
-  setDirty(true); renderGrid();
+  setDirty(true);
+  renderTablaCobranza();
 });
+
 document.getElementById('btnClearCell').addEventListener('click', ()=>{
   const {estId, pracId} = activeCell;
   delete state.pagos[estId+'__'+pracId];
   document.getElementById('cellModal').classList.add('hidden');
-  setDirty(true); renderGrid();
+  setDirty(true);
+  renderTablaCobranza();
 });
 
-/* ---------------- Prácticas ---------------- */
-document.getElementById('btnAddPractica').addEventListener('click', ()=>{
-  const nombre = document.getElementById('pNombre').value.trim();
-  const monto = document.getElementById('pMonto').value;
-  const fecha = document.getElementById('pFecha').value;
-  if(!nombre){ toast('Poné un nombre para la práctica', true); return; }
-  state.practicas.push({id:uid(), nombre, monto:Number(monto)||0, fecha});
-  document.getElementById('pNombre').value='';
-  document.getElementById('pMonto').value='';
-  document.getElementById('pFecha').value='';
-  setDirty(true); renderPracticas(); renderGrid();
-});
+/* ---------------- Prácticas (Pestaña Lista) ---------------- */
 function renderPracticas(){
   const el = document.getElementById('listaPracticas');
   if(state.practicas.length===0){ el.innerHTML = '<div class="empty">Todavía no agregaste prácticas.</div>'; return; }
-  let html = '<table class="list-table"><thead><tr><th>Nombre</th><th>Cuota</th><th>Fecha límite</th><th></th></tr></thead><tbody>';
+  let html = '<table class="list-table"><thead><tr><th>Nombre</th><th>Cuota</th><th>Fecha límite</th><th>Acción</th></tr></thead><tbody>';
   state.practicas.forEach(p=>{
     html += `<tr><td>${escapeHtml(p.nombre)}</td><td class="num">${fmtGs(p.monto)}</td><td>${p.fecha||'—'}</td>
       <td><div class="row-actions"><button class="btn-danger btn-small" data-del="${p.id}">Eliminar</button></div></td></tr>`;
@@ -456,11 +696,14 @@ function renderPracticas(){
   html += '</tbody></table>';
   el.innerHTML = html;
   el.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click', ()=>{
-    if(!confirm('¿Eliminar esta práctica? También se borran los pagos registrados en ella.')) return;
+    if(!confirm('¿Eliminar esta práctica? También se borrarán los pagos registrados en ella.')) return;
     const id = b.dataset.del;
     state.practicas = state.practicas.filter(p=>p.id!==id);
     Object.keys(state.pagos).forEach(k=>{ if(k.endsWith('__'+id)) delete state.pagos[k]; });
-    setDirty(true); renderPracticas(); renderGrid();
+    if(practicaActivaId === id) practicaActivaId = null;
+    setDirty(true);
+    actualizarSelectPracticas();
+    renderAll();
   }));
 }
 
@@ -474,14 +717,7 @@ document.getElementById('btnAddEstudiante').addEventListener('click', ()=>{
 
   if(!nombre || !apellido){ toast('Poné nombre y apellido', true); return; }
 
-  state.estudiantes.push({
-    id: uid(), 
-    nombre, 
-    apellido, 
-    cedula,
-    carrera,
-    etiqueta
-  });
+  state.estudiantes.push({ id: uid(), nombre, apellido, cedula, carrera, etiqueta });
 
   document.getElementById('eNombre').value='';
   document.getElementById('eApellido').value='';
@@ -489,7 +725,8 @@ document.getElementById('btnAddEstudiante').addEventListener('click', ()=>{
   document.getElementById('eCarrera').value='';
   document.getElementById('eEtiqueta').value='';
 
-  setDirty(true); renderEstudiantes(); renderGrid();
+  setDirty(true);
+  renderAll();
 });
 
 function renderEstudiantes(){
@@ -510,11 +747,12 @@ function renderEstudiantes(){
   html += '</tbody></table>';
   el.innerHTML = html;
   el.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click', ()=>{
-    if(!confirm('¿Eliminar este estudiante? También se borran sus pagos.')) return;
+    if(!confirm('¿Eliminar este estudiante? También se borrarán sus pagos.')) return;
     const id = b.dataset.del;
     state.estudiantes = state.estudiantes.filter(e=>e.id!==id);
     Object.keys(state.pagos).forEach(k=>{ if(k.startsWith(id+'__')) delete state.pagos[k]; });
-    setDirty(true); renderEstudiantes(); renderGrid();
+    setDirty(true);
+    renderAll();
   }));
 }
 
@@ -607,6 +845,13 @@ async function loadFromShared(){
 
     saveLocal();
     dirty = false;
+    
+    // Seleccionar última práctica por defecto si existe
+    if(state.practicas.length > 0 && !practicaActivaId){
+      practicaActivaId = state.practicas[state.practicas.length - 1].id;
+    }
+
+    actualizarSelectPracticas();
     renderAll();
 
     statusEl.textContent = 'sincronizado con GitHub ✓';
@@ -706,9 +951,10 @@ setInterval(()=>{
 
 /* Init */
 function renderAll(){
+  poblarFiltros();
   renderPracticas();
   renderEstudiantes();
-  renderGrid();
+  renderTablaCobranza();
   renderResumen();
 }
 
