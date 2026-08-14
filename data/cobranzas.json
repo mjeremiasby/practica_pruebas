@@ -1,0 +1,19 @@
+{
+  "practicas": [
+    {
+      "id": "1oqnkqj9",
+      "nombre": "Practica 1",
+      "monto": 6000,
+      "fecha": "2026-08-14"
+    }
+  ],
+  "estudiantes": [
+    {
+      "id": "ozxfhl1p",
+      "nombre": "Martin Jeremias",
+      "apellido": "Britos Ylchuk",
+      "cedula": "5834241"
+    }
+  ],
+  "pagos": {}
+}
