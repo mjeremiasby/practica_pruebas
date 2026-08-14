@@ -865,26 +865,5 @@
       "etiqueta": "Enfermo"
     }
   ],
-  "pagos": {
-    "est-061__mwmc2vca": {
-      "pagado": true,
-      "monto": 3000,
-      "fecha": "2026-08-14"
-    },
-    "est-088__mwmc2vca": {
-      "pagado": true,
-      "monto": 3000,
-      "fecha": "2026-08-14"
-    },
-    "est-038__mwmc2vca": {
-      "pagado": true,
-      "monto": 3000,
-      "fecha": "2026-08-14"
-    },
-    "est-043__mwmc2vca": {
-      "pagado": true,
-      "monto": 3000,
-      "fecha": "2026-08-14"
-    }
-  }
+  "pagos": {}
 }
