@@ -1,12 +1,5 @@
 {
-  "practicas": [
-    {
-      "id": "mwmc2vca",
-      "nombre": "Práctica 14/08/2026",
-      "monto": 3000,
-      "fecha": "2026-08-14"
-    }
-  ],
+  "practicas": [],
   "estudiantes": [
     {
       "id": "est-001",
