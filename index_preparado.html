@@ -34,7 +34,7 @@
   }
   ::selection{background:var(--red);color:#fff;}
 
-  /* ---------- Header / Cover ---------- */
+  /* Header / Cover */
   header.cover{
     background:var(--cover);
     padding:22px clamp(16px,4vw,40px) 0;
@@ -105,7 +105,7 @@
   .panel-head h2{font-family:'Spectral',serif;font-size:20px;margin:0;font-weight:600;color:#fff;}
   .panel-head p{margin:2px 0 0;color:var(--muted);font-size:13px;}
 
-  /* ---------- Ledger table ---------- */
+  /* Ledger table */
   .ledger-wrap{overflow-x:auto;border:1px solid var(--paper-line);border-radius:4px;background:#141414;}
   table.ledger{border-collapse:collapse;width:100%;font-size:13px;}
   table.ledger th,table.ledger td{
@@ -133,7 +133,7 @@
   .cell-btn.partial{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber);}
   .cell-btn.unpaid:hover{border-color:var(--red);color:var(--red-hover);background:#251515;}
 
-  /* ---------- Forms & Inputs ---------- */
+  /* Forms & Inputs */
   .form-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
   .field{display:flex;flex-direction:column;gap:4px;flex:1;min-width:140px;}
   .field label{font-size:11.5px;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);font-weight:600;}
@@ -152,7 +152,7 @@
   .list-table td{padding:10px;border-bottom:1px solid var(--paper-line);}
   .list-table td.num{font-family:'IBM Plex Mono',monospace;}
 
-  /* ---------- Summary ---------- */
+  /* Summary */
   .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px;}
   .stamp-card{
     background:var(--paper-card);border:1px solid var(--paper-line);border-radius:6px;padding:16px 18px;
@@ -163,7 +163,7 @@
   .stamp-card.total-green .value{color:var(--green);}
   .stamp-card.total-red .value{color:var(--red-hover);}
 
-  /* ---------- Modal ---------- */
+  /* Modal */
   .modal{
     position:fixed;inset:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;
     padding:20px;z-index:50;backdrop-filter:blur(3px);
@@ -205,7 +205,6 @@
     </div>
     <div class="cover-actions">
       <span id="syncStatus">cargando...</span>
-      <button class="btn-ghost btn-small" id="btnOpenConfig">⚙️ Token GitHub</button>
       <button class="btn-primary" id="btnSave">Guardar cambios</button>
     </div>
   </div>
@@ -268,24 +267,6 @@
 
 </main>
 
-<!-- Modal Configuración Token GitHub -->
-<div class="modal hidden" id="settingsModal">
-  <div class="modal-box">
-    <h3>Sincronización con GitHub</h3>
-    <p class="hint">
-      Los datos se leen directamente de tu repositorio. Para poder <strong>guardar cambios desde tu celular u otra PC</strong>, ingresa un <i>Personal Access Token (PAT)</i> de GitHub con permiso de escritura.
-    </p>
-    <div class="field" style="margin-bottom:14px;">
-      <label>GitHub Personal Access Token (PAT)</label>
-      <input id="ghTokenInput" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
-    </div>
-    <div class="modal-actions">
-      <button class="btn-ghost btn-small" id="btnCancelSettings">Cancelar</button>
-      <button class="btn-primary btn-small" id="btnSaveSettings">Guardar Token</button>
-    </div>
-  </div>
-</div>
-
 <!-- Modal Edición Celda -->
 <div class="modal hidden" id="cellModal">
   <div class="modal-box">
@@ -305,17 +286,16 @@
 <div class="toast" id="toast"></div>
 
 <script>
-/* ---------------- Estado & Configuración ---------------- */
+/* ---------------- Configuración ---------------- */
 const LS_DATA = 'cobranzas_data_v1';
-const LS_TOKEN = 'cobranzas_gh_token';
 
-// Configuración de Repositorio GitHub
+// AQUÍ PEGA TU TOKEN GENERADO DE GITHUB
+const GITHUB_TOKEN = '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';
+
 const REPO_OWNER = 'mjeremiasby';
 const REPO_NAME = 'practica_pruebas';
 const FILE_PATH = 'data/cobranzas.json';
 
-// URLs
-const RAW_JSON_URL = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/${FILE_PATH}`;
 const API_GITHUB_URL = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
 
 let state = {
@@ -328,7 +308,7 @@ let dirty = false;
 let loadingShared = false;
 let savingShared = false;
 let activeCell = null;
-let currentFileSha = null; // Necesario para actualizar el archivo vía API de GitHub
+let currentFileSha = null;
 
 /* ---------------- Utilidades ---------------- */
 const uid = () => Math.random().toString(36).slice(2,10);
@@ -554,7 +534,7 @@ document.getElementById('btnExportCsv').addEventListener('click', ()=>{
   a.click();
 });
 
-/* ---------------- Sincronización con GitHub ---------------- */
+/* ---------------- API de GitHub Directa ---------------- */
 
 async function loadFromShared(){
   if(loadingShared) return;
@@ -564,18 +544,30 @@ async function loadFromShared(){
   statusEl.className = '';
 
   try {
-    // Intentar obtener los metadatos y la SHA mediante API
-    const metaRes = await fetch(API_GITHUB_URL, { cache: 'no-store' });
-    if(metaRes.ok){
-      const meta = await metaRes.json();
-      currentFileSha = meta.sha;
+    const headers = {};
+    if(GITHUB_TOKEN && GITHUB_TOKEN !== 'ghp_TU_TOKEN_AQUI'){
+      headers['Authorization'] = `token ${GITHUB_TOKEN}`;
     }
 
-    // Cargar contenido de data/cobranzas.json con anti-cache
-    const res = await fetch(`${RAW_JSON_URL}?_t=${Date.now()}`, { cache: 'no-store' });
-    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const metaRes = await fetch(`${API_GITHUB_URL}?_t=${Date.now()}`, {
+      headers,
+      cache: 'no-store'
+    });
 
-    const json = await res.json();
+    if(!metaRes.ok) throw new Error('HTTP ' + metaRes.status);
+    
+    const meta = await metaRes.json();
+    currentFileSha = meta.sha;
+
+    // Decodificar Base64 UTF-8
+    const binary = atob(meta.content.replace(/\s/g, ''));
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+    const jsonStr = new TextDecoder().decode(bytes);
+    const json = JSON.parse(jsonStr);
+
     state = Object.assign({practicas:[], estudiantes:[], pagos:{}}, json);
 
     saveLocal();
@@ -594,10 +586,8 @@ async function loadFromShared(){
 }
 
 async function saveToShared(){
-  const token = localStorage.getItem(LS_TOKEN);
-  if(!token){
-    document.getElementById('settingsModal').classList.remove('hidden');
-    toast('Debes ingresar tu Token de GitHub para guardar', true);
+  if(!GITHUB_TOKEN || GITHUB_TOKEN === 'ghp_TU_TOKEN_AQUI'){
+    toast('No has configurado el Token en el archivo HTML', true);
     return;
   }
 
@@ -609,10 +599,9 @@ async function saveToShared(){
   statusEl.className = '';
 
   try {
-    // 1. Obtener la SHA actual si no la tenemos
     if(!currentFileSha){
       const metaRes = await fetch(API_GITHUB_URL, {
-        headers: { 'Authorization': `token ${token}` },
+        headers: { 'Authorization': `token ${GITHUB_TOKEN}` },
         cache: 'no-store'
       });
       if(metaRes.ok){
@@ -621,7 +610,7 @@ async function saveToShared(){
       }
     }
 
-    // UTF-8 a Base64 compatible
+    // UTF-8 a Base64
     const jsonStr = JSON.stringify(state, null, 2);
     const bytes = new TextEncoder().encode(jsonStr);
     let binary = '';
@@ -631,7 +620,7 @@ async function saveToShared(){
     const contentBase64 = btoa(binary);
 
     const bodyData = {
-      message: 'Actualización de cobranzas vía Web',
+      message: 'Actualización de cobranzas',
       content: contentBase64,
       sha: currentFileSha
     };
@@ -639,7 +628,7 @@ async function saveToShared(){
     const res = await fetch(API_GITHUB_URL, {
       method: 'PUT',
       headers: {
-        'Authorization': `token ${token}`,
+        'Authorization': `token ${GITHUB_TOKEN}`,
         'Content-Type': 'application/json',
         'Accept': 'application/vnd.github.v3+json'
       },
@@ -670,36 +659,16 @@ async function saveToShared(){
   }
 }
 
-/* ---------------- Gestión del Modal de Configuración ---------------- */
-document.getElementById('btnOpenConfig').addEventListener('click', ()=>{
-  document.getElementById('ghTokenInput').value = localStorage.getItem(LS_TOKEN) || '';
-  document.getElementById('settingsModal').classList.remove('hidden');
-});
-document.getElementById('btnCancelSettings').addEventListener('click', ()=>{
-  document.getElementById('settingsModal').classList.add('hidden');
-});
-document.getElementById('btnSaveSettings').addEventListener('click', ()=>{
-  const token = document.getElementById('ghTokenInput').value.trim();
-  if(token){
-    localStorage.setItem(LS_TOKEN, token);
-    toast('Token guardado localmente');
-  } else {
-    localStorage.removeItem(LS_TOKEN);
-    toast('Token eliminado');
-  }
-  document.getElementById('settingsModal').classList.add('hidden');
-});
-
 document.getElementById('btnSave').addEventListener('click', saveToShared);
 
-/* ---------------- Auto-recarga ---------------- */
+/* Auto-recarga cada 15 seg */
 setInterval(()=>{
   if(!dirty && !loadingShared && !savingShared){
     loadFromShared();
   }
 }, 15000);
 
-/* ---------------- Init ---------------- */
+/* Init */
 function renderAll(){
   renderPracticas();
   renderEstudiantes();
