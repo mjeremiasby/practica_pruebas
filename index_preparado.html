@@ -34,7 +34,6 @@
   }
   ::selection{background:var(--red);color:#fff;}
 
-  /* Header / Cover */
   header.cover{
     background:var(--cover);
     padding:22px clamp(16px,4vw,40px) 0;
@@ -105,7 +104,7 @@
   .panel-head h2{font-family:'Spectral',serif;font-size:20px;margin:0;font-weight:600;color:#fff;}
   .panel-head p{margin:2px 0 0;color:var(--muted);font-size:13px;}
 
-  /* Ledger table */
+  /* Tabla principal */
   .ledger-wrap{overflow-x:auto;border:1px solid var(--paper-line);border-radius:4px;background:#141414;}
   table.ledger{border-collapse:collapse;width:100%;font-size:13px;}
   table.ledger th,table.ledger td{
@@ -133,7 +132,7 @@
   .cell-btn.partial{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber);}
   .cell-btn.unpaid:hover{border-color:var(--red);color:var(--red-hover);background:#251515;}
 
-  /* Forms & Inputs */
+  /* Formas y Listas */
   .form-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
   .field{display:flex;flex-direction:column;gap:4px;flex:1;min-width:140px;}
   .field label{font-size:11.5px;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);font-weight:600;}
@@ -152,7 +151,7 @@
   .list-table td{padding:10px;border-bottom:1px solid var(--paper-line);}
   .list-table td.num{font-family:'IBM Plex Mono',monospace;}
 
-  /* Summary */
+  /* Resumen */
   .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px;}
   .stamp-card{
     background:var(--paper-card);border:1px solid var(--paper-line);border-radius:6px;padding:16px 18px;
@@ -163,7 +162,7 @@
   .stamp-card.total-green .value{color:var(--green);}
   .stamp-card.total-red .value{color:var(--red-hover);}
 
-  /* Modal */
+  /* Modales */
   .modal{
     position:fixed;inset:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;
     padding:20px;z-index:50;backdrop-filter:blur(3px);
@@ -205,6 +204,7 @@
     </div>
     <div class="cover-actions">
       <span id="syncStatus">cargando...</span>
+      <button class="btn-ghost btn-small" id="btnConfigToken">🔑 Token</button>
       <button class="btn-primary" id="btnSave">Guardar cambios</button>
     </div>
   </div>
@@ -217,7 +217,6 @@
 </header>
 
 <main class="paper">
-
   <!-- PLANILLA -->
   <section id="tab-planilla" class="tab-panel active">
     <div class="panel-head">
@@ -264,7 +263,6 @@
     <div id="resumenTotales" class="summary-grid"></div>
     <div id="resumenTabla"></div>
   </section>
-
 </main>
 
 <!-- Modal Edición Celda -->
@@ -288,20 +286,17 @@
 <script>
 /* ---------------- Configuración ---------------- */
 const LS_DATA = 'cobranzas_data_v1';
-
-// AQUÍ PEGA TU TOKEN GENERADO DE GITHUB
-const GITHUB_TOKEN = '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';
+const LS_TOKEN = 'cobranzas_github_token';
 
 const REPO_OWNER = 'mjeremiasby';
 const REPO_NAME = 'practica_pruebas';
 const FILE_PATH = 'data/cobranzas.json';
-
 const API_GITHUB_URL = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
 
 let state = {
-  practicas: [],   // {id, nombre, monto, fecha}
-  estudiantes: [], // {id, nombre, apellido, cedula}
-  pagos: {}        // `${estudianteId}__${practicaId}` -> {monto, fecha, obs}
+  practicas: [],
+  estudiantes: [],
+  pagos: {}
 };
 
 let dirty = false;
@@ -331,13 +326,30 @@ function setDirty(v){
   saveLocal();
 }
 
-function saveLocal(){
-  localStorage.setItem(LS_DATA, JSON.stringify(state));
-}
+function saveLocal(){ localStorage.setItem(LS_DATA, JSON.stringify(state)); }
 function loadLocal(){
   const raw = localStorage.getItem(LS_DATA);
   if(raw){ try{ state = JSON.parse(raw); }catch(e){} }
 }
+
+/* ---------------- Gestión del Token ---------------- */
+function getSavedToken(){
+  return localStorage.getItem(LS_TOKEN) || '';
+}
+
+function promptForToken(){
+  const current = getSavedToken();
+  const token = prompt('Ingresa tu Personal Access Token de GitHub (ghp_...):', current);
+  if(token !== null){
+    localStorage.setItem(LS_TOKEN, token.trim());
+    if(token.trim()){
+      toast('Token guardado en tu navegador');
+      loadFromShared();
+    }
+  }
+}
+
+document.getElementById('btnConfigToken').addEventListener('click', promptForToken);
 
 /* ---------------- Tabs ---------------- */
 document.querySelectorAll('.tab').forEach(btn=>{
@@ -388,7 +400,7 @@ function escapeHtml(s){
   return String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
-/* ---------------- Cell modal ---------------- */
+/* ---------------- Modal Celda ---------------- */
 function openCellModal(estId, pracId){
   activeCell = {estId, pracId};
   const est = state.estudiantes.find(x=>x.id===estId);
@@ -534,8 +546,7 @@ document.getElementById('btnExportCsv').addEventListener('click', ()=>{
   a.click();
 });
 
-/* ---------------- API de GitHub Directa ---------------- */
-
+/* ---------------- API GitHub ---------------- */
 async function loadFromShared(){
   if(loadingShared) return;
   loadingShared = true;
@@ -543,11 +554,11 @@ async function loadFromShared(){
   statusEl.textContent = 'sincronizando...';
   statusEl.className = '';
 
+  const token = getSavedToken();
+
   try {
     const headers = {};
-    if(GITHUB_TOKEN && GITHUB_TOKEN !== 'ghp_TU_TOKEN_AQUI'){
-      headers['Authorization'] = `token ${GITHUB_TOKEN}`;
-    }
+    if(token) headers['Authorization'] = `token ${token}`;
 
     const metaRes = await fetch(`${API_GITHUB_URL}?_t=${Date.now()}`, {
       headers,
@@ -559,7 +570,6 @@ async function loadFromShared(){
     const meta = await metaRes.json();
     currentFileSha = meta.sha;
 
-    // Decodificar Base64 UTF-8
     const binary = atob(meta.content.replace(/\s/g, ''));
     const bytes = new Uint8Array(binary.length);
     for (let i = 0; i < binary.length; i++) {
@@ -578,7 +588,7 @@ async function loadFromShared(){
     statusEl.className = '';
   } catch(err) {
     console.error(err);
-    statusEl.textContent = 'modo local';
+    statusEl.textContent = token ? 'error al sincronizar' : 'ingresa tu token (🔑)';
     statusEl.className = 'error';
   } finally {
     loadingShared = false;
@@ -586,9 +596,11 @@ async function loadFromShared(){
 }
 
 async function saveToShared(){
-  if(!GITHUB_TOKEN || GITHUB_TOKEN === 'ghp_TU_TOKEN_AQUI'){
-    toast('No has configurado el Token en el archivo HTML', true);
-    return;
+  let token = getSavedToken();
+  if(!token){
+    promptForToken();
+    token = getSavedToken();
+    if(!token) return;
   }
 
   if(savingShared) return;
@@ -601,7 +613,7 @@ async function saveToShared(){
   try {
     if(!currentFileSha){
       const metaRes = await fetch(API_GITHUB_URL, {
-        headers: { 'Authorization': `token ${GITHUB_TOKEN}` },
+        headers: { 'Authorization': `token ${token}` },
         cache: 'no-store'
       });
       if(metaRes.ok){
@@ -610,7 +622,6 @@ async function saveToShared(){
       }
     }
 
-    // UTF-8 a Base64
     const jsonStr = JSON.stringify(state, null, 2);
     const bytes = new TextEncoder().encode(jsonStr);
     let binary = '';
@@ -628,7 +639,7 @@ async function saveToShared(){
     const res = await fetch(API_GITHUB_URL, {
       method: 'PUT',
       headers: {
-        'Authorization': `token ${GITHUB_TOKEN}`,
+        'Authorization': `token ${token}`,
         'Content-Type': 'application/json',
         'Accept': 'application/vnd.github.v3+json'
       },
@@ -648,12 +659,12 @@ async function saveToShared(){
 
     statusEl.textContent = 'guardado en GitHub ✓';
     statusEl.className = '';
-    toast('¡Cambios guardados en GitHub con éxito!');
+    toast('¡Cambios guardados en GitHub!');
   } catch(err) {
     console.error(err);
     statusEl.textContent = 'error al guardar';
     statusEl.className = 'error';
-    toast('Error al guardar: ' + err.message, true);
+    toast('Error: ' + err.message, true);
   } finally {
     savingShared = false;
   }
@@ -661,7 +672,7 @@ async function saveToShared(){
 
 document.getElementById('btnSave').addEventListener('click', saveToShared);
 
-/* Auto-recarga cada 15 seg */
+/* Recarga automática cada 15s */
 setInterval(()=>{
   if(!dirty && !loadingShared && !savingShared){
     loadFromShared();
