@@ -196,8 +196,7 @@
     </div>
     <div class="cover-actions">
       <span id="syncStatus">sin conectar a GitHub</span>
-      <button class="btn-ghost" id="btnSettings">⚙ Config. GitHub</button>
-      <button class="btn-primary" id="btnSave">Guardar en GitHub</button>
+      <button class="btn-primary" id="btnSave">Guardar cambios</button>
     </div>
   </div>
   <nav class="tabs">
@@ -259,20 +258,20 @@
 
 </main>
 
-<!-- Settings modal -->
+<!-- Shared data connection modal -->
 <div class="modal hidden" id="settingsModal">
   <div class="modal-box">
-    <h3>Conexión con GitHub</h3>
-    <p class="hint">Se guarda como un archivo JSON dentro de un repo tuyo. El token queda solo en este navegador (localStorage), nunca se envía a Anthropic.</p>
-    <div class="field" style="margin-bottom:10px;"><label>Usuario / organización</label><input id="cfgOwner" placeholder="tu-usuario"></div>
-    <div class="field" style="margin-bottom:10px;"><label>Repositorio</label><input id="cfgRepo" placeholder="cobranzas-practicas"></div>
-    <div class="field" style="margin-bottom:10px;"><label>Ruta del archivo</label><input id="cfgPath" placeholder="data/cobranzas.json"></div>
-    <div class="field" style="margin-bottom:10px;"><label>Rama</label><input id="cfgBranch" placeholder="main"></div>
-    <div class="field" style="margin-bottom:4px;"><label>Personal Access Token (repo scope)</label><input id="cfgToken" type="password" placeholder="ghp_..."></div>
-    <p class="hint" style="margin-top:6px;">Creá el token en GitHub → Settings → Developer settings → Personal access tokens (fine-grained, con permiso de lectura/escritura de "Contents" en ese repo).</p>
+    <h3>Datos compartidos</h3>
+    <p class="hint">
+      Esta versión está preparada para usar un backend compartido.
+      Todos los cobradores trabajarán sobre el mismo <strong>cobranzas.json</strong>.
+    </p>
+    <p class="hint">
+      El token de GitHub no se guarda ni se solicita en este navegador.
+      El backend será el encargado de comunicarse con GitHub de forma segura.
+    </p>
     <div class="modal-actions">
-      <button class="btn-ghost btn-small" id="btnCancelSettings">Cancelar</button>
-      <button class="btn-primary btn-small" id="btnSaveSettings">Guardar y cargar</button>
+      <button class="btn-primary btn-small" id="btnCancelSettings">Cerrar</button>
     </div>
   </div>
 </div>
@@ -298,16 +297,28 @@
 <script>
 /* ---------------- Estado ---------------- */
 const LS_DATA = 'cobranzas_data_v1';
-const LS_CFG  = 'cobranzas_github_cfg_v1';
+
+/*
+ * DATOS COMPARTIDOS
+ * -----------------
+ * La página NO debe guardar un token de GitHub.
+ *
+ * El backend debe exponer:
+ *   GET  /api/cobranzas  -> devuelve el JSON compartido
+ *   PUT  /api/cobranzas  -> guarda el JSON compartido
+ *
+ * Cambiá SHARED_API por la URL real de tu backend cuando lo publiques.
+ */
+const SHARED_API = '/api/cobranzas';
 
 let state = {
   practicas: [],   // {id, nombre, monto, fecha}
   estudiantes: [], // {id, nombre, apellido, cedula}
   pagos: {}        // key `${estudianteId}__${practicaId}` -> {monto, fecha, obs}
 };
-let cfg = { owner:'', repo:'', path:'data/cobranzas.json', branch:'main', token:'' };
-let fileSha = null;
 let dirty = false;
+let loadingShared = false;
+let savingShared = false;
 let activeCell = null; // {estudianteId, practicaId}
 
 /* ---------------- Utilidades ---------------- */
@@ -338,13 +349,7 @@ function loadLocal(){
   const raw = localStorage.getItem(LS_DATA);
   if(raw){ try{ state = JSON.parse(raw); }catch(e){} }
 }
-function loadCfg(){
-  const raw = localStorage.getItem(LS_CFG);
-  if(raw){ try{ cfg = Object.assign(cfg, JSON.parse(raw)); }catch(e){} }
-}
-function saveCfg(){
-  localStorage.setItem(LS_CFG, JSON.stringify(cfg));
-}
+
 
 /* ---------------- Tabs ---------------- */
 document.querySelectorAll('.tab').forEach(btn=>{
@@ -541,110 +546,164 @@ document.getElementById('btnExportCsv').addEventListener('click', ()=>{
   a.click();
 });
 
-/* ---------------- GitHub sync ---------------- */
-const API = 'https://api.github.com';
+/* ---------------- Datos compartidos ---------------- */
 
-function ghHeaders(){
-  const h = {'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};
-  if(cfg.token) h['Authorization'] = 'Bearer '+cfg.token;
-  return h;
-}
+/*
+ * IMPORTANTE:
+ * Este navegador NO conoce ninguna credencial de GitHub.
+ *
+ * El backend se ocupa de:
+ *   1. Leer data/cobranzas.json desde GitHub.
+ *   2. Recibir cambios.
+ *   3. Actualizar el JSON en GitHub usando su secreto.
+ *
+ * Así todos los cobradores usan exactamente los mismos datos.
+ */
 
-function utf8ToB64(str){ return btoa(unescape(encodeURIComponent(str))); }
-function b64ToUtf8(str){ return decodeURIComponent(escape(atob(str))); }
+async function loadFromShared(){
+  if(loadingShared) return;
 
-function cfgReady(){ return cfg.owner && cfg.repo && cfg.path; }
-
-async function loadFromGithub(){
-  if(!cfgReady()){ updateStatus(); return; }
+  loadingShared = true;
   const statusEl = document.getElementById('syncStatus');
-  statusEl.textContent = 'cargando desde GitHub…'; statusEl.className='';
+  statusEl.textContent = 'cargando datos compartidos…';
+  statusEl.className = '';
+
   try{
-    const url = `${API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(cfg.path)}?ref=${encodeURIComponent(cfg.branch||'main')}`;
-    const res = await fetch(url, {headers: ghHeaders()});
-    if(res.status===404){
-      fileSha = null;
-      toast('No existe el archivo todavía en el repo. Se creará al guardar.');
-      updateStatus();
-      return;
+    const res = await fetch(SHARED_API, {
+      method: 'GET',
+      headers: {'Accept':'application/json'},
+      cache: 'no-store'
+    });
+
+    if(!res.ok){
+      throw new Error('HTTP '+res.status);
     }
-    if(!res.ok){ throw new Error('HTTP '+res.status); }
-    const data = await res.json();
-    fileSha = data.sha;
-    const json = JSON.parse(b64ToUtf8(data.content.replace(/\n/g,'')));
-    state = Object.assign({practicas:[],estudiantes:[],pagos:{}}, json);
+
+    const json = await res.json();
+
+    state = Object.assign(
+      {practicas:[], estudiantes:[], pagos:{}},
+      json
+    );
+
     saveLocal();
-    renderAll();
     dirty = false;
-    toast('Datos cargados desde GitHub');
-    updateStatus();
+    renderAll();
+
+    statusEl.textContent = 'datos compartidos sincronizados ✓';
+    statusEl.className = '';
   }catch(err){
     console.error(err);
-    statusEl.textContent = 'error al cargar de GitHub'; statusEl.className='error';
-    toast('No se pudo cargar desde GitHub: '+err.message, true);
+
+    /*
+     * Si el backend todavía no está publicado, dejamos los datos
+     * locales visibles para poder seguir trabajando durante el desarrollo.
+     */
+    statusEl.textContent = 'modo local — backend no disponible';
+    statusEl.className = 'error';
+
+    toast(
+      'No se pudieron cargar los datos compartidos. Se mantienen los datos locales.',
+      true
+    );
+  }finally{
+    loadingShared = false;
   }
 }
 
-async function saveToGithub(){
-  if(!cfgReady()){ document.getElementById('settingsModal').classList.remove('hidden'); toast('Configurá el repo primero', true); return; }
-  if(!cfg.token){ toast('Falta el token para poder guardar', true); return; }
+async function saveToShared(){
+  if(savingShared) return;
+
+  savingShared = true;
+
   const statusEl = document.getElementById('syncStatus');
-  statusEl.textContent='guardando en GitHub…'; statusEl.className='';
+  statusEl.textContent = 'guardando cambios…';
+  statusEl.className = '';
+
   try{
-    const content = utf8ToB64(JSON.stringify(state, null, 2));
-    const url = `${API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(cfg.path)}`;
-    const body = {
-      message: `Actualiza cobranzas — ${new Date().toLocaleString('es-PY')}`,
-      content,
-      branch: cfg.branch || 'main'
-    };
-    if(fileSha) body.sha = fileSha;
-    const res = await fetch(url, {method:'PUT', headers:{...ghHeaders(),'Content-Type':'application/json'}, body:JSON.stringify(body)});
+    const res = await fetch(SHARED_API, {
+      method: 'PUT',
+      headers: {
+        'Content-Type':'application/json',
+        'Accept':'application/json'
+      },
+      body: JSON.stringify(state)
+    });
+
     if(!res.ok){
-      const errBody = await res.json().catch(()=>({}));
-      throw new Error(errBody.message || ('HTTP '+res.status));
+      const text = await res.text().catch(()=> '');
+      throw new Error(text || ('HTTP '+res.status));
     }
-    const data = await res.json();
-    fileSha = data.content.sha;
+
     dirty = false;
-    toast('Guardado en GitHub ✓');
-    updateStatus();
+    saveLocal();
+
+    statusEl.textContent = 'guardado y compartido ✓';
+    statusEl.className = '';
+
+    toast('Cambios guardados para todos ✓');
   }catch(err){
     console.error(err);
-    statusEl.textContent='error al guardar'; statusEl.className='error';
-    toast('No se pudo guardar en GitHub: '+err.message, true);
+
+    statusEl.textContent = 'error al guardar';
+    statusEl.className = 'error';
+
+    toast(
+      'No se pudieron guardar los cambios: '+err.message,
+      true
+    );
+  }finally{
+    savingShared = false;
   }
 }
 
 function updateStatus(){
   const el = document.getElementById('syncStatus');
-  if(!cfgReady()){ el.textContent='sin conectar a GitHub'; el.className=''; return; }
-  if(dirty){ el.textContent='cambios sin guardar en GitHub'; el.className='dirty'; return; }
-  el.textContent = `sincronizado con ${cfg.owner}/${cfg.repo}`; el.className='';
+
+  if(dirty){
+    el.textContent = 'cambios sin guardar';
+    el.className = 'dirty';
+    return;
+  }
+
+  if(loadingShared){
+    el.textContent = 'cargando datos compartidos…';
+    el.className = '';
+    return;
+  }
+
+  if(savingShared){
+    el.textContent = 'guardando cambios…';
+    el.className = '';
+    return;
+  }
+
+  el.textContent = 'datos compartidos';
+  el.className = '';
 }
 
-document.getElementById('btnSave').addEventListener('click', saveToGithub);
+document.getElementById('btnSave').addEventListener('click', saveToShared);
 
-/* ---------------- Settings modal ---------------- */
-document.getElementById('btnSettings').addEventListener('click', ()=>{
-  document.getElementById('cfgOwner').value = cfg.owner;
-  document.getElementById('cfgRepo').value = cfg.repo;
-  document.getElementById('cfgPath').value = cfg.path;
-  document.getElementById('cfgBranch').value = cfg.branch;
-  document.getElementById('cfgToken').value = cfg.token;
-  document.getElementById('settingsModal').classList.remove('hidden');
-});
-document.getElementById('btnCancelSettings').addEventListener('click', ()=> document.getElementById('settingsModal').classList.add('hidden'));
-document.getElementById('btnSaveSettings').addEventListener('click', async ()=>{
-  cfg.owner = document.getElementById('cfgOwner').value.trim();
-  cfg.repo = document.getElementById('cfgRepo').value.trim();
-  cfg.path = document.getElementById('cfgPath').value.trim() || 'data/cobranzas.json';
-  cfg.branch = document.getElementById('cfgBranch').value.trim() || 'main';
-  cfg.token = document.getElementById('cfgToken').value.trim();
-  saveCfg();
+/* ---------------- Información de conexión ---------------- */
+
+document.getElementById('btnCancelSettings').addEventListener('click', ()=>{
   document.getElementById('settingsModal').classList.add('hidden');
-  await loadFromGithub();
 });
+
+/* ---------------- Auto-recarga ---------------- */
+
+/*
+ * Cada 15 segundos comprobamos si hay una versión nueva.
+ * No sobrescribimos los cambios locales si el usuario está editando.
+ *
+ * Para una sincronización más avanzada podemos agregar después
+ * control de versiones/conflictos en el backend.
+ */
+setInterval(()=>{
+  if(!dirty && !loadingShared && !savingShared){
+    loadFromShared();
+  }
+}, 15000);
 
 /* ---------------- Init ---------------- */
 function renderAll(){
@@ -655,10 +714,9 @@ function renderAll(){
   updateStatus();
 }
 
-loadCfg();
 loadLocal();
 renderAll();
-if(cfgReady()) loadFromGithub();
+loadFromShared();
 </script>
 </body>
 </html>
