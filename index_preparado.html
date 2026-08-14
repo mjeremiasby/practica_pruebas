@@ -1,509 +1,79 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema de Cobranza de Prácticas</title>
-  <style>
-    :root {
-      --bg: #0f172a;
-      --card-bg: #1e293b;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --primary: #2563eb;
-      --primary-hover: #1d4ed8;
-      --success: #10b981;
-      --danger: #ef4444;
-      --border: #334155;
+async function loadFromShared(){
+  if(loadingShared) return;
+  loadingShared = true;
+  const statusEl = document.getElementById('syncStatus');
+  statusEl.textContent = 'sincronizando...';
+  statusEl.className = '';
+
+  const token = getSavedToken();
+
+  try {
+    const headers = {};
+    if(token) headers['Authorization'] = `token ${token}`;
+
+    const metaRes = await fetch(`${API_GITHUB_URL}?_t=${Date.now()}`, {
+      headers,
+      cache: 'no-store'
+    });
+
+    if(!metaRes.ok) throw new Error('HTTP ' + metaRes.status);
+    
+    const meta = await metaRes.json();
+    currentFileSha = meta.sha;
+
+    const binary = atob(meta.content.replace(/\s/g, ''));
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
     }
+    const jsonStr = new TextDecoder().decode(bytes);
+    let json = JSON.parse(jsonStr);
 
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-    }
+    // Normalizar estudiantes para mapear campos viejos o alternativos al formato interno
+    if (Array.isArray(json.estudiantes)) {
+      json.estudiantes = json.estudiantes.map(e => {
+        // Separar nombre_completo en nombre y apellido si no vienen separados
+        let nombre = e.nombre || '';
+        let apellido = e.apellido || '';
+        
+        if (!nombre && e.nombre_completo) {
+          const partes = e.nombre_completo.trim().split(' ');
+          if (partes.length > 2) {
+            // Asume los últimos dos términos como apellidos y el resto como nombre
+            apellido = partes.slice(-2).join(' ');
+            nombre = partes.slice(0, -2).join(' ');
+          } else if (partes.length === 2) {
+            nombre = partes[0];
+            apellido = partes[1];
+          } else {
+            nombre = e.nombre_completo;
+          }
+        }
 
-    .container {
-      width: 100%;
-      max-width: 900px;
-    }
-
-    h1, h2, h3 {
-      margin-top: 0;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-      border: 1px solid var(--border);
-    }
-
-    .header-status {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    #syncStatus {
-      font-size: 0.9em;
-      color: var(--muted);
-    }
-    #syncStatus.error { color: var(--danger); }
-
-    .form-group {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 15px;
-    }
-
-    input, select, button {
-      padding: 10px 14px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: #0f172a;
-      color: var(--text);
-      font-size: 1rem;
-    }
-
-    input:focus, select:focus {
-      outline: 2px solid var(--primary);
-    }
-
-    button {
-      background: var(--primary);
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background 0.2s;
-    }
-
-    button:hover {
-      background: var(--primary-hover);
-    }
-
-    .filters-bar {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
-      flex-wrap: wrap;
-    }
-
-    .filters-bar input {
-      flex: 2;
-      min-width: 200px;
-    }
-
-    .filters-bar select {
-      flex: 1;
-      min-width: 130px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-
-    th, td {
-      text-align: left;
-      padding: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    th {
-      color: var(--muted);
-      font-size: 0.85rem;
-      text-transform: uppercase;
-    }
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      font-weight: bold;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .status-badge.paid {
-      background: rgba(16, 185, 129, 0.2);
-      color: var(--success);
-      border: 1px solid var(--success);
-    }
-
-    .status-badge.unpaid {
-      background: rgba(239, 68, 68, 0.2);
-      color: var(--danger);
-      border: 1px solid var(--danger);
-    }
-
-    .tag {
-      background: #334155;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 0.85em;
-    }
-
-    .practice-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #0f172a;
-      padding: 12px 16px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-    }
-  </style>
-</head>
-<body>
-
-<div class="container">
-  <div class="header-status">
-    <h1>Cobranza de Prácticas</h1>
-    <span id="syncStatus">sincronizando...</span>
-  </div>
-
-  <!-- SECCIÓN 1: INICIAR O SELECCIONAR PRÁCTICA -->
-  <div class="card">
-    <h2>Nueva Cobranza</h2>
-    <div class="form-group">
-      <input type="date" id="fechaPractica">
-      <input type="number" id="montoPractica" placeholder="Monto a cobrar (ej: 15000)" min="0">
-      <button onclick="crearPractica()">Iniciar Cobranza</button>
-    </div>
-
-    <div style="margin-top: 15px;">
-      <label for="selectPractica" style="color: var(--muted); font-size: 0.9em;">O Seleccionar Práctica Existente:</label>
-      <select id="selectPractica" style="width: 100%; margin-top: 5px;" onchange="cambiarPracticaActiva()">
-        <option value="">-- Seleccionar Práctica --</option>
-      </select>
-    </div>
-  </div>
-
-  <!-- SECCIÓN 2: LISTA DE ESTUDIANTES Y ESTADO DE PAGO -->
-  <div class="card" id="seccionCobranza" style="display: none;">
-    <div class="practice-info">
-      <div>
-        <h3 id="tituloPractica" style="margin: 0;">Práctica</h3>
-        <span id="montoPracticaDisplay" style="color: var(--muted); font-size: 0.9em;">Monto: 0 Gs.</span>
-      </div>
-      <div>
-        <strong id="resumenPagos">0/0 Pagados</strong>
-      </div>
-    </div>
-
-    <!-- Filtros y Buscador -->
-    <div class="filters-bar">
-      <input type="text" id="busqueda" placeholder="Buscar por nombre, apellido o cédula..." oninput="renderEstudiantes()">
-      <select id="filtroCarrera" onchange="renderEstudiantes()">
-        <option value="">Todas las carreras</option>
-      </select>
-      <select id="filtroEtiqueta" onchange="renderEstudiantes()">
-        <option value="">Todas las etiquetas</option>
-      </select>
-    </div>
-
-    <!-- Tabla de Estudiantes -->
-    <table>
-      <thead>
-        <tr>
-          <th>Estado</th>
-          <th>Estudiante</th>
-          <th>Cédula</th>
-          <th>Carrera</th>
-          <th>Etiqueta</th>
-        </tr>
-      </thead>
-      <tbody id="tablaEstudiantes">
-        <!-- Se llena dinámicamente -->
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<script>
-  // CONFIGURACIÓN DE TU REPO DE GITHUB
-  const GITHUB_USER = 'TU_USUARIO';      // Reemplaza por tu usuario
-  const GITHUB_REPO = 'TU_REPOSITORIO';  // Reemplaza por el nombre de tu repo
-  const GITHUB_PATH = 'estudiantes.json'; 
-  const API_GITHUB_URL = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
-
-  let state = {
-    practicas: [],
-    estudiantes: [],
-    pagos: {} 
-  };
-
-  let practicaActivaId = null;
-  let loadingShared = false;
-  let currentFileSha = null;
-
-  // Cargar fecha actual por defecto en el input
-  document.getElementById('fechaPractica').valueAsDate = new Date();
-
-  function getSavedToken() {
-    return localStorage.getItem('gh_token') || '';
-  }
-
-  function uid() {
-    return 'id-' + Math.random().toString(36).substr(2, 9);
-  }
-
-  // --- CARGA Y SINCRONIZACIÓN CON GITHUB ---
-  async function loadFromShared() {
-    if(loadingShared) return;
-    loadingShared = true;
-    const statusEl = document.getElementById('syncStatus');
-    statusEl.textContent = 'sincronizando...';
-
-    const token = getSavedToken();
-
-    try {
-      const headers = {};
-      if(token) headers['Authorization'] = `token ${token}`;
-
-      const metaRes = await fetch(`${API_GITHUB_URL}?_t=${Date.now()}`, { headers, cache: 'no-store' });
-      if(!metaRes.ok) throw new Error('HTTP ' + metaRes.status);
-      
-      const meta = await metaRes.json();
-      currentFileSha = meta.sha;
-
-      const binary = atob(meta.content.replace(/\s/g, ''));
-      const bytes = new Uint8Array(binary.length);
-      for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-      const jsonStr = new TextDecoder().decode(bytes);
-      let json = JSON.parse(jsonStr);
-
-      // Cargar correctamente la estructura de tu JSON (estudiantes, prácticas y pagos)
-      state.estudiantes = Array.isArray(json.estudiantes) ? json.estudiantes : [];
-      state.practicas = Array.isArray(json.practicas) ? json.practicas : [];
-      state.pagos = (json.pagos && typeof json.pagos === 'object') ? json.pagos : {};
-
-      poblarFiltros();
-      actualizarSelectPracticas();
-
-      // Si hay prácticas creadas previamente, seleccionamos la última por defecto
-      if (state.practicas.length > 0 && !practicaActivaId) {
-        practicaActivaId = state.practicas[state.practicas.length - 1].id;
-        document.getElementById('selectPractica').value = practicaActivaId;
-      }
-
-      renderCobranza();
-      statusEl.textContent = 'sincronizado con GitHub ✓';
-      statusEl.className = '';
-    } catch(err) {
-      console.error(err);
-      statusEl.textContent = 'error al sincronizar';
-      statusEl.className = 'error';
-    } finally {
-      loadingShared = false;
-    }
-  }
-
-  async function saveToGitHub() {
-    const token = getSavedToken();
-    if(!token) {
-      const inputToken = prompt("Ingresa tu Personal Access Token (PAT) de GitHub:");
-      if(inputToken) {
-        localStorage.setItem('gh_token', inputToken);
-      } else {
-        return;
-      }
-    }
-
-    const statusEl = document.getElementById('syncStatus');
-    statusEl.textContent = 'guardando...';
-
-    try {
-      const jsonStr = JSON.stringify(state, null, 2);
-      const utf8Bytes = new TextEncoder().encode(jsonStr);
-      let binary = '';
-      for (let i = 0; i < utf8Bytes.length; i++) {
-        binary += String.fromCharCode(utf8Bytes[i]);
-      }
-      const base64Content = btoa(binary);
-
-      const body = {
-        message: "Actualización de cobranzas y pagos",
-        content: base64Content,
-        sha: currentFileSha
-      };
-
-      const res = await fetch(API_GITHUB_URL, {
-        method: 'PUT',
-        headers: {
-          'Authorization': `token ${getSavedToken()}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
+        return {
+          id: e.id || uid(),
+          cedula: String(e.cedula || e.numero_cedula || ''),
+          nombre: nombre,
+          apellido: apellido,
+          carrera: e.carrera || '',
+          etiqueta: e.etiqueta || ''
+        };
       });
-
-      if(!res.ok) throw new Error('Error guardando en GitHub: ' + res.status);
-      const data = await res.json();
-      currentFileSha = data.content.sha;
-      statusEl.textContent = 'sincronizado con GitHub ✓';
-      statusEl.className = '';
-    } catch(err) {
-      console.error(err);
-      statusEl.textContent = 'error al guardar';
-      statusEl.className = 'error';
-    }
-  }
-
-  // --- LÓGICA DE NEGOCIO Y RENDERIZADO ---
-  function crearPractica() {
-    const fechaInput = document.getElementById('fechaPractica').value;
-    const montoInput = document.getElementById('montoPractica').value;
-
-    if(!fechaInput) {
-      alert("Por favor selecciona una fecha.");
-      return;
     }
 
-    const [a, m, d] = fechaInput.split('-');
-    const nombrePractica = `Práctica ${d}/${m}/${a}`;
-    const nuevoId = uid();
+    state = Object.assign({practicas:[], estudiantes:[], pagos:{}}, json);
 
-    const nuevaPractica = {
-      id: nuevoId,
-      nombre: nombrePractica,
-      fecha: fechaInput,
-      monto: Number(montoInput) || 0
-    };
+    saveLocal();
+    dirty = false;
+    renderAll();
 
-    state.practicas.push(nuevaPractica);
-    state.pagos[nuevoId] = {}; 
-    practicaActivaId = nuevoId;
-
-    actualizarSelectPracticas();
-    renderCobranza();
-    saveToGitHub();
-
-    document.getElementById('montoPractica').value = '';
+    statusEl.textContent = 'sincronizado con GitHub ✓';
+    statusEl.className = '';
+  } catch(err) {
+    console.error(err);
+    statusEl.textContent = token ? 'error al sincronizar' : 'ingresa tu token (🔑)';
+    statusEl.className = 'error';
+  } finally {
+    loadingShared = false;
   }
-
-  function cambiarPracticaActiva() {
-    practicaActivaId = document.getElementById('selectPractica').value;
-    renderCobranza();
-  }
-
-  function actualizarSelectPracticas() {
-    const select = document.getElementById('selectPractica');
-    select.innerHTML = '<option value="">-- Seleccionar Práctica --</option>';
-    state.practicas.forEach(p => {
-      const opt = document.createElement('option');
-      opt.value = p.id;
-      opt.textContent = `${p.nombre} - (${p.monto ? p.monto.toLocaleString() + ' Gs.' : 'Sin monto'})`;
-      if(p.id === practicaActivaId) opt.selected = true;
-      select.appendChild(opt);
-    });
-  }
-
-  function poblarFiltros() {
-    const carreras = [...new Set(state.estudiantes.map(e => e.carrera).filter(Boolean))];
-    const etiquetas = [...new Set(state.estudiantes.map(e => e.etiqueta).filter(Boolean))];
-
-    const selCarrera = document.getElementById('filtroCarrera');
-    const selEtiqueta = document.getElementById('filtroEtiqueta');
-
-    selCarrera.innerHTML = '<option value="">Todas las carreras</option>';
-    carreras.forEach(c => selCarrera.innerHTML += `<option value="${c}">${c}</option>`);
-
-    selEtiqueta.innerHTML = '<option value="">Todas las etiquetas</option>';
-    etiquetas.forEach(e => selEtiqueta.innerHTML += `<option value="${e}">${e}</option>`);
-  }
-
-  function renderCobranza() {
-    const seccion = document.getElementById('seccionCobranza');
-    if(!practicaActivaId) {
-      seccion.style.display = 'none';
-      return;
-    }
-
-    const practica = state.practicas.find(p => p.id === practicaActivaId);
-    if(!practica) return;
-
-    seccion.style.display = 'block';
-    document.getElementById('tituloPractica').textContent = practica.nombre;
-    document.getElementById('montoPracticaDisplay').textContent = `Monto a cobrar: ${practica.monto ? practica.monto.toLocaleString() : 0} Gs.`;
-
-    renderEstudiantes();
-  }
-
-  function renderEstudiantes() {
-    if(!practicaActivaId) return;
-
-    const texto = document.getElementById('busqueda').value.toLowerCase();
-    const carreraSel = document.getElementById('filtroCarrera').value;
-    const etiquetaSel = document.getElementById('filtroEtiqueta').value;
-
-    const filtrados = state.estudiantes.filter(e => {
-      const nombreCompleto = `${e.nombre} ${e.apellido}`.toLowerCase();
-      const coincideTexto = nombreCompleto.includes(texto) || String(e.cedula).includes(texto);
-      const coincideCarrera = !carreraSel || e.carrera === carreraSel;
-      const coincideEtiqueta = !etiquetaSel || e.etiqueta === etiquetaSel;
-      return coincideTexto && coincideCarrera && coincideEtiqueta;
-    });
-
-    const tbody = document.getElementById('tablaEstudiantes');
-    tbody.innerHTML = '';
-
-    const pagosPractica = state.pagos[practicaActivaId] || {};
-    let pagadosCount = 0;
-
-    state.estudiantes.forEach(e => {
-      if(pagosPractica[e.id]) pagadosCount++;
-    });
-
-    document.getElementById('resumenPagos').textContent = `${pagadosCount}/${state.estudiantes.length} Pagados`;
-
-    filtrados.forEach(est => {
-      const estaPagado = !!pagosPractica[est.id];
-      const tr = document.createElement('tr');
-
-      tr.innerHTML = `
-        <td>
-          <span class="status-badge ${estaPagado ? 'paid' : 'unpaid'}" onclick="togglePago('${est.id}')">
-            ${estaPagado ? '✓' : '✕'}
-          </span>
-        </td>
-        <td><strong>${est.nombre} ${est.apellido}</strong></td>
-        <td>${est.cedula}</td>
-        <td>${est.carrera}</td>
-        <td><span class="tag">${est.etiqueta || 'Ninguno'}</span></td>
-      `;
-      tbody.appendChild(tr);
-    });
-  }
-
-  function togglePago(estudianteId) {
-    if(!practicaActivaId) return;
-
-    if(!state.pagos[practicaActivaId]) {
-      state.pagos[practicaActivaId] = {};
-    }
-
-    state.pagos[practicaActivaId][estudianteId] = !state.pagos[practicaActivaId][estudianteId];
-
-    renderEstudiantes();
-    saveToGitHub();
-  }
-
-  // Carga inicial
-  loadFromShared();
-</script>
-
-</body>
-</html>
+}
