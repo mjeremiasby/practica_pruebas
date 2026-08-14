@@ -252,6 +252,8 @@
       <div class="field"><label>Nombre</label><input id="eNombre" placeholder="Nombre"></div>
       <div class="field"><label>Apellido</label><input id="eApellido" placeholder="Apellido"></div>
       <div class="field"><label>Cédula</label><input id="eCedula" placeholder="1234567"></div>
+      <div class="field"><label>Carrera</label><input id="eCarrera" placeholder="Ej: Civil"></div>
+      <div class="field"><label>Etiqueta</label><input id="eEtiqueta" placeholder="Ej: Enfermo/Alego"></div>
       <div class="field" style="flex:0;align-self:flex-end;"><button class="btn-primary" id="btnAddEstudiante">+ Agregar</button></div>
     </div>
     <div id="listaEstudiantes"></div>
@@ -369,14 +371,15 @@ function renderGrid(){
     grid.innerHTML = `<div class="empty">Agregá al menos un estudiante y una práctica para ver la planilla.</div>`;
     return;
   }
-  const estudiantes = [...state.estudiantes].sort((a,b)=> (a.apellido+a.nombre).localeCompare(b.apellido+b.nombre));
+  const estudiantes = [...state.estudiantes].sort((a,b)=> ((a.apellido||'')+(a.nombre||'')).localeCompare((b.apellido||'')+(b.nombre||'')));
   let html = '<table class="ledger"><thead><tr><th class="sticky-col">Estudiante</th>';
   state.practicas.forEach(p=>{
     html += `<th class="num practica-head">${escapeHtml(p.nombre)}<small>${fmtGs(p.monto)}</small></th>`;
   });
   html += '</tr></thead><tbody>';
   estudiantes.forEach(e=>{
-    html += `<tr><td class="sticky-col">${escapeHtml(e.apellido)}, ${escapeHtml(e.nombre)}</td>`;
+    const nombreDisplay = (e.apellido || e.nombre) ? `${escapeHtml(e.apellido||'')}, ${escapeHtml(e.nombre||'')}` : 'Sin Nombre';
+    html += `<tr><td class="sticky-col">${nombreDisplay}</td>`;
     state.practicas.forEach(p=>{
       const key = e.id+'__'+p.id;
       const pago = state.pagos[key];
@@ -406,7 +409,7 @@ function openCellModal(estId, pracId){
   const est = state.estudiantes.find(x=>x.id===estId);
   const prac = state.practicas.find(x=>x.id===pracId);
   const pago = state.pagos[estId+'__'+pracId];
-  document.getElementById('cellTitle').textContent = `${est.nombre} ${est.apellido}`;
+  document.getElementById('cellTitle').textContent = `${est.nombre||''} ${est.apellido||''}`.trim() || 'Estudiante';
   document.getElementById('cellSubtitle').textContent = `${prac.nombre} · cuota ${fmtGs(prac.monto)}`;
   document.getElementById('cellMonto').value = pago ? pago.monto : prac.monto;
   document.getElementById('cellFecha').value = pago ? pago.fecha : todayISO();
@@ -466,21 +469,43 @@ document.getElementById('btnAddEstudiante').addEventListener('click', ()=>{
   const nombre = document.getElementById('eNombre').value.trim();
   const apellido = document.getElementById('eApellido').value.trim();
   const cedula = document.getElementById('eCedula').value.trim();
+  const carrera = document.getElementById('eCarrera').value.trim();
+  const etiqueta = document.getElementById('eEtiqueta').value.trim();
+
   if(!nombre || !apellido){ toast('Poné nombre y apellido', true); return; }
-  state.estudiantes.push({id:uid(), nombre, apellido, cedula});
+
+  state.estudiantes.push({
+    id: uid(), 
+    nombre, 
+    apellido, 
+    cedula,
+    carrera,
+    etiqueta
+  });
+
   document.getElementById('eNombre').value='';
   document.getElementById('eApellido').value='';
   document.getElementById('eCedula').value='';
+  document.getElementById('eCarrera').value='';
+  document.getElementById('eEtiqueta').value='';
+
   setDirty(true); renderEstudiantes(); renderGrid();
 });
+
 function renderEstudiantes(){
   const el = document.getElementById('listaEstudiantes');
   if(state.estudiantes.length===0){ el.innerHTML = '<div class="empty">Todavía no agregaste estudiantes.</div>'; return; }
-  const rows = [...state.estudiantes].sort((a,b)=> (a.apellido+a.nombre).localeCompare(b.apellido+b.nombre));
-  let html = '<table class="list-table"><thead><tr><th>Apellido</th><th>Nombre</th><th>Cédula</th><th></th></tr></thead><tbody>';
+  const rows = [...state.estudiantes].sort((a,b)=> ((a.apellido||'')+(a.nombre||'')).localeCompare((b.apellido||'')+(b.nombre||'')));
+  let html = '<table class="list-table"><thead><tr><th>Apellido</th><th>Nombre</th><th>Cédula</th><th>Carrera</th><th>Etiqueta</th><th></th></tr></thead><tbody>';
   rows.forEach(e=>{
-    html += `<tr><td>${escapeHtml(e.apellido)}</td><td>${escapeHtml(e.nombre)}</td><td>${escapeHtml(e.cedula)}</td>
-      <td><div class="row-actions"><button class="btn-danger btn-small" data-del="${e.id}">Eliminar</button></div></td></tr>`;
+    html += `<tr>
+      <td>${escapeHtml(e.apellido||'')}</td>
+      <td>${escapeHtml(e.nombre||'')}</td>
+      <td>${escapeHtml(e.cedula||'')}</td>
+      <td>${escapeHtml(e.carrera||'—')}</td>
+      <td>${escapeHtml(e.etiqueta||'—')}</td>
+      <td><div class="row-actions"><button class="btn-danger btn-small" data-del="${e.id}">Eliminar</button></div></td>
+    </tr>`;
   });
   html += '</tbody></table>';
   el.innerHTML = html;
@@ -526,8 +551,8 @@ function renderResumen(){
 /* ---------------- Export CSV ---------------- */
 document.getElementById('btnExportCsv').addEventListener('click', ()=>{
   if(state.estudiantes.length===0){ toast('No hay datos para exportar', true); return; }
-  const estudiantes = [...state.estudiantes].sort((a,b)=> (a.apellido+a.nombre).localeCompare(b.apellido+b.nombre));
-  let rows = [['Apellido','Nombre','Cédula', ...state.practicas.map(p=>p.nombre), 'Total pagado']];
+  const estudiantes = [...state.estudiantes].sort((a,b)=> ((a.apellido||'')+(a.nombre||'')).localeCompare((b.apellido||'')+(b.nombre||'')));
+  let rows = [['Apellido','Nombre','Cédula','Carrera','Etiqueta', ...state.practicas.map(p=>p.nombre), 'Total pagado']];
   estudiantes.forEach(e=>{
     let total = 0;
     const cells = state.practicas.map(p=>{
@@ -536,7 +561,7 @@ document.getElementById('btnExportCsv').addEventListener('click', ()=>{
       total += monto;
       return monto;
     });
-    rows.push([e.apellido, e.nombre, e.cedula, ...cells, total]);
+    rows.push([e.apellido||'', e.nombre||'', e.cedula||'', e.carrera||'', e.etiqueta||'', ...cells, total]);
   });
   const csv = rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
   const blob = new Blob(['\ufeff'+csv], {type:'text/csv;charset=utf-8;'});
