@@ -15,5 +15,11 @@
       "cedula": "5834241"
     }
   ],
-  "pagos": {}
+  "pagos": {
+    "ozxfhl1p__1oqnkqj9": {
+      "monto": 6000,
+      "fecha": "2026-08-14",
+      "obs": ""
+    }
+  }
 }
