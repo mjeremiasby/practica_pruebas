@@ -1,659 +1,862 @@
 {
-  "practicas": [
-    {
-
-    }
-  ],
+  "practicas": [],
+  "pagos": {},
   "estudiantes": [
     {
-[
-  {
-    "numero_cedula": "6095684",
-    "nombre_completo": "Jéssica Kazlauskas Kondratiuk",
-    "carrera": "Civil",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "6097208",
-    "nombre_completo": "Leandro Ivan Torres Paniagua",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "7005316",
-    "nombre_completo": "Leonardo Simón Setrini Villalba",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5983192",
-    "nombre_completo": "Elias Martin Vera Jara",
-    "carrera": "Civil",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6033685",
-    "nombre_completo": "Gustavo Ariel Nuñez Dure",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5974425",
-    "nombre_completo": "Eliana Jasmin Caballero Galeano",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5949974",
-    "nombre_completo": "Giovanni Joaquín Ledesma Delgado",
-    "carrera": "Civil",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "8228947",
-    "nombre_completo": "Juan Carlos Ramos Rojas",
-    "carrera": "Civil",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "5764703",
-    "nombre_completo": "Nardi Amir Gauto Ojeda",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6851070",
-    "nombre_completo": "Henry David Giménez Gómez",
-    "carrera": "Civil",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "6136188",
-    "nombre_completo": "Jazmín Ortiz Alfonso",
-    "carrera": "Civil",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6066729",
-    "nombre_completo": "Leandro Valenzuela Jara",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6106667",
-    "nombre_completo": "Carlos Mathias González Cáceres",
-    "carrera": "Civil",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "5276108",
-    "nombre_completo": "Yasmín Cecilia Rojas García",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5873446",
-    "nombre_completo": "Juliana Fernanda Chávez Acosta",
-    "carrera": "Civil",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "6075780",
-    "nombre_completo": "Matias José Mereles Casco",
-    "carrera": "Civil",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6228888",
-    "nombre_completo": "Mizael Herrera Delvalle Wenceslao",
-    "carrera": "Civil",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6029579",
-    "nombre_completo": "Rocio Araceli Martinez Nuñez",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5872699",
-    "nombre_completo": "Bianca Alessandra Núñez Barrios",
-    "carrera": "Civil",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "6037137",
-    "nombre_completo": "Facundo Adrian Ferreira Maciel",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6072666",
-    "nombre_completo": "Analia Grismar Ayala Páez",
-    "carrera": "Civil",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "7036927",
-    "nombre_completo": "Cristhian Matias Duarte Sanchez",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5885507",
-    "nombre_completo": "Milagros Loana Jara Baez",
-    "carrera": "Civil",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "6830668",
-    "nombre_completo": "Yamila Maylén Brittos Centurión",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6577036",
-    "nombre_completo": "Sofía Esperanza Vera Miranda",
-    "carrera": "Civil",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "6097248",
-    "nombre_completo": "Sara Valentina Olmedo Villalba",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5650580",
-    "nombre_completo": "Axel Aquiles Terwindt Yabusch",
-    "carrera": "Civil",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "5716215",
-    "nombre_completo": "Fernando Rafael Aguilera Ojeda",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6057768",
-    "nombre_completo": "Rodrigo Miguel Centurión Ubeda",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6158876",
-    "nombre_completo": "Zoe María Luján Martinez Silva",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6147753",
-    "nombre_completo": "Angélica Belén Giménez López",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6350464",
-    "nombre_completo": "Gustavo Ezequiel Díaz Miño",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "9125883",
-    "nombre_completo": "Sebastián de Jesús Vázquez Figueredo",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6239941",
-    "nombre_completo": "Nicolas Gabriel Gauto Lombardo",
-    "carrera": "Civil",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6149442",
-    "nombre_completo": "Thiago Osmar Olazar Gonzalez",
-    "carrera": "Civil",
-    "etiqueta": "Enfermo"
-  },
-  {
-    "numero_cedula": "9404765",
-    "nombre_completo": "Jonathan Dario Otazu López",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5900354",
-    "nombre_completo": "Micaela Zotelo Caceres",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "4855772",
-    "nombre_completo": "Angel Fabián Acuña Méndez",
-    "carrera": "Civil",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6056461",
-    "nombre_completo": "Mauro Alexandre Pulguer Gansel",
-    "carrera": "Electromecánica",
-    "etiqueta": "Enfermo"
-  },
-  {
-    "numero_cedula": "6679040",
-    "nombre_completo": "Eric Steven Gregor Ruiz Díaz",
-    "carrera": "Electromecánica",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "7644048",
-    "nombre_completo": "Mario Ramón Sanabria Martínez",
-    "carrera": "Electromecánica",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6695771",
-    "nombre_completo": "Marcelo Martin Rojas Cano",
-    "carrera": "Electromecánica",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6278289",
-    "nombre_completo": "Amadeo Abel Areco Benítez",
-    "carrera": "Electromecánica",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6133898",
-    "nombre_completo": "Juan José González Romero",
-    "carrera": "Electromecánica",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5892546",
-    "nombre_completo": "Alexander Sánchez Ayala",
-    "carrera": "Electromecánica",
-    "etiqueta": "Enfermo"
-  },
-  {
-    "numero_cedula": "5751224",
-    "nombre_completo": "Lucas Gilberto Algarin Gómez",
-    "carrera": "Electromecánica",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6237134",
-    "nombre_completo": "Micaela María Encina Morínigo",
-    "carrera": "Electromecánica",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5650587",
-    "nombre_completo": "Arami María Elena Rondelli Vera",
-    "carrera": "Electromecánica",
-    "etiqueta": "Enfermo"
-  },
-  {
-    "numero_cedula": "5685934",
-    "nombre_completo": "Tobias Nahuel Silva Nuñez",
-    "carrera": "Electromecánica",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5793921",
-    "nombre_completo": "Guido Alejandro Chávez López",
-    "carrera": "Electromecánica",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5851450",
-    "nombre_completo": "Maia Samira Sarquis Paniagua",
-    "carrera": "Electromecánica",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "5851873",
-    "nombre_completo": "Lucas Ocampos",
-    "carrera": "Electromecánica",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5698246",
-    "nombre_completo": "Maia Agustina Ivaskevich Cardoso",
-    "carrera": "Electromecánica",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "6002718",
-    "nombre_completo": "Thiago Sebastián Rojas Britez",
-    "carrera": "Electromecánica",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "9283216",
-    "nombre_completo": "Tiago Mauricio Figueredo",
-    "carrera": "Electromecánica",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6066081",
-    "nombre_completo": "Alhana Denisse Viana Bunchuk",
-    "carrera": "Industrial",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6742760",
-    "nombre_completo": "Tobias Nahuel Leidemer Sánchez",
-    "carrera": "Industrial",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6859634",
-    "nombre_completo": "Aurora Soledad Avalos Vera",
-    "carrera": "Industrial",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5745331",
-    "nombre_completo": "Tamara Belen Fleitas González",
-    "carrera": "Industrial",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6115735",
-    "nombre_completo": "Elias Ramirez Villaverde",
-    "carrera": "Industrial",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6038190",
-    "nombre_completo": "Alex Rafael Abud Kühner",
-    "carrera": "Industrial",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6127037",
-    "nombre_completo": "Lorena Romina Monserrat Mendez Niven",
-    "carrera": "Industrial",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5714322",
-    "nombre_completo": "Yisel Liz Maria Flores Perez",
-    "carrera": "Industrial",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6609182",
-    "nombre_completo": "Camila Jeruti Sotelo Ortiz",
-    "carrera": "Industrial",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "6147106",
-    "nombre_completo": "Fernando vallejos ullo",
-    "carrera": "Industrial",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5859260",
-    "nombre_completo": "Iara Jeanette Matiauda Rios",
-    "carrera": "Industrial",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6304357",
-    "nombre_completo": "Jossias Rubén Rivas colman",
-    "carrera": "Industrial",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "5822064",
-    "nombre_completo": "Elías Ezequiel Cataldo Ayala",
-    "carrera": "Industrial",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6231046",
-    "nombre_completo": "Luz Priscila Borba Ortiz",
-    "carrera": "Industrial",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "5614139",
-    "nombre_completo": "Augusto Ezequiel González Alvarenga",
-    "carrera": "Industrial",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "5822083",
-    "nombre_completo": "Josías Enrique Chamorro Ayala",
-    "carrera": "Industrial",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5585613",
-    "nombre_completo": "Oscar Ariel Miranda Benítez",
-    "carrera": "Industrial",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "7209908",
-    "nombre_completo": "Enzo Gustavo González Larrea",
-    "carrera": "Industrial",
-    "etiqueta": "Enfermo"
-  },
-  {
-    "numero_cedula": "7144071",
-    "nombre_completo": "Vanessa Benitez Martinez",
-    "carrera": "Industrial",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "5781311",
-    "nombre_completo": "Santiago Anthony Olejnik Semenchuk",
-    "carrera": "Industrial",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "7120562",
-    "nombre_completo": "Martin Nicolas Velazquez Alonso",
-    "carrera": "Industrial",
-    "etiqueta": "Enfermo"
-  },
-  {
-    "numero_cedula": "7569186",
-    "nombre_completo": "Melani Catalina Talavera Alcaraz",
-    "carrera": "Industrial",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5786797",
-    "nombre_completo": "Marlilian Lizzeth Rodríguez Aranda",
-    "carrera": "Industrial",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6178253",
-    "nombre_completo": "Valentino Gabriel Gennari Matthias",
-    "carrera": "Informática",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "5777103",
-    "nombre_completo": "Jéssica Dahiana Benítez Zarza",
-    "carrera": "Informática",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6087932",
-    "nombre_completo": "Santiago Lorenzo Escobar Ramos",
-    "carrera": "Informática",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6083251",
-    "nombre_completo": "Alan Aquino Riquelme Gonzalez",
-    "carrera": "Informática",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "6579426",
-    "nombre_completo": "Leandro Moises Valenzuela Vigo",
-    "carrera": "Informática",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "7052920",
-    "nombre_completo": "Santiago Ezequiel Salinas Britez",
-    "carrera": "Informática",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6805360",
-    "nombre_completo": "Claudio Amin Cristaldo Prado",
-    "carrera": "Informática",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6351022",
-    "nombre_completo": "Claudio José Ferreira Vergara",
-    "carrera": "Informática",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "6870382",
-    "nombre_completo": "Nahuel Shinnosuke Burzio Matsumoto",
-    "carrera": "Informática",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5768006",
-    "nombre_completo": "Nahomy Yazmin Acosta Bustamante",
-    "carrera": "Informática",
-    "etiqueta": "Enfermo"
-  },
-  {
-    "numero_cedula": "6157881",
-    "nombre_completo": "Katherin Juliana Erberich Rojas",
-    "carrera": "Informática",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "7769040",
-    "nombre_completo": "Dany Ezequiel Gaona Dávalos",
-    "carrera": "Informática",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6907648",
-    "nombre_completo": "Mariela Soledad Delvalle Alfonso",
-    "carrera": "Informática",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6991148",
-    "nombre_completo": "Violeta Isabel Chaparro Osorio",
-    "carrera": "Informática",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5700974",
-    "nombre_completo": "Alexis Ramón García DeJesus",
-    "carrera": "Informática",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "7498159",
-    "nombre_completo": "Sofía Maylen Delvalle Benítez",
-    "carrera": "Informática",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5999722",
-    "nombre_completo": "Joel Sebastian Benitez Franck",
-    "carrera": "Informática",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6036533",
-    "nombre_completo": "Thiago Martin Vargas Caceres",
-    "carrera": "Informática",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "9191462",
-    "nombre_completo": "Axel Ezequiel Chamorro Mateu",
-    "carrera": "Informática",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5834241",
-    "nombre_completo": "Martin Jeremias Britos Ylchuk",
-    "carrera": "Informática",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6303351",
-    "nombre_completo": "Sanye Maylen García Talavera",
-    "carrera": "Informática",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "7433582",
-    "nombre_completo": "César López",
-    "carrera": "Informática",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "5921535",
-    "nombre_completo": "Ivan Rodrigo Cantero Rodriguez",
-    "carrera": "Informática",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6078987",
-    "nombre_completo": "Fabrizio Joaquín Ayala Rojas",
-    "carrera": "Informática",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "7352221",
-    "nombre_completo": "Tamara Luján Martínez Ríos",
-    "carrera": "Informática",
-    "etiqueta": "Enfermo/Alego"
-  },
-  {
-    "numero_cedula": "6522764",
-    "nombre_completo": "Rolando Sebastián Gamarra Caballero",
-    "carrera": "Informática",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "5861113",
-    "nombre_completo": "Alejandro Ruben Espinola Molinas",
-    "carrera": "Informática",
-    "etiqueta": "Alego"
-  },
-  {
-    "numero_cedula": "6518459",
-    "nombre_completo": "Jimena Monserrat Pintos Müller",
-    "carrera": "Informática",
-    "etiqueta": "Ninguno"
-  },
-  {
-    "numero_cedula": "6188671",
-    "nombre_completo": "Ashlee Micaela Bogado Bogado",
-    "carrera": "Informática",
-    "etiqueta": "Enfermo"
-  }
-]
+      "id": "est-001",
+      "cedula": "6095684",
+      "nombre": "Jéssica",
+      "apellido": "Kazlauskas Kondratiuk",
+      "carrera": "Civil",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-002",
+      "cedula": "6097208",
+      "nombre": "Leandro Ivan",
+      "apellido": "Torres Paniagua",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-003",
+      "cedula": "7005316",
+      "nombre": "Leonardo Simón",
+      "apellido": "Setrini Villalba",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-004",
+      "cedula": "5983192",
+      "nombre": "Elias Martin",
+      "apellido": "Vera Jara",
+      "carrera": "Civil",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-005",
+      "cedula": "6033685",
+      "nombre": "Gustavo Ariel",
+      "apellido": "Nuñez Dure",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-006",
+      "cedula": "5974425",
+      "nombre": "Eliana Jasmin",
+      "apellido": "Caballero Galeano",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-007",
+      "cedula": "5949974",
+      "nombre": "Giovanni Joaquín",
+      "apellido": "Ledesma Delgado",
+      "carrera": "Civil",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-008",
+      "cedula": "8228947",
+      "nombre": "Juan Carlos",
+      "apellido": "Ramos Rojas",
+      "carrera": "Civil",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-009",
+      "cedula": "5764703",
+      "nombre": "Nardi Amir",
+      "apellido": "Gauto Ojeda",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-010",
+      "cedula": "6851070",
+      "nombre": "Henry David",
+      "apellido": "Giménez Gómez",
+      "carrera": "Civil",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-011",
+      "cedula": "6136188",
+      "nombre": "Jazmín",
+      "apellido": "Ortiz Alfonso",
+      "carrera": "Civil",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-012",
+      "cedula": "6066729",
+      "nombre": "Leandro",
+      "apellido": "Valenzuela Jara",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-013",
+      "cedula": "6106667",
+      "nombre": "Carlos Mathias",
+      "apellido": "González Cáceres",
+      "carrera": "Civil",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-014",
+      "cedula": "5276108",
+      "nombre": "Yasmín Cecilia",
+      "apellido": "Rojas García",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-015",
+      "cedula": "5873446",
+      "nombre": "Juliana Fernanda",
+      "apellido": "Chávez Acosta",
+      "carrera": "Civil",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-016",
+      "cedula": "6075780",
+      "nombre": "Matias José",
+      "apellido": "Mereles Casco",
+      "carrera": "Civil",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-017",
+      "cedula": "6228888",
+      "nombre": "Mizael Herrera",
+      "apellido": "Delvalle Wenceslao",
+      "carrera": "Civil",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-018",
+      "cedula": "6029579",
+      "nombre": "Rocio Araceli",
+      "apellido": "Martinez Nuñez",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-019",
+      "cedula": "5872699",
+      "nombre": "Bianca Alessandra",
+      "apellido": "Núñez Barrios",
+      "carrera": "Civil",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-020",
+      "cedula": "6037137",
+      "nombre": "Facundo Adrian",
+      "apellido": "Ferreira Maciel",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-021",
+      "cedula": "6072666",
+      "nombre": "Analia Grismar",
+      "apellido": "Ayala Páez",
+      "carrera": "Civil",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-022",
+      "cedula": "7036927",
+      "nombre": "Cristhian Matias",
+      "apellido": "Duarte Sanchez",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-023",
+      "cedula": "5885507",
+      "nombre": "Milagros Loana",
+      "apellido": "Jara Baez",
+      "carrera": "Civil",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-024",
+      "cedula": "6830668",
+      "nombre": "Yamila Maylén",
+      "apellido": "Brittos Centurión",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-025",
+      "cedula": "6577036",
+      "nombre": "Sofía Esperanza",
+      "apellido": "Vera Miranda",
+      "carrera": "Civil",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-026",
+      "cedula": "6097248",
+      "nombre": "Sara Valentina",
+      "apellido": "Olmedo Villalba",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-027",
+      "cedula": "5650580",
+      "nombre": "Axel Aquiles",
+      "apellido": "Terwindt Yabusch",
+      "carrera": "Civil",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-028",
+      "cedula": "5716215",
+      "nombre": "Fernando Rafael",
+      "apellido": "Aguilera Ojeda",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-029",
+      "cedula": "6057768",
+      "nombre": "Rodrigo Miguel",
+      "apellido": "Centurión Ubeda",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-030",
+      "cedula": "6158876",
+      "nombre": "Zoe María Luján",
+      "apellido": "Martinez Silva",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-031",
+      "cedula": "6147753",
+      "nombre": "Angélica Belén",
+      "apellido": "Giménez López",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-032",
+      "cedula": "6350464",
+      "nombre": "Gustavo Ezequiel",
+      "apellido": "Díaz Miño",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-033",
+      "cedula": "9125883",
+      "nombre": "Sebastián de Jesús",
+      "apellido": "Vázquez Figueredo",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-034",
+      "cedula": "6239941",
+      "nombre": "Nicolas Gabriel",
+      "apellido": "Gauto Lombardo",
+      "carrera": "Civil",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-035",
+      "cedula": "6149442",
+      "nombre": "Thiago Osmar",
+      "apellido": "Olazar Gonzalez",
+      "carrera": "Civil",
+      "etiqueta": "Enfermo"
+    },
+    {
+      "id": "est-036",
+      "cedula": "9404765",
+      "nombre": "Jonathan Dario",
+      "apellido": "Otazu López",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-037",
+      "cedula": "5900354",
+      "nombre": "Micaela",
+      "apellido": "Zotelo Caceres",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-038",
+      "cedula": "4855772",
+      "nombre": "Angel Fabián",
+      "apellido": "Acuña Méndez",
+      "carrera": "Civil",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-039",
+      "cedula": "6056461",
+      "nombre": "Mauro Alexandre",
+      "apellido": "Pulguer Gansel",
+      "carrera": "Electromecánica",
+      "etiqueta": "Enfermo"
+    },
+    {
+      "id": "est-040",
+      "cedula": "6679040",
+      "nombre": "Eric Steven Gregor",
+      "apellido": "Ruiz Díaz",
+      "carrera": "Electromecánica",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-041",
+      "cedula": "7644048",
+      "nombre": "Mario Ramón",
+      "apellido": "Sanabria Martínez",
+      "carrera": "Electromecánica",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-042",
+      "cedula": "6695771",
+      "nombre": "Marcelo Martin",
+      "apellido": "Rojas Cano",
+      "carrera": "Electromecánica",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-043",
+      "cedula": "6278289",
+      "nombre": "Amadeo Abel",
+      "apellido": "Areco Benítez",
+      "carrera": "Electromecánica",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-044",
+      "cedula": "6133898",
+      "nombre": "Juan José",
+      "apellido": "González Romero",
+      "carrera": "Electromecánica",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-045",
+      "cedula": "5892546",
+      "nombre": "Alexander",
+      "apellido": "Sánchez Ayala",
+      "carrera": "Electromecánica",
+      "etiqueta": "Enfermo"
+    },
+    {
+      "id": "est-046",
+      "cedula": "5751224",
+      "nombre": "Lucas Gilberto",
+      "apellido": "Algarin Gómez",
+      "carrera": "Electromecánica",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-047",
+      "cedula": "6237134",
+      "nombre": "Micaela María",
+      "apellido": "Encina Morínigo",
+      "carrera": "Electromecánica",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-048",
+      "cedula": "5650587",
+      "nombre": "Arami María Elena",
+      "apellido": "Rondelli Vera",
+      "carrera": "Electromecánica",
+      "etiqueta": "Enfermo"
+    },
+    {
+      "id": "est-049",
+      "cedula": "5685934",
+      "nombre": "Tobias Nahuel",
+      "apellido": "Silva Nuñez",
+      "carrera": "Electromecánica",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-050",
+      "cedula": "5793921",
+      "nombre": "Guido Alejandro",
+      "apellido": "Chávez López",
+      "carrera": "Electromecánica",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-051",
+      "cedula": "5851450",
+      "nombre": "Maia Samira",
+      "apellido": "Sarquis Paniagua",
+      "carrera": "Electromecánica",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-052",
+      "cedula": "5851873",
+      "nombre": "Lucas",
+      "apellido": "Ocampos",
+      "carrera": "Electromecánica",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-053",
+      "cedula": "5698246",
+      "nombre": "Maia Agustina",
+      "apellido": "Ivaskevich Cardoso",
+      "carrera": "Electromecánica",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-054",
+      "cedula": "6002718",
+      "nombre": "Thiago Sebastián",
+      "apellido": "Rojas Britez",
+      "carrera": "Electromecánica",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-055",
+      "cedula": "9283216",
+      "nombre": "Tiago Mauricio",
+      "apellido": "Figueredo",
+      "carrera": "Electromecánica",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-056",
+      "cedula": "6066081",
+      "nombre": "Alhana Denisse",
+      "apellido": "Viana Bunchuk",
+      "carrera": "Industrial",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-057",
+      "cedula": "6742760",
+      "nombre": "Tobias Nahuel",
+      "apellido": "Leidemer Sánchez",
+      "carrera": "Industrial",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-058",
+      "cedula": "6859634",
+      "nombre": "Aurora Soledad",
+      "apellido": "Avalos Vera",
+      "carrera": "Industrial",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-059",
+      "cedula": "5745331",
+      "nombre": "Tamara Belen",
+      "apellido": "Fleitas González",
+      "carrera": "Industrial",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-060",
+      "cedula": "6115735",
+      "nombre": "Elias",
+      "apellido": "Ramirez Villaverde",
+      "carrera": "Industrial",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-061",
+      "cedula": "6038190",
+      "nombre": "Alex Rafael",
+      "apellido": "Abud Kühner",
+      "carrera": "Industrial",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-062",
+      "cedula": "6127037",
+      "nombre": "Lorena Romina Monserrat",
+      "apellido": "Mendez Niven",
+      "carrera": "Industrial",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-063",
+      "cedula": "5714322",
+      "nombre": "Yisel Liz Maria",
+      "apellido": "Flores Perez",
+      "carrera": "Industrial",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-064",
+      "cedula": "6609182",
+      "nombre": "Camila Jeruti",
+      "apellido": "Sotelo Ortiz",
+      "carrera": "Industrial",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-065",
+      "cedula": "6147106",
+      "nombre": "Fernando",
+      "apellido": "vallejos ullo",
+      "carrera": "Industrial",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-066",
+      "cedula": "5859260",
+      "nombre": "Iara Jeanette",
+      "apellido": "Matiauda Rios",
+      "carrera": "Industrial",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-067",
+      "cedula": "6304357",
+      "nombre": "Jossias Rubén",
+      "apellido": "Rivas colman",
+      "carrera": "Industrial",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-068",
+      "cedula": "5822064",
+      "nombre": "Elías Ezequiel",
+      "apellido": "Cataldo Ayala",
+      "carrera": "Industrial",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-069",
+      "cedula": "6231046",
+      "nombre": "Luz Priscila",
+      "apellido": "Borba Ortiz",
+      "carrera": "Industrial",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-070",
+      "cedula": "5614139",
+      "nombre": "Augusto Ezequiel",
+      "apellido": "González Alvarenga",
+      "carrera": "Industrial",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-071",
+      "cedula": "5822083",
+      "nombre": "Josías Enrique",
+      "apellido": "Chamorro Ayala",
+      "carrera": "Industrial",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-072",
+      "cedula": "5585613",
+      "nombre": "Oscar Ariel",
+      "apellido": "Miranda Benítez",
+      "carrera": "Industrial",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-073",
+      "cedula": "7209908",
+      "nombre": "Enzo Gustavo",
+      "apellido": "González Larrea",
+      "carrera": "Industrial",
+      "etiqueta": "Enfermo"
+    },
+    {
+      "id": "est-074",
+      "cedula": "7144071",
+      "nombre": "Vanessa",
+      "apellido": "Benitez Martinez",
+      "carrera": "Industrial",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-075",
+      "cedula": "5781311",
+      "nombre": "Santiago Anthony",
+      "apellido": "Olejnik Semenchuk",
+      "carrera": "Industrial",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-076",
+      "cedula": "7120562",
+      "nombre": "Martin Nicolas",
+      "apellido": "Velazquez Alonso",
+      "carrera": "Industrial",
+      "etiqueta": "Enfermo"
+    },
+    {
+      "id": "est-077",
+      "cedula": "7569186",
+      "nombre": "Melani Catalina",
+      "apellido": "Talavera Alcaraz",
+      "carrera": "Industrial",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-078",
+      "cedula": "5786797",
+      "nombre": "Marlilian Lizzeth",
+      "apellido": "Rodríguez Aranda",
+      "carrera": "Industrial",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-079",
+      "cedula": "6178253",
+      "nombre": "Valentino Gabriel",
+      "apellido": "Gennari Matthias",
+      "carrera": "Informática",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-080",
+      "cedula": "5777103",
+      "nombre": "Jéssica Dahiana",
+      "apellido": "Benítez Zarza",
+      "carrera": "Informática",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-081",
+      "cedula": "6087932",
+      "nombre": "Santiago Lorenzo",
+      "apellido": "Escobar Ramos",
+      "carrera": "Informática",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-082",
+      "cedula": "6083251",
+      "nombre": "Alan Aquino",
+      "apellido": "Riquelme Gonzalez",
+      "carrera": "Informática",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-083",
+      "cedula": "6579426",
+      "nombre": "Leandro Moises",
+      "apellido": "Valenzuela Vigo",
+      "carrera": "Informática",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-084",
+      "cedula": "7052920",
+      "nombre": "Santiago Ezequiel",
+      "apellido": "Salinas Britez",
+      "carrera": "Informática",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-085",
+      "cedula": "6805360",
+      "nombre": "Claudio Amin",
+      "apellido": "Cristaldo Prado",
+      "carrera": "Informática",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-086",
+      "cedula": "6351022",
+      "nombre": "Claudio José",
+      "apellido": "Ferreira Vergara",
+      "carrera": "Informática",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-087",
+      "cedula": "6870382",
+      "nombre": "Nahuel Shinnosuke",
+      "apellido": "Burzio Matsumoto",
+      "carrera": "Informática",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-088",
+      "cedula": "5768006",
+      "nombre": "Nahomy Yazmin",
+      "apellido": "Acosta Bustamante",
+      "carrera": "Informática",
+      "etiqueta": "Enfermo"
+    },
+    {
+      "id": "est-089",
+      "cedula": "6157881",
+      "nombre": "Katherin Juliana",
+      "apellido": "Erberich Rojas",
+      "carrera": "Informática",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-090",
+      "cedula": "7769040",
+      "nombre": "Dany Ezequiel",
+      "apellido": "Gaona Dávalos",
+      "carrera": "Informática",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-091",
+      "cedula": "6907648",
+      "nombre": "Mariela Soledad",
+      "apellido": "Delvalle Alfonso",
+      "carrera": "Informática",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-092",
+      "cedula": "6991148",
+      "nombre": "Violeta Isabel",
+      "apellido": "Chaparro Osorio",
+      "carrera": "Informática",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-093",
+      "cedula": "5700974",
+      "nombre": "Alexis Ramón",
+      "apellido": "García DeJesus",
+      "carrera": "Informática",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-094",
+      "cedula": "7498159",
+      "nombre": "Sofía Maylen",
+      "apellido": "Delvalle Benítez",
+      "carrera": "Informática",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-095",
+      "cedula": "5999722",
+      "nombre": "Joel Sebastian",
+      "apellido": "Benitez Franck",
+      "carrera": "Informática",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-096",
+      "cedula": "6036533",
+      "nombre": "Thiago Martin",
+      "apellido": "Vargas Caceres",
+      "carrera": "Informática",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-097",
+      "cedula": "9191462",
+      "nombre": "Axel Ezequiel",
+      "apellido": "Chamorro Mateu",
+      "carrera": "Informática",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-098",
+      "cedula": "5834241",
+      "nombre": "Martin Jeremias",
+      "apellido": "Britos Ylchuk",
+      "carrera": "Informática",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-099",
+      "cedula": "6303351",
+      "nombre": "Sanye Maylen",
+      "apellido": "García Talavera",
+      "carrera": "Informática",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-100",
+      "cedula": "7433582",
+      "nombre": "César",
+      "apellido": "López",
+      "carrera": "Informática",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-101",
+      "cedula": "5921535",
+      "nombre": "Ivan Rodrigo",
+      "apellido": "Cantero Rodriguez",
+      "carrera": "Informática",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-102",
+      "cedula": "6078987",
+      "nombre": "Fabrizio Joaquín",
+      "apellido": "Ayala Rojas",
+      "carrera": "Informática",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-103",
+      "cedula": "7352221",
+      "nombre": "Tamara Luján",
+      "apellido": "Martínez Ríos",
+      "carrera": "Informática",
+      "etiqueta": "Enfermo/Alego"
+    },
+    {
+      "id": "est-104",
+      "cedula": "6522764",
+      "nombre": "Rolando Sebastián",
+      "apellido": "Gamarra Caballero",
+      "carrera": "Informática",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-105",
+      "cedula": "5861113",
+      "nombre": "Alejandro Ruben",
+      "apellido": "Espinola Molinas",
+      "carrera": "Informática",
+      "etiqueta": "Alego"
+    },
+    {
+      "id": "est-106",
+      "cedula": "6518459",
+      "nombre": "Jimena Monserrat",
+      "apellido": "Pintos Müller",
+      "carrera": "Informática",
+      "etiqueta": "Ninguno"
+    },
+    {
+      "id": "est-107",
+      "cedula": "6188671",
+      "nombre": "Ashlee Micaela",
+      "apellido": "Bogado Bogado",
+      "carrera": "Informática",
+      "etiqueta": "Enfermo"
     }
-  ],
-  "pagos": {
-
-    }
-  }
+  ]
 }
