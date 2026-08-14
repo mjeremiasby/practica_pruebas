@@ -206,7 +206,7 @@
 
     <!-- Filtros y Buscador -->
     <div class="filters-bar">
-      <input type="text" id="busqueda" placeholder="Buscar por nombre o cédula..." oninput="renderEstudiantes()">
+      <input type="text" id="busqueda" placeholder="Buscar por nombre, apellido o cédula..." oninput="renderEstudiantes()">
       <select id="filtroCarrera" onchange="renderEstudiantes()">
         <option value="">Todas las carreras</option>
       </select>
@@ -243,7 +243,7 @@
   let state = {
     practicas: [],
     estudiantes: [],
-    pagos: {} // Estructura: { idPractica: { idEstudiante: true/false } }
+    pagos: {} 
   };
 
   let practicaActivaId = null;
@@ -286,41 +286,15 @@
       const jsonStr = new TextDecoder().decode(bytes);
       let json = JSON.parse(jsonStr);
 
-      // Mapear/Normalizar estudiantes
-      if (Array.isArray(json.estudiantes)) {
-        json.estudiantes = json.estudiantes.map((e, idx) => {
-          let nombre = e.nombre || '';
-          let apellido = e.apellido || '';
-          
-          if (!nombre && e.nombre_completo) {
-            const partes = e.nombre_completo.trim().split(' ');
-            if (partes.length > 2) {
-              apellido = partes.slice(-2).join(' ');
-              nombre = partes.slice(0, -2).join(' ');
-            } else if (partes.length === 2) {
-              nombre = partes[0];
-              apellido = partes[1];
-            } else {
-              nombre = e.nombre_completo;
-            }
-          }
-
-          return {
-            id: e.id || `est-${idx + 1}`,
-            cedula: String(e.cedula || e.numero_cedula || ''),
-            nombre: nombre,
-            apellido: apellido,
-            carrera: e.carrera || '',
-            etiqueta: e.etiqueta || ''
-          };
-        });
-      }
-
-      state = Object.assign({ practicas: [], estudiantes: [], pagos: {} }, json);
+      // Cargar correctamente la estructura de tu JSON (estudiantes, prácticas y pagos)
+      state.estudiantes = Array.isArray(json.estudiantes) ? json.estudiantes : [];
+      state.practicas = Array.isArray(json.practicas) ? json.practicas : [];
+      state.pagos = (json.pagos && typeof json.pagos === 'object') ? json.pagos : {};
 
       poblarFiltros();
       actualizarSelectPracticas();
 
+      // Si hay prácticas creadas previamente, seleccionamos la última por defecto
       if (state.practicas.length > 0 && !practicaActivaId) {
         practicaActivaId = state.practicas[state.practicas.length - 1].id;
         document.getElementById('selectPractica').value = practicaActivaId;
@@ -410,7 +384,7 @@
     };
 
     state.practicas.push(nuevaPractica);
-    state.pagos[nuevoId] = {}; // Inicializar estado de pagos
+    state.pagos[nuevoId] = {}; 
     practicaActivaId = nuevoId;
 
     actualizarSelectPracticas();
@@ -477,7 +451,7 @@
 
     const filtrados = state.estudiantes.filter(e => {
       const nombreCompleto = `${e.nombre} ${e.apellido}`.toLowerCase();
-      const coincideTexto = nombreCompleto.includes(texto) || e.cedula.includes(texto);
+      const coincideTexto = nombreCompleto.includes(texto) || String(e.cedula).includes(texto);
       const coincideCarrera = !carreraSel || e.carrera === carreraSel;
       const coincideEtiqueta = !etiquetaSel || e.etiqueta === etiquetaSel;
       return coincideTexto && coincideCarrera && coincideEtiqueta;
@@ -489,7 +463,6 @@
     const pagosPractica = state.pagos[practicaActivaId] || {};
     let pagadosCount = 0;
 
-    // Contar total pagados de toda la lista
     state.estudiantes.forEach(e => {
       if(pagosPractica[e.id]) pagadosCount++;
     });
@@ -522,7 +495,6 @@
       state.pagos[practicaActivaId] = {};
     }
 
-    // Alternar estado de pago
     state.pagos[practicaActivaId][estudianteId] = !state.pagos[practicaActivaId][estudianteId];
 
     renderEstudiantes();
