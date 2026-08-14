@@ -152,10 +152,10 @@
 
   /* Botones Check / Equis */
   .status-btn {
-    width: 32px; height: 32px;
+    width: 36px; height: 36px;
     border-radius: 50%;
     display: inline-flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: bold;
+    font-size: 16px; font-weight: bold;
     cursor: pointer; user-select: none;
     transition: all 0.2s ease;
     border: 1px solid transparent;
@@ -164,7 +164,7 @@
     background: var(--green-bg);
     color: var(--green);
     border-color: var(--green);
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
   }
   .status-btn.unpaid {
     background: var(--red-bg);
@@ -177,9 +177,10 @@
     background: #2a2a2a;
     border: 1px solid var(--paper-line);
     color: var(--muted);
-    padding: 2px 8px;
+    padding: 3px 8px;
     border-radius: 4px;
     font-size: 11px;
+    font-weight: 500;
   }
 
   /* Progress Bar */
@@ -222,12 +223,11 @@
   }
   .modal.hidden{display:none;}
   .modal-box{
-    background:#222222;border:1px solid var(--paper-line);border-radius:8px;max-width:460px;width:100%;
+    background:#222222;border:1px solid var(--paper-line);border-radius:8px;max-width:480px;width:100%;
     padding:24px;box-shadow:0 20px 50px rgba(0,0,0,0.8);
   }
-  .modal-box h3{font-family:'Spectral',serif;margin:0 0 6px;font-size:19px;color:#fff;}
-  .modal-box p.hint{color:var(--muted);font-size:12.5px;margin:0 0 16px;line-height:1.4;}
-  .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px;}
+  .modal-box h3{font-family:'Spectral',serif;margin:0 0 12px;font-size:19px;color:#fff;}
+  .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px;}
 
   .empty{color:var(--muted);font-size:13.5px;padding:24px 0;text-align:center;}
   .toast{
@@ -282,7 +282,7 @@
           <input type="date" id="initFecha">
         </div>
         <div class="field">
-          <label>Monto a cobrar por estudiante (Gs.)</label>
+          <label>Monto fijo definitivo a cobrar (Gs.)</label>
           <input type="number" id="initMonto" placeholder="Ej: 150000" min="0">
         </div>
         <div class="field" style="flex:0; align-self:flex-end;">
@@ -305,7 +305,7 @@
       <div class="panel-head">
         <div>
           <h2 id="cobranzaTitulo">Práctica</h2>
-          <p id="cobranzaSubmonto" style="font-family:'IBM Plex Mono',monospace; color:var(--amber);">Monto a cobrar: 0 Gs.</p>
+          <p id="cobranzaSubmonto" style="font-family:'IBM Plex Mono',monospace; color:var(--amber);">Monto fijo: 0 Gs.</p>
         </div>
         <div style="text-align:right;">
           <span id="cobranzaContador" style="font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:15px; color:var(--green);">0/0 Pagados</span>
@@ -317,12 +317,12 @@
 
       <!-- Filtros de búsqueda -->
       <div class="filter-bar">
-        <input type="text" id="inputSearch" class="search-input" placeholder="🔍 Buscar por estudiante, cédula..." oninput="renderTablaCobranza()">
+        <input type="text" id="inputSearch" class="search-input" placeholder="🔍 Buscar por nombre, apellido, cédula..." oninput="renderTablaCobranza()">
         <select id="filterCarrera" onchange="renderTablaCobranza()">
           <option value="">Todas las carreras</option>
         </select>
         <select id="filterEtiqueta" onchange="renderTablaCobranza()">
-          <option value="">Todas las etiquetas</option>
+          <option value="">Todas las etiquetas (Alego/Enfermo)</option>
         </select>
         <button class="btn-ghost btn-small" id="btnExportCsv">Exportar CSV</button>
       </div>
@@ -332,12 +332,12 @@
         <table class="ledger">
           <thead>
             <tr>
-              <th style="width:60px; text-align:center;">Estado</th>
+              <th style="width:90px; text-align:center;">¿PAGÓ?</th>
               <th>Estudiante</th>
               <th>Cédula</th>
               <th>Carrera</th>
               <th>Etiqueta</th>
-              <th style="text-align:right;">Monto Pagado</th>
+              <th style="text-align:right;">Estado de Pago</th>
             </tr>
           </thead>
           <tbody id="tbodyCobranza">
@@ -370,7 +370,7 @@
       <div class="field"><label>Apellido</label><input id="eApellido" placeholder="Apellido"></div>
       <div class="field"><label>Cédula</label><input id="eCedula" placeholder="1234567"></div>
       <div class="field"><label>Carrera</label><input id="eCarrera" placeholder="Ej: Civil"></div>
-      <div class="field"><label>Etiqueta</label><input id="eEtiqueta" placeholder="Ej: Delegado"></div>
+      <div class="field"><label>Etiqueta</label><input id="eEtiqueta" placeholder="Ej: Alego / Enfermo"></div>
       <div class="field" style="flex:0;align-self:flex-end;"><button class="btn-primary" id="btnAddEstudiante">+ Agregar</button></div>
     </div>
     <div id="listaEstudiantes"></div>
@@ -384,18 +384,19 @@
   </section>
 </main>
 
-<!-- Modal Edición Registro de Pago -->
-<div class="modal hidden" id="cellModal">
+<!-- Modal Editar Estudiante -->
+<div class="modal hidden" id="editEstudianteModal">
   <div class="modal-box">
-    <h3 id="cellTitle">Registrar pago</h3>
-    <p class="hint" id="cellSubtitle"></p>
-    <div class="field" style="margin-bottom:10px;"><label>Monto pagado (Gs.)</label><input id="cellMonto" type="number" min="0"></div>
-    <div class="field" style="margin-bottom:10px;"><label>Fecha de pago</label><input id="cellFecha" type="date"></div>
-    <div class="field"><label>Observación</label><input id="cellObs" placeholder="Opcional (Ej: Transferencia)"></div>
+    <h3>Editar Datos del Estudiante</h3>
+    <input type="hidden" id="editEstId">
+    <div class="field" style="margin-bottom:10px;"><label>Nombre</label><input id="editEstNombre"></div>
+    <div class="field" style="margin-bottom:10px;"><label>Apellido</label><input id="editEstApellido"></div>
+    <div class="field" style="margin-bottom:10px;"><label>Cédula</label><input id="editEstCedula"></div>
+    <div class="field" style="margin-bottom:10px;"><label>Carrera</label><input id="editEstCarrera"></div>
+    <div class="field" style="margin-bottom:10px;"><label>Etiqueta</label><input id="editEstEtiqueta" placeholder="Ej: Alego / Enfermo"></div>
     <div class="modal-actions">
-      <button class="btn-danger btn-small" id="btnClearCell">Quitar pago (✕)</button>
-      <button class="btn-ghost btn-small" id="btnCancelCell">Cancelar</button>
-      <button class="btn-primary btn-small" id="btnSaveCell">Guardar pago (✓)</button>
+      <button class="btn-ghost btn-small" id="btnCancelEditEst">Cancelar</button>
+      <button class="btn-primary btn-small" id="btnSaveEditEst">Guardar Cambios</button>
     </div>
   </div>
 </div>
@@ -421,7 +422,6 @@ let state = {
 let dirty = false;
 let loadingShared = false;
 let savingShared = false;
-let activeCell = null;
 let currentFileSha = null;
 let practicaActivaId = null;
 
@@ -508,7 +508,7 @@ document.getElementById('btnIniciarCobranza').addEventListener('click', ()=>{
   
   actualizarSelectPracticas();
   renderAll();
-  toast('¡Nueva práctica creada e iniciada!');
+  toast('¡Nueva práctica iniciada!');
 });
 
 function actualizarSelectPracticas(){
@@ -542,7 +542,7 @@ function poblarFiltros(){
   carreras.forEach(c => selCarrera.innerHTML += `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`);
   selCarrera.value = currC;
 
-  selEtiqueta.innerHTML = '<option value="">Todas las etiquetas</option>';
+  selEtiqueta.innerHTML = '<option value="">Todas las etiquetas (Alego/Enfermo)</option>';
   etiquetas.forEach(e => selEtiqueta.innerHTML += `<option value="${escapeHtml(e)}">${escapeHtml(e)}</option>`);
   selEtiqueta.value = currE;
 }
@@ -569,7 +569,7 @@ function renderTablaCobranza(){
   emptyState.style.display = 'none';
 
   document.getElementById('cobranzaTitulo').textContent = practica.nombre;
-  document.getElementById('cobranzaSubmonto').textContent = `Monto a cobrar: ${fmtGs(practica.monto)}`;
+  document.getElementById('cobranzaSubmonto').textContent = `Monto fijo a cobrar: ${fmtGs(practica.monto)}`;
 
   const searchTxt = document.getElementById('inputSearch').value.toLowerCase().trim();
   const selCarrera = document.getElementById('filterCarrera').value;
@@ -589,7 +589,7 @@ function renderTablaCobranza(){
   let pagadosCount = 0;
   state.estudiantes.forEach(e => {
     const pago = state.pagos[e.id + '__' + practicaActivaId];
-    if(pago && Number(pago.monto) >= Number(practica.monto) && Number(practica.monto) > 0){
+    if(pago && pago.pagado){
       pagadosCount++;
     }
   });
@@ -607,39 +607,40 @@ function renderTablaCobranza(){
   estudiantesFiltrados.forEach(est => {
     const key = est.id + '__' + practicaActivaId;
     const pago = state.pagos[key];
-    const estaPagadoCompleto = pago && Number(pago.monto) >= Number(practica.monto) && Number(practica.monto) > 0;
+    const estaPagado = pago && pago.pagado;
     
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td style="text-align:center;">
-        <button class="status-btn ${estaPagadoCompleto ? 'paid' : 'unpaid'}" onclick="toggleQuickPago('${est.id}', '${practica.id}')">
-          ${estaPagadoCompleto ? '✓' : '✕'}
+        <button class="status-btn ${estaPagado ? 'paid' : 'unpaid'}" onclick="toggleQuickPago('${est.id}', '${practica.id}')" title="Haz clic para cambiar estado">
+          ${estaPagado ? '✓' : '✕'}
         </button>
       </td>
       <td><strong>${escapeHtml(est.apellido||'')}, ${escapeHtml(est.nombre||'')}</strong></td>
       <td class="num">${escapeHtml(est.cedula||'—')}</td>
       <td>${escapeHtml(est.carrera||'—')}</td>
       <td>${est.etiqueta ? `<span class="badge-tag">${escapeHtml(est.etiqueta)}</span>` : '—'}</td>
-      <td class="num" style="text-align:right; cursor:pointer;" onclick="openCellModal('${est.id}', '${practica.id}')">
-        ${pago ? fmtGs(pago.monto) : '0 Gs.'} ✏️
+      <td class="num" style="text-align:right; font-weight:600; color: ${estaPagado ? 'var(--green)' : 'var(--muted)'}">
+        ${estaPagado ? `Pagado (${fmtGs(practica.monto)})` : 'Pendiente (0 Gs.)'}
       </td>
     `;
     tbody.appendChild(tr);
   });
 }
 
+// Alternar directamente entre pagado (✓) o pendiente (✕) usando el monto fijo
 function toggleQuickPago(estId, pracId){
   const key = estId + '__' + pracId;
   const prac = state.practicas.find(p => p.id === pracId);
   const pago = state.pagos[key];
 
-  if(pago && Number(pago.monto) >= Number(prac.monto) && Number(prac.monto) > 0){
+  if(pago && pago.pagado){
     delete state.pagos[key];
   } else {
     state.pagos[key] = {
+      pagado: true,
       monto: Number(prac.monto) || 0,
-      fecha: todayISO(),
-      obs: 'Pago completo'
+      fecha: todayISO()
     };
   }
 
@@ -647,48 +648,11 @@ function toggleQuickPago(estId, pracId){
   renderTablaCobranza();
 }
 
-/* ---------------- Modal Celda / Pago ---------------- */
-function openCellModal(estId, pracId){
-  activeCell = {estId, pracId};
-  const est = state.estudiantes.find(x=>x.id===estId);
-  const prac = state.practicas.find(x=>x.id===pracId);
-  const pago = state.pagos[estId+'__'+pracId];
-
-  document.getElementById('cellTitle').textContent = `${est.nombre||''} ${est.apellido||''}`.trim() || 'Estudiante';
-  document.getElementById('cellSubtitle').textContent = `${prac.nombre} · Cuota fija: ${fmtGs(prac.monto)}`;
-  document.getElementById('cellMonto').value = pago ? pago.monto : prac.monto;
-  document.getElementById('cellFecha').value = pago ? pago.fecha : todayISO();
-  document.getElementById('cellObs').value = pago ? (pago.obs||'') : '';
-  document.getElementById('cellModal').classList.remove('hidden');
-}
-
-document.getElementById('btnCancelCell').addEventListener('click', ()=> document.getElementById('cellModal').classList.add('hidden'));
-
-document.getElementById('btnSaveCell').addEventListener('click', ()=>{
-  const {estId, pracId} = activeCell;
-  const monto = document.getElementById('cellMonto').value;
-  const fecha = document.getElementById('cellFecha').value || todayISO();
-  const obs = document.getElementById('cellObs').value;
-
-  state.pagos[estId+'__'+pracId] = { monto: Number(monto)||0, fecha, obs };
-  document.getElementById('cellModal').classList.add('hidden');
-  setDirty(true);
-  renderTablaCobranza();
-});
-
-document.getElementById('btnClearCell').addEventListener('click', ()=>{
-  const {estId, pracId} = activeCell;
-  delete state.pagos[estId+'__'+pracId];
-  document.getElementById('cellModal').classList.add('hidden');
-  setDirty(true);
-  renderTablaCobranza();
-});
-
 /* ---------------- Prácticas (Pestaña Lista) ---------------- */
 function renderPracticas(){
   const el = document.getElementById('listaPracticas');
   if(state.practicas.length===0){ el.innerHTML = '<div class="empty">Todavía no agregaste prácticas.</div>'; return; }
-  let html = '<table class="list-table"><thead><tr><th>Nombre</th><th>Cuota</th><th>Fecha límite</th><th>Acción</th></tr></thead><tbody>';
+  let html = '<table class="list-table"><thead><tr><th>Nombre</th><th>Cuota Fija</th><th>Fecha límite</th><th>Acción</th></tr></thead><tbody>';
   state.practicas.forEach(p=>{
     html += `<tr><td>${escapeHtml(p.nombre)}</td><td class="num">${fmtGs(p.monto)}</td><td>${p.fecha||'—'}</td>
       <td><div class="row-actions"><button class="btn-danger btn-small" data-del="${p.id}">Eliminar</button></div></td></tr>`;
@@ -707,7 +671,7 @@ function renderPracticas(){
   }));
 }
 
-/* ---------------- Estudiantes ---------------- */
+/* ---------------- Estudiantes (Agregar, Listar y Editar) ---------------- */
 document.getElementById('btnAddEstudiante').addEventListener('click', ()=>{
   const nombre = document.getElementById('eNombre').value.trim();
   const apellido = document.getElementById('eApellido').value.trim();
@@ -733,15 +697,20 @@ function renderEstudiantes(){
   const el = document.getElementById('listaEstudiantes');
   if(state.estudiantes.length===0){ el.innerHTML = '<div class="empty">Todavía no agregaste estudiantes.</div>'; return; }
   const rows = [...state.estudiantes].sort((a,b)=> ((a.apellido||'')+(a.nombre||'')).localeCompare((b.apellido||'')+(b.nombre||'')));
-  let html = '<table class="list-table"><thead><tr><th>Apellido</th><th>Nombre</th><th>Cédula</th><th>Carrera</th><th>Etiqueta</th><th></th></tr></thead><tbody>';
+  let html = '<table class="list-table"><thead><tr><th>Apellido</th><th>Nombre</th><th>Cédula</th><th>Carrera</th><th>Etiqueta</th><th>Acciones</th></tr></thead><tbody>';
   rows.forEach(e=>{
     html += `<tr>
       <td>${escapeHtml(e.apellido||'')}</td>
       <td>${escapeHtml(e.nombre||'')}</td>
       <td>${escapeHtml(e.cedula||'')}</td>
       <td>${escapeHtml(e.carrera||'—')}</td>
-      <td>${escapeHtml(e.etiqueta||'—')}</td>
-      <td><div class="row-actions"><button class="btn-danger btn-small" data-del="${e.id}">Eliminar</button></div></td>
+      <td>${e.etiqueta ? `<span class="badge-tag">${escapeHtml(e.etiqueta)}</span>` : '—'}</td>
+      <td>
+        <div class="row-actions">
+          <button class="btn-ghost btn-small" onclick="abrirModalEditarEstudiante('${e.id}')">✏️ Editar</button>
+          <button class="btn-danger btn-small" data-del="${e.id}">Eliminar</button>
+        </div>
+      </td>
     </tr>`;
   });
   html += '</tbody></table>';
@@ -756,6 +725,44 @@ function renderEstudiantes(){
   }));
 }
 
+/* Modal de Edición de Estudiantes */
+function abrirModalEditarEstudiante(id){
+  const est = state.estudiantes.find(e => e.id === id);
+  if(!est) return;
+
+  document.getElementById('editEstId').value = est.id;
+  document.getElementById('editEstNombre').value = est.nombre || '';
+  document.getElementById('editEstApellido').value = est.apellido || '';
+  document.getElementById('editEstCedula').value = est.cedula || '';
+  document.getElementById('editEstCarrera').value = est.carrera || '';
+  document.getElementById('editEstEtiqueta').value = est.etiqueta || '';
+
+  document.getElementById('editEstudianteModal').classList.remove('hidden');
+}
+
+document.getElementById('btnCancelEditEst').addEventListener('click', ()=>{
+  document.getElementById('editEstudianteModal').classList.add('hidden');
+});
+
+document.getElementById('btnSaveEditEst').addEventListener('click', ()=>{
+  const id = document.getElementById('editEstId').value;
+  const est = state.estudiantes.find(e => e.id === id);
+
+  if(est){
+    est.nombre = document.getElementById('editEstNombre').value.trim();
+    est.apellido = document.getElementById('editEstApellido').value.trim();
+    est.cedula = document.getElementById('editEstCedula').value.trim();
+    est.carrera = document.getElementById('editEstCarrera').value.trim();
+    est.etiqueta = document.getElementById('editEstEtiqueta').value.trim();
+
+    setDirty(true);
+    renderAll();
+    toast('Estudiante actualizado correctamente');
+  }
+
+  document.getElementById('editEstudianteModal').classList.add('hidden');
+});
+
 /* ---------------- Resumen ---------------- */
 function renderResumen(){
   const totalesEl = document.getElementById('resumenTotales');
@@ -766,7 +773,7 @@ function renderResumen(){
     let recaudado = 0, pagaron = 0;
     state.estudiantes.forEach(e=>{
       const pago = state.pagos[e.id+'__'+p.id];
-      if(pago){ recaudado += Number(pago.monto)||0; if(Number(pago.monto) >= Number(p.monto)) pagaron++; }
+      if(pago && pago.pagado){ recaudado += Number(p.monto)||0; pagaron++; }
     });
     granEsperado += esperado; granRecaudado += recaudado;
     return {p, esperado, recaudado, pendiente: esperado-recaudado, pagaron};
@@ -795,7 +802,7 @@ document.getElementById('btnExportCsv').addEventListener('click', ()=>{
     let total = 0;
     const cells = state.practicas.map(p=>{
       const pago = state.pagos[e.id+'__'+p.id];
-      const monto = pago ? Number(pago.monto)||0 : 0;
+      const monto = (pago && pago.pagado) ? Number(p.monto)||0 : 0;
       total += monto;
       return monto;
     });
