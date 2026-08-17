@@ -1,9 +1,9 @@
 {
   "practicas": [
     {
-      "id": "2ahkail4",
+      "id": "4pwo1mi6",
       "nombre": "Práctica 17/08/2026",
-      "monto": 10000,
+      "monto": 3000,
       "fecha": "2026-08-17"
     }
   ],
@@ -865,21 +865,5 @@
       "etiqueta": "Enfermo"
     }
   ],
-  "pagos": {
-    "est-088__2ahkail4": {
-      "pagado": true,
-      "monto": 10000,
-      "fecha": "2026-08-17"
-    },
-    "est-102__2ahkail4": {
-      "pagado": true,
-      "monto": 10000,
-      "fecha": "2026-08-17"
-    },
-    "est-095__2ahkail4": {
-      "pagado": true,
-      "monto": 10000,
-      "fecha": "2026-08-17"
-    }
-  }
+  "pagos": {}
 }
