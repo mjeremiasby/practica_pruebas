@@ -1,5 +1,12 @@
 {
-  "practicas": [],
+  "practicas": [
+    {
+      "id": "2ahkail4",
+      "nombre": "Práctica 17/08/2026",
+      "monto": 10000,
+      "fecha": "2026-08-17"
+    }
+  ],
   "estudiantes": [
     {
       "id": "est-001",
@@ -858,5 +865,21 @@
       "etiqueta": "Enfermo"
     }
   ],
-  "pagos": {}
+  "pagos": {
+    "est-088__2ahkail4": {
+      "pagado": true,
+      "monto": 10000,
+      "fecha": "2026-08-17"
+    },
+    "est-102__2ahkail4": {
+      "pagado": true,
+      "monto": 10000,
+      "fecha": "2026-08-17"
+    },
+    "est-095__2ahkail4": {
+      "pagado": true,
+      "monto": 10000,
+      "fecha": "2026-08-17"
+    }
+  }
 }
