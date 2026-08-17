@@ -1,24 +1,5 @@
 {
-  "practicas": [
-    {
-      "id": "itynn15k",
-      "nombre": "Práctica 17/08/2026",
-      "monto": 0,
-      "fecha": "2026-08-17"
-    },
-    {
-      "id": "wa4el4ng",
-      "nombre": "Práctica 17/08/2026",
-      "monto": 0,
-      "fecha": "2026-08-17"
-    },
-    {
-      "id": "7lesjlb9",
-      "nombre": "Práctica 15/08/2026",
-      "monto": 0,
-      "fecha": "2026-08-15"
-    }
-  ],
+  "practicas": [],
   "estudiantes": [
     {
       "id": "est-001",
@@ -877,36 +858,5 @@
       "etiqueta": "Enfermo"
     }
   ],
-  "pagos": {
-    "est-061__itynn15k": {
-      "pagado": true,
-      "monto": 0,
-      "fecha": "2026-08-17"
-    },
-    "est-088__itynn15k": {
-      "pagado": true,
-      "monto": 0,
-      "fecha": "2026-08-17"
-    },
-    "est-038__itynn15k": {
-      "pagado": true,
-      "monto": 0,
-      "fecha": "2026-08-17"
-    },
-    "est-028__7lesjlb9": {
-      "pagado": true,
-      "monto": 0,
-      "fecha": "2026-08-17"
-    },
-    "est-046__7lesjlb9": {
-      "pagado": true,
-      "monto": 0,
-      "fecha": "2026-08-17"
-    },
-    "est-043__7lesjlb9": {
-      "pagado": true,
-      "monto": 0,
-      "fecha": "2026-08-17"
-    }
-  }
+  "pagos": {}
 }
