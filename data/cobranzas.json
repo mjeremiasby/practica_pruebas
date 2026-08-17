@@ -1,16 +1,22 @@
 {
   "practicas": [
     {
-      "id": "7rjbngpd",
+      "id": "itynn15k",
       "nombre": "Práctica 17/08/2026",
       "monto": 0,
       "fecha": "2026-08-17"
     },
     {
-      "id": "z1r5qv6p",
-      "nombre": "Práctica 16/08/2026",
+      "id": "wa4el4ng",
+      "nombre": "Práctica 17/08/2026",
       "monto": 0,
-      "fecha": "2026-08-16"
+      "fecha": "2026-08-17"
+    },
+    {
+      "id": "7lesjlb9",
+      "nombre": "Práctica 15/08/2026",
+      "monto": 0,
+      "fecha": "2026-08-15"
     }
   ],
   "estudiantes": [
@@ -872,22 +878,32 @@
     }
   ],
   "pagos": {
-    "est-061__7rjbngpd": {
+    "est-061__itynn15k": {
       "pagado": true,
       "monto": 0,
       "fecha": "2026-08-17"
     },
-    "est-088__7rjbngpd": {
+    "est-088__itynn15k": {
       "pagado": true,
       "monto": 0,
       "fecha": "2026-08-17"
     },
-    "est-038__7rjbngpd": {
+    "est-038__itynn15k": {
       "pagado": true,
       "monto": 0,
       "fecha": "2026-08-17"
     },
-    "est-028__7rjbngpd": {
+    "est-028__7lesjlb9": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-08-17"
+    },
+    "est-046__7lesjlb9": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-08-17"
+    },
+    "est-043__7lesjlb9": {
       "pagado": true,
       "monto": 0,
       "fecha": "2026-08-17"
