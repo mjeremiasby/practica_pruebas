@@ -1,5 +1,12 @@
 {
-  "practicas": [],
+  "practicas": [
+    {
+      "id": "pnualmyl",
+      "nombre": "Práctica 15/08/2026",
+      "monto": 3000,
+      "fecha": "2026-08-15"
+    }
+  ],
   "estudiantes": [
     {
       "id": "est-001",
@@ -858,5 +865,466 @@
       "etiqueta": "Enfermo"
     }
   ],
-  "pagos": {}
+  "pagos": {
+    "est-061__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-058__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-074__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-069__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-068__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-071__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-059__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-063__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-073__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-057__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-066__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-062__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-072__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-075__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-060__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-064__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-077__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-065__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-056__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-038__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-028__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-021__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-024__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-006__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-029__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-015__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-032__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-022__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-020__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-034__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-009__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-010__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-031__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-023__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-001__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-030__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-019__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-005__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-035__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-026__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-036__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-008__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-014__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-003__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-027__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-002__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-012__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-033__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-004__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-025__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-037__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-046__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-043__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-050__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-047__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-044__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-053__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-052__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-039__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-054__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-042__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-048__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-040__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-041__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-045__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-049__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-088__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-102__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-095__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-080__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-107__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-098__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-087__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-097__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-092__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-091__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-094__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-089__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-081__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-105__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-086__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-104__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-090__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-093__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-099__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-079__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-100__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-103__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-106__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-082__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-083__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    },
+    "est-096__pnualmyl": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-17"
+    }
+  }
 }
