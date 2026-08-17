@@ -89,28 +89,12 @@
       "etiqueta": "Enfermo/Alego"
     },
     {
-      "id": "est-011",
-      "cedula": "6136188",
-      "nombre": "Jazmín",
-      "apellido": "Ortiz Alfonso",
-      "carrera": "Civil",
-      "etiqueta": "Ninguno"
-    },
-    {
       "id": "est-012",
       "cedula": "6066729",
       "nombre": "Leandro",
       "apellido": "Valenzuela Jara",
       "carrera": "Civil",
       "etiqueta": "Alego"
-    },
-    {
-      "id": "est-013",
-      "cedula": "6106667",
-      "nombre": "Carlos Mathias",
-      "apellido": "González Cáceres",
-      "carrera": "Civil",
-      "etiqueta": "Ninguno"
     },
     {
       "id": "est-014",
@@ -677,14 +661,6 @@
       "cedula": "7052920",
       "nombre": "Santiago Ezequiel",
       "apellido": "Salinas Britez",
-      "carrera": "Informática",
-      "etiqueta": "Ninguno"
-    },
-    {
-      "id": "est-085",
-      "cedula": "6805360",
-      "nombre": "Claudio Amin",
-      "apellido": "Cristaldo Prado",
       "carrera": "Informática",
       "etiqueta": "Ninguno"
     },
