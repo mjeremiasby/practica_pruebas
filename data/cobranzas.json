@@ -851,6 +851,14 @@
       "apellido": "Bogado Bogado",
       "carrera": "Informática",
       "etiqueta": "Enfermo"
+    },
+    {
+      "id": "1dof1v81",
+      "nombre": "Juan Andres",
+      "apellido": "Avalos Chavez",
+      "cedula": "6227940",
+      "carrera": "Industrial",
+      "etiqueta": "Enfermo"
     }
   ],
   "pagos": {
