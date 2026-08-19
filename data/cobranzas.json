@@ -11,6 +11,12 @@
       "nombre": "Práctica 18/08/2026",
       "monto": 3000,
       "fecha": "2026-08-18"
+    },
+    {
+      "id": "tyoaoa5u",
+      "nombre": "Práctica 19/08/2026",
+      "monto": 3000,
+      "fecha": "2026-08-19"
     }
   ],
   "estudiantes": [
@@ -1687,6 +1693,121 @@
       "pagado": true,
       "monto": 3000,
       "fecha": "2026-08-18"
+    },
+    "est-059__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-056__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-061__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-062__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-072__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-058__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-066__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-075__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-057__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-069__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-077__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-070__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-063__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-073__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-071__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-065__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-060__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-076__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-064__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-048__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-051__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-100__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
+    },
+    "est-088__tyoaoa5u": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-08-19"
     }
   }
 }
