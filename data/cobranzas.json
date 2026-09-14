@@ -83,6 +83,12 @@
       "nombre": "Práctica 10/09/2026",
       "monto": 3000,
       "fecha": "2026-09-10"
+    },
+    {
+      "id": "jvvpzfs5",
+      "nombre": "Práctica 14/09/2026",
+      "monto": 3000,
+      "fecha": "2026-09-14"
     }
   ],
   "estudiantes": [
@@ -6077,6 +6083,461 @@
       "pagado": true,
       "monto": 3000,
       "fecha": "2026-09-10"
+    },
+    "est-061__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-088__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-038__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-028__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-046__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-043__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "1dof1v81__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-058__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-021__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-102__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-095__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-074__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-080__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-069__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-098__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-024__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-087__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-006__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-101__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-029__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-071__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-097__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-092__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-015__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-091__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-094__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-032__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-022__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-047__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-089__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-081__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-105__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-020__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-086__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-059__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-063__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-104__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-090__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-093__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-099__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-009__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-079__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-010__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-031__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-070__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-073__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-044__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-053__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-023__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-001__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-057__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-100__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-018__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-103__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-030__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-066__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-062__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-019__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-005__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-052__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-035__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-075__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-026__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-036__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-106__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-039__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-060__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-008__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-082__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-054__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-042__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-014__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-048__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-040__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-084__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-041__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-051__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-003__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-049__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-064__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-077__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-027__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-002__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-012__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-083__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-065__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-096__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-033__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-004__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-025__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
+    },
+    "est-037__jvvpzfs5": {
+      "pagado": true,
+      "monto": 3000,
+      "fecha": "2026-09-14"
     }
   }
 }
