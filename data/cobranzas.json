@@ -89,6 +89,12 @@
       "nombre": "Práctica 14/09/2026",
       "monto": 3000,
       "fecha": "2026-09-14"
+    },
+    {
+      "id": "rbaci7lo",
+      "nombre": "Práctica 15/09/2026",
+      "monto": 0,
+      "fecha": "2026-09-15"
     }
   ],
   "estudiantes": [
@@ -6538,6 +6544,406 @@
       "pagado": true,
       "monto": 3000,
       "fecha": "2026-09-14"
+    },
+    "est-061__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-088__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-038__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-028__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-046__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-043__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-058__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-021__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-102__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-095__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-080__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-107__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-098__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-024__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-087__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-006__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-101__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-029__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-097__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-092__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-015__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-050__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-091__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-094__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-032__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-047__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-089__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-081__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-105__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-020__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-086__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-104__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-090__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-093__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-099__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-009__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-079__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-010__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-031__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-044__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-053__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-023__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-001__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-100__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-018__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-103__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-030__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-062__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-019__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-005__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-052__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-035__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-026__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-036__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-106__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-039__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-008__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-082__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-054__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-042__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-014__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-048__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-040__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-084__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-041__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-045__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-051__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-003__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-049__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-064__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-027__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-002__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-012__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-083__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-065__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-096__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-033__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-025__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-004__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
+    },
+    "est-037__rbaci7lo": {
+      "pagado": true,
+      "monto": 0,
+      "fecha": "2026-09-15"
     }
   }
 }
